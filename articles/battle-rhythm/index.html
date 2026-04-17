@@ -222,11 +222,15 @@
   }
   .failure-list li {
     counter-increment: failure;
-    display: grid;
-    grid-template-columns: 52px 1fr;
+    display: flex;
+    flex-direction: row;
     gap: 0 20px;
     margin-bottom: 28px;
     align-items: start;
+  }
+  .failure-list li > div {
+    flex: 1;
+    min-width: 0;
   }
   .failure-list li::before {
     content: counter(failure, decimal-leading-zero);
