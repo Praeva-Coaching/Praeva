@@ -1,0 +1,1926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PRAEVA™ — Leadership as Architecture</title>
+
+<!-- SEO -->
+<meta name="description" content="PRAEVA™ is a leadership consultancy built on a single conviction: that great organizations are designed, not assembled. Five load-bearing pillars. Discipline that holds them true. Adaptability as what emerges when both are present.">
+<meta name="author" content="Kelly McNeese">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://praeva.com/">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://praeva.com/">
+<meta property="og:title" content="PRAEVA™ — Leadership as Architecture">
+<meta property="og:description" content="Five load-bearing pillars. Discipline that holds them true. Adaptability as what emerges when both are present. Polaris Veritas — True North.">
+<meta property="og:site_name" content="PRAEVA™">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PRAEVA™ — Leadership as Architecture">
+<meta name="twitter:description" content="Five load-bearing pillars. Discipline that holds them true. Adaptability as what emerges when both are present.">
+
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0d1b2a">
+
+<!-- Preconnect for Google Fonts performance -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --navy:   #0d1b2a;
+    --navy2:  #0a1520;
+    --steel:  #2e5d8e;
+    --sky:    #5b9ec9;
+    --mist:   #c8dce8;
+    --gold:   #c8a84b;
+    --amber:  #e8c86a;
+    --white:  #f5f0ea;
+    --parch:  #e2d9c4;
+    --ink:    #1a1208;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy2);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ══════════════════════════════════════
+     ANIMATIONS
+     ══════════════════════════════════════ */
+  @keyframes breathe {
+    0%,100% { opacity: 0.18; transform: scale(1); }
+    50%      { opacity: 0.35; transform: scale(1.15); }
+  }
+  @keyframes twinkle {
+    0%,100% { opacity: 1; }
+    50%      { opacity: 0.65; }
+  }
+  @keyframes drift {
+    0%,100% { transform: translateY(0px); }
+    50%      { transform: translateY(-4px); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes ruleExpand {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+
+  .glow-anim  { animation: breathe 5s ease-in-out infinite; transform-origin: center; }
+  .core-anim  { animation: twinkle 3.5s ease-in-out infinite; }
+  .drift-anim { animation: drift 9s ease-in-out infinite; }
+
+  /* ══════════════════════════════════════
+     NAV BAR
+     ══════════════════════════════════════ */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    background: rgba(10, 21, 32, 0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,168,75,0.12);
+  }
+
+  .nav-mark {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+  }
+
+  .nav-mark-wordmark {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 22px;
+    letter-spacing: 0.18em;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .nav-mark-wordmark sup {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 300;
+    color: var(--gold);
+    vertical-align: super;
+    letter-spacing: 0;
+  }
+
+  .nav-divider {
+    width: 1px;
+    height: 20px;
+    background: rgba(200,168,75,0.3);
+  }
+
+  .nav-tagline {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 200;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    opacity: 0.7;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mist);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s, color 0.2s;
+  }
+
+  .nav-links a:hover { opacity: 1; color: var(--gold); }
+
+  .nav-cta {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold) !important;
+    opacity: 1 !important;
+    border: 1px solid rgba(200,168,75,0.4);
+    padding: 8px 20px;
+    transition: background 0.2s, border-color 0.2s !important;
+  }
+  .nav-cta:hover {
+    background: rgba(200,168,75,0.1) !important;
+    border-color: var(--gold) !important;
+  }
+
+  /* ══════════════════════════════════════
+     HERO
+     ══════════════════════════════════════ */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 120px 48px 80px;
+    background: linear-gradient(180deg, #060d14 0%, var(--navy2) 60%, var(--navy) 100%);
+  }
+
+  /* Star field */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 8%  12%, rgba(200,220,232,0.5)  0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 68%, rgba(200,220,232,0.3)  0%, transparent 100%),
+      radial-gradient(1px 1px at 71% 9%,  rgba(200,220,232,0.45) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 54%, rgba(200,220,232,0.35) 0%, transparent 100%),
+      radial-gradient(1px 1px at 43% 84%, rgba(200,220,232,0.3)  0%, transparent 100%),
+      radial-gradient(1px 1px at 94% 28%, rgba(200,220,232,0.4)  0%, transparent 100%),
+      radial-gradient(1px 1px at 14% 47%, rgba(200,220,232,0.25) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 38%, rgba(200,220,232,0.2)  0%, transparent 100%),
+      radial-gradient(1px 1px at 77% 78%, rgba(200,220,232,0.32) 0%, transparent 100%),
+      radial-gradient(1px 1px at 33% 22%, rgba(200,220,232,0.28) 0%, transparent 100%),
+      radial-gradient(1px 1px at 50% 55%, rgba(200,220,232,0.18) 0%, transparent 100%),
+      radial-gradient(1px 1px at 4%  88%, rgba(200,220,232,0.22) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 92%, rgba(200,220,232,0.28) 0%, transparent 100%),
+      radial-gradient(1px 1px at 62% 18%, rgba(200,220,232,0.22) 0%, transparent 100%);
+    pointer-events: none;
+  }
+
+  /* Ambient glow beneath the star */
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 10%; left: 50%;
+    transform: translateX(-50%);
+    width: 500px; height: 500px;
+    background: radial-gradient(ellipse, rgba(200,168,75,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeUp 1.2s ease both;
+  }
+
+  /* Full Polaris mark — hero scale */
+  .hero-mark { margin-bottom: 0; }
+
+  .hero-wordmark {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -8px;
+  }
+
+  .hero-rule-top {
+    width: 120px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.45;
+    margin-bottom: 16px;
+    animation: ruleExpand 1.4s ease 0.4s both;
+    transform-origin: center;
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(52px, 8vw, 88px);
+    letter-spacing: 0.25em;
+    color: var(--white);
+    line-height: 1;
+    animation: fadeUp 1s ease 0.3s both;
+  }
+
+  .hero-name sup {
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(12px, 1.5vw, 18px);
+    font-weight: 300;
+    color: var(--gold);
+    vertical-align: super;
+    letter-spacing: 0;
+  }
+
+  .hero-rule-mid {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(200,168,75,0.5), transparent);
+    margin: 18px 0 14px;
+    animation: ruleExpand 1.4s ease 0.6s both;
+    transform-origin: center;
+  }
+
+  .hero-pv {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(14px, 1.8vw, 18px);
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    opacity: 0.88;
+    animation: fadeUp 1s ease 0.7s both;
+  }
+
+  .hero-true-north {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 200;
+    font-size: 9px;
+    letter-spacing: 0.42em;
+    color: var(--mist);
+    opacity: 0.38;
+    text-transform: uppercase;
+    margin-top: 6px;
+    animation: fadeUp 1s ease 0.85s both;
+  }
+
+  /* Hero sub-headline */
+  .hero-sub {
+    margin-top: 64px;
+    text-align: center;
+    max-width: 560px;
+    animation: fadeUp 1s ease 1s both;
+  }
+
+  .hero-sub h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(20px, 3vw, 28px);
+    color: var(--white);
+    opacity: 0.85;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    margin-bottom: 20px;
+  }
+
+  .hero-sub p {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 1.85;
+    color: var(--mist);
+    opacity: 0.6;
+    letter-spacing: 0.04em;
+  }
+
+  .hero-cta-row {
+    display: flex;
+    gap: 20px;
+    margin-top: 40px;
+    animation: fadeUp 1s ease 1.1s both;
+  }
+
+  .btn-primary {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--navy);
+    background: var(--gold);
+    padding: 14px 32px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--amber); transform: translateY(-1px); }
+
+  .btn-secondary {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(200,168,75,0.4);
+    padding: 14px 32px;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  }
+  .btn-secondary:hover {
+    background: rgba(200,168,75,0.08);
+    border-color: var(--gold);
+    transform: translateY(-1px);
+  }
+
+  /* Scroll indicator */
+  .scroll-hint {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.35;
+    animation: fadeIn 2s ease 2s both;
+  }
+  .scroll-hint span {
+    font-size: 8px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--mist);
+  }
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(180deg, var(--gold), transparent);
+    animation: drift 2s ease-in-out infinite;
+  }
+
+  /* ══════════════════════════════════════
+     KEYSTONE SECTION (between hero & about)
+     ══════════════════════════════════════ */
+  .keystone-band {
+    background: var(--navy);
+    border-top: 1px solid rgba(200,168,75,0.1);
+    border-bottom: 1px solid rgba(200,168,75,0.1);
+    padding: 64px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+  }
+
+  .ks-item {
+    padding: 0 40px;
+    position: relative;
+  }
+
+  .ks-item + .ks-item::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 10%; height: 80%;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, rgba(200,168,75,0.2), transparent);
+  }
+
+  .ks-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    opacity: 0.6;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .ks-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 22px;
+    color: var(--white);
+    letter-spacing: 0.06em;
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .ks-body {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 1.85;
+    color: var(--mist);
+    opacity: 0.55;
+    letter-spacing: 0.03em;
+  }
+
+  /* ══════════════════════════════════════
+     ABOUT SECTION — parchment
+     ══════════════════════════════════════ */
+  .about {
+    background: var(--parch);
+    padding: 120px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .about-mark-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .about-text-col {}
+
+  .about-overline {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 9px;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    color: #8a6010;
+    opacity: 0.7;
+    margin-bottom: 20px;
+  }
+
+  .about-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(32px, 4vw, 48px);
+    color: var(--ink);
+    line-height: 1.25;
+    letter-spacing: 0.02em;
+    margin-bottom: 28px;
+  }
+
+  .about-heading em {
+    font-style: italic;
+    color: #7a5614;
+  }
+
+  .about-body {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 1.9;
+    color: #2a1a06;
+    opacity: 0.65;
+    letter-spacing: 0.03em;
+    margin-bottom: 20px;
+  }
+
+  .about-rule {
+    width: 48px;
+    height: 1px;
+    background: #8a6010;
+    opacity: 0.35;
+    margin-bottom: 20px;
+  }
+
+  .about-credentials {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: #5a3e10;
+    opacity: 0.75;
+    line-height: 1.7;
+    letter-spacing: 0.04em;
+  }
+
+  /* ══════════════════════════════════════
+     KEYSTONE FRAMEWORK SECTION
+     ══════════════════════════════════════ */
+  .framework {
+    background: #060d14;
+    padding: 120px 48px;
+    text-align: center;
+  }
+
+  .framework-overline {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.65;
+    margin-bottom: 20px;
+  }
+
+  .framework-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(32px, 5vw, 56px);
+    color: var(--white);
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .framework-heading em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .framework-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    color: var(--mist);
+    opacity: 0.5;
+    letter-spacing: 0.05em;
+    margin-bottom: 72px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.8;
+  }
+
+  /* Five pillars */
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2px;
+    max-width: 1100px;
+    margin: 0 auto 0;
+  }
+
+  .pillar {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(91,158,201,0.12);
+    border-bottom: none;
+    padding: 36px 24px 40px;
+    text-align: left;
+    position: relative;
+    transition: background 0.25s, border-color 0.25s;
+  }
+  .pillar:hover {
+    background: rgba(91,158,201,0.06);
+    border-color: rgba(91,158,201,0.28);
+  }
+
+  /* Constellation line dropping from top of each pillar */
+  .pillar::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 28px;
+    background: linear-gradient(180deg, rgba(200,168,75,0.4), rgba(200,168,75,0.08));
+    top: -28px;
+  }
+
+  .pillar-num {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 8px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--sky);
+    opacity: 0.55;
+    margin-bottom: 14px;
+  }
+
+  .pillar-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 17px;
+    color: var(--white);
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    margin-bottom: 14px;
+  }
+
+  .pillar-body {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    line-height: 1.8;
+    color: var(--mist);
+    opacity: 0.45;
+    letter-spacing: 0.03em;
+  }
+
+  /* Constellation spine — connects all pillars before Adaptability */
+  .pillar-spine {
+    max-width: 1100px;
+    margin: 0 auto;
+    height: 2px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2px;
+  }
+
+  .pillar-spine-seg {
+    height: 1px;
+    background: linear-gradient(90deg, rgba(200,168,75,0.15), rgba(200,168,75,0.3), rgba(200,168,75,0.15));
+    margin-top: 1px;
+  }
+
+  /* Adaptability band */
+  .adaptability {
+    max-width: 1100px;
+    margin: 0 auto 80px;
+    background: rgba(29,158,117,0.07);
+    border: 1px solid rgba(29,158,117,0.2);
+    border-top: 2px solid rgba(29,158,117,0.35);
+    padding: 36px 40px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 48px;
+    align-items: center;
+    transition: background 0.25s;
+  }
+  .adaptability:hover { background: rgba(29,158,117,0.1); }
+
+  .adapt-label-col {}
+
+  .adapt-tag {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 8px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #5b9ec9;
+    opacity: 0.6;
+    margin-bottom: 10px;
+  }
+
+  .adapt-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 26px;
+    color: var(--white);
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+
+  .adapt-descriptor {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: #5bb898;
+    opacity: 0.8;
+    letter-spacing: 0.06em;
+  }
+
+  .adapt-body {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 1.9;
+    color: var(--mist);
+    opacity: 0.55;
+    letter-spacing: 0.03em;
+  }
+
+  /* Polaris north marker above the pillar constellation */
+  .polaris-connector {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 28px;
+    position: relative;
+  }
+
+  .polaris-node {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 24px;
+    border: 1px solid rgba(200,168,75,0.25);
+    background: rgba(200,168,75,0.05);
+    margin-bottom: 0;
+  }
+
+  .polaris-node-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+  }
+
+  .polaris-node-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 8px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.5;
+  }
+
+  /* Drop line from Polaris node to pillar tops */
+  .polaris-drop {
+    width: 1px;
+    height: 32px;
+    background: linear-gradient(180deg, rgba(200,168,75,0.45), rgba(200,168,75,0.05));
+  }
+
+  /* ══════════════════════════════════════
+     FOOTER
+     ══════════════════════════════════════ */
+  footer {
+    background: #04080d;
+    border-top: 1px solid rgba(200,168,75,0.12);
+    padding: 64px 48px 48px;
+  }
+
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 56px;
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .footer-mark-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .footer-wordmark {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 24px;
+    letter-spacing: 0.2em;
+    color: var(--white);
+  }
+
+  .footer-wordmark sup {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    color: var(--gold);
+    font-weight: 300;
+  }
+
+  .footer-pv {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 11px;
+    color: var(--gold);
+    opacity: 0.6;
+    letter-spacing: 0.12em;
+  }
+
+  .footer-body {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    line-height: 1.85;
+    color: var(--mist);
+    opacity: 0.38;
+    letter-spacing: 0.03em;
+  }
+
+  .footer-col-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 8.5px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.5;
+    margin-bottom: 20px;
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .footer-links a {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--mist);
+    opacity: 0.45;
+    text-decoration: none;
+    transition: opacity 0.2s, color 0.2s;
+  }
+  .footer-links a:hover { opacity: 0.85; color: var(--gold); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(200,168,75,0.08);
+    padding-top: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-legal {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 200;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: var(--mist);
+    opacity: 0.28;
+  }
+
+  .footer-coord {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 10px;
+    color: var(--gold);
+    opacity: 0.3;
+    letter-spacing: 0.1em;
+  }
+
+
+  /* ══════════════════════════════════════
+     GESTALT — THEORETICAL FOUNDATION
+     ══════════════════════════════════════ */
+  .gestalt {
+    background: var(--navy);
+    padding: 120px 48px;
+    border-top: 1px solid rgba(200,168,75,0.1);
+  }
+  .gestalt-inner { max-width: 1100px; margin: 0 auto; }
+  .gestalt-overline {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--gold); opacity: 0.65; margin-bottom: 20px;
+  }
+  .gestalt-heading {
+    font-family: 'Cormorant Garamond', serif; font-weight: 300;
+    font-size: clamp(28px, 4vw, 48px); color: var(--white);
+    letter-spacing: 0.03em; line-height: 1.2; margin-bottom: 16px;
+  }
+  .gestalt-heading em { font-style: italic; color: var(--gold); }
+  .gestalt-intro-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 72px; align-items: start; margin: 48px 0 64px;
+  }
+  .gestalt-body-text {
+    font-family: 'DM Sans', sans-serif; font-weight: 300;
+    font-size: 13px; line-height: 1.9; color: var(--mist); opacity: 0.6;
+    letter-spacing: 0.03em;
+  }
+  .gestalt-body-text + .gestalt-body-text { margin-top: 16px; }
+  .gestalt-pullquote {
+    border-left: 1px solid rgba(200,168,75,0.35);
+    padding-left: 28px;
+  }
+  .gestalt-pullquote p {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 300;
+    font-size: clamp(16px, 2vw, 22px); color: var(--white); opacity: 0.82;
+    line-height: 1.55; letter-spacing: 0.03em;
+  }
+  .gestalt-pullquote cite {
+    display: block; margin-top: 18px;
+    font-family: 'DM Sans', sans-serif; font-size: 9px;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); opacity: 0.5; font-style: normal;
+  }
+  .gestalt-table { border-top: 1px solid rgba(200,168,75,0.12); }
+  .gestalt-table-head {
+    display: grid; grid-template-columns: 180px 1fr 1.6fr;
+    gap: 32px; padding: 14px 0;
+    border-bottom: 1px solid rgba(200,168,75,0.18);
+  }
+  .gestalt-table-head span {
+    font-family: 'DM Sans', sans-serif; font-size: 8px;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); opacity: 0.5;
+  }
+  .gestalt-row {
+    display: grid; grid-template-columns: 180px 1fr 1.6fr;
+    gap: 32px; padding: 22px 0;
+    border-bottom: 1px solid rgba(200,168,75,0.07);
+    align-items: start;
+    transition: background 0.2s;
+  }
+  .gestalt-law {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 15px; color: var(--gold); letter-spacing: 0.06em;
+  }
+  .gestalt-pillar {
+    font-family: 'Cormorant Garamond', serif; font-size: 14px;
+    color: var(--white); letter-spacing: 0.04em;
+  }
+  .gestalt-desc {
+    font-family: 'DM Sans', sans-serif; font-weight: 300;
+    font-size: 11px; line-height: 1.85; color: var(--mist);
+    opacity: 0.5; letter-spacing: 0.03em;
+  }
+  .gestalt-emergence {
+    margin-top: 48px;
+    background: rgba(200,168,75,0.04);
+    border: 1px solid rgba(200,168,75,0.18);
+    border-top: 2px solid rgba(200,168,75,0.35);
+    padding: 36px 40px;
+    display: grid; grid-template-columns: 1fr 2fr; gap: 48px; align-items: center;
+  }
+  .emerge-label {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 22px; color: var(--gold); letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+  .emerge-tag {
+    font-family: 'DM Sans', sans-serif; font-size: 8px;
+    letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--gold); opacity: 0.5;
+  }
+  .emerge-body {
+    font-family: 'DM Sans', sans-serif; font-weight: 300;
+    font-size: 12px; line-height: 1.9; color: var(--mist); opacity: 0.55;
+    letter-spacing: 0.03em;
+  }
+
+  /* ══════════════════════════════════════
+     WORK / SERVICES
+     ══════════════════════════════════════ */
+  .work {
+    background: #060d14; padding: 120px 48px;
+    border-top: 1px solid rgba(200,168,75,0.1);
+  }
+  .work-inner { max-width: 1100px; margin: 0 auto; }
+  .work-overline {
+    font-family: 'DM Sans', sans-serif; font-size: 9px;
+    letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--gold); opacity: 0.65; margin-bottom: 20px;
+  }
+  .work-heading {
+    font-family: 'Cormorant Garamond', serif; font-weight: 300;
+    font-size: clamp(28px, 4vw, 48px); color: var(--white);
+    letter-spacing: 0.03em; line-height: 1.2; margin-bottom: 16px;
+  }
+  .work-heading em { font-style: italic; color: var(--gold); }
+  .work-sub {
+    font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 13px;
+    color: var(--mist); opacity: 0.5; letter-spacing: 0.05em;
+    max-width: 520px; line-height: 1.8; margin-bottom: 64px;
+  }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+  }
+  .service-card {
+    background: rgba(255,255,255,0.025);
+    border: 1px solid rgba(91,158,201,0.1);
+    padding: 40px 32px;
+    transition: background 0.25s, border-color 0.25s;
+  }
+  .service-card:hover {
+    background: rgba(91,158,201,0.05);
+    border-color: rgba(91,158,201,0.25);
+  }
+  .service-overline {
+    font-family: 'DM Sans', sans-serif; font-size: 8px;
+    letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--sky); opacity: 0.55; margin-bottom: 16px;
+  }
+  .service-title {
+    font-family: 'Cormorant Garamond', serif; font-weight: 400;
+    font-size: 20px; color: var(--white); letter-spacing: 0.04em;
+    line-height: 1.3; margin-bottom: 16px;
+  }
+  .service-body {
+    font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 11px;
+    line-height: 1.85; color: var(--mist); opacity: 0.5;
+    letter-spacing: 0.03em; margin-bottom: 24px;
+  }
+  .service-rule {
+    width: 32px; height: 1px; background: rgba(200,168,75,0.35);
+    margin-bottom: 20px;
+  }
+  .service-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .service-list li {
+    font-family: 'DM Sans', sans-serif; font-size: 10px;
+    color: var(--mist); opacity: 0.42; letter-spacing: 0.05em;
+    padding-left: 14px; position: relative; line-height: 1.6;
+  }
+  .service-list li::before {
+    content: '—'; position: absolute; left: 0;
+    color: var(--gold); opacity: 0.6;
+  }
+
+  /* ══════════════════════════════════════
+     BOOK
+     ══════════════════════════════════════ */
+  .book {
+    background: var(--navy); padding: 120px 48px;
+    border-top: 1px solid rgba(200,168,75,0.1);
+  }
+  .book-inner { max-width: 1100px; margin: 0 auto; }
+  .book-overline {
+    font-family: 'DM Sans', sans-serif; font-size: 9px;
+    letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--gold); opacity: 0.65; margin-bottom: 20px;
+  }
+  .book-heading {
+    font-family: 'Cormorant Garamond', serif; font-weight: 300;
+    font-size: clamp(28px, 4vw, 48px); color: var(--white);
+    letter-spacing: 0.03em; line-height: 1.2; margin-bottom: 56px;
+  }
+  .book-heading em { font-style: italic; color: var(--gold); }
+  .book-layout {
+    display: grid; grid-template-columns: 280px 1fr; gap: 80px; align-items: start;
+  }
+  .book-cover {
+    background: linear-gradient(160deg, #0d1b2a 0%, #060d14 100%);
+    border: 1px solid rgba(200,168,75,0.2);
+    border-top: 3px solid var(--gold);
+    padding: 40px 32px;
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center; position: relative;
+  }
+  .book-cover-title {
+    font-family: 'Cormorant Garamond', serif; font-weight: 300;
+    font-size: 22px; color: var(--white); letter-spacing: 0.06em;
+    line-height: 1.3; margin-bottom: 12px;
+  }
+  .book-cover-sub {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 11px; color: var(--mist); opacity: 0.6;
+    line-height: 1.6; margin-bottom: 28px; letter-spacing: 0.04em;
+  }
+  .book-cover-rule {
+    width: 36px; height: 1px; background: rgba(200,168,75,0.4);
+    margin: 0 auto 24px;
+  }
+  .book-cover-author {
+    font-family: 'DM Sans', sans-serif; font-weight: 200;
+    font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); opacity: 0.6;
+  }
+  .book-notify {
+    margin-top: 24px; padding: 20px;
+    border: 1px solid rgba(200,168,75,0.15);
+    background: rgba(200,168,75,0.03);
+  }
+  .book-notify p {
+    font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 10px;
+    letter-spacing: 0.05em; color: var(--mist); opacity: 0.5;
+    line-height: 1.7; margin-bottom: 12px;
+  }
+  .notify-form { display: flex; }
+  .notify-input {
+    flex: 1; background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(200,168,75,0.2); border-right: none;
+    color: var(--white); padding: 10px 14px;
+    font-family: 'DM Sans', sans-serif; font-size: 10px;
+    letter-spacing: 0.05em; outline: none;
+    transition: border-color 0.2s;
+  }
+  .notify-input::placeholder { color: rgba(200,220,232,0.25); }
+  .notify-input:focus { border-color: rgba(200,168,75,0.5); }
+  .notify-btn {
+    background: var(--gold); color: var(--navy);
+    border: none; padding: 10px 16px;
+    font-family: 'DM Sans', sans-serif; font-size: 8.5px;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    cursor: pointer; font-weight: 400; white-space: nowrap;
+    transition: background 0.2s;
+  }
+  .notify-btn:hover { background: var(--amber); }
+  .book-content p {
+    font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 13px;
+    line-height: 1.9; color: var(--mist); opacity: 0.55;
+    letter-spacing: 0.03em; margin-bottom: 16px;
+  }
+  .book-content em {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 15px; color: var(--gold); opacity: 1;
+  }
+  .book-toc {
+    margin-top: 32px; border-top: 1px solid rgba(200,168,75,0.12);
+  }
+  .toc-row {
+    display: grid; grid-template-columns: 56px 1fr;
+    gap: 16px; padding: 10px 0;
+    border-bottom: 1px solid rgba(200,168,75,0.07);
+    align-items: baseline;
+  }
+  .toc-num {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 11px; color: var(--gold); opacity: 0.7;
+  }
+  .toc-name {
+    font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 11px;
+    color: var(--mist); opacity: 0.42; letter-spacing: 0.04em;
+  }
+
+  /* ══════════════════════════════════════
+     BEGIN / CONTACT
+     ══════════════════════════════════════ */
+  .begin {
+    background: #060d14; padding: 120px 48px;
+    border-top: 1px solid rgba(200,168,75,0.1);
+  }
+  .begin-inner {
+    max-width: 1000px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1.5fr; gap: 80px; align-items: start;
+  }
+  .begin-overline {
+    font-family: 'DM Sans', sans-serif; font-size: 9px;
+    letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--gold); opacity: 0.65; margin-bottom: 20px;
+  }
+  .begin-heading {
+    font-family: 'Cormorant Garamond', serif; font-weight: 300;
+    font-size: clamp(26px, 3.5vw, 40px); color: var(--white);
+    letter-spacing: 0.03em; line-height: 1.25; margin-bottom: 20px;
+  }
+  .begin-heading em { font-style: italic; color: var(--gold); }
+  .begin-body {
+    font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 12px;
+    line-height: 1.9; color: var(--mist); opacity: 0.5;
+    letter-spacing: 0.03em; margin-bottom: 32px;
+  }
+  .begin-detail {
+    padding: 14px 0; border-bottom: 1px solid rgba(200,168,75,0.1);
+  }
+  .begin-detail-label {
+    font-family: 'DM Sans', sans-serif; font-size: 8px;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); opacity: 0.5; margin-bottom: 5px;
+  }
+  .begin-detail-val {
+    font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 11px;
+    color: var(--mist); opacity: 0.45; line-height: 1.7;
+  }
+  .contact-form { display: flex; flex-direction: column; gap: 14px; }
+  .contact-form-label {
+    font-family: 'DM Sans', sans-serif; font-size: 9px;
+    letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--gold); opacity: 0.55; margin-bottom: 20px;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-label {
+    font-family: 'DM Sans', sans-serif; font-size: 8px;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--mist); opacity: 0.45;
+  }
+  .form-input, .form-select, .form-textarea {
+    background: rgba(255,255,255,0.035);
+    border: 1px solid rgba(91,158,201,0.15);
+    color: var(--white); padding: 12px 16px;
+    font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 12px;
+    letter-spacing: 0.03em; outline: none; width: 100%;
+    transition: border-color 0.2s;
+    appearance: none;
+  }
+  .form-input::placeholder, .form-textarea::placeholder { color: rgba(200,220,232,0.2); }
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: rgba(91,158,201,0.4);
+  }
+  .form-textarea { min-height: 120px; resize: vertical; line-height: 1.7; }
+  .form-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 5 5-5' stroke='%235b9ec9' fill='none' stroke-width='1.2' opacity='0.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 14px center;
+    background-color: rgba(255,255,255,0.035); cursor: pointer;
+  }
+  .form-select option { background: #060d14; }
+  .form-submit {
+    background: var(--gold); color: var(--navy);
+    border: none; padding: 14px 36px;
+    font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 10px;
+    letter-spacing: 0.28em; text-transform: uppercase;
+    cursor: pointer; align-self: flex-start; margin-top: 4px;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .form-submit:hover { background: var(--amber); transform: translateY(-1px); }
+  .form-note {
+    font-family: 'DM Sans', sans-serif; font-size: 9px;
+    color: var(--mist); opacity: 0.3; letter-spacing: 0.06em; line-height: 1.7;
+  }
+  .form-success {
+    display: none; padding: 28px 32px;
+    border: 1px solid rgba(200,168,75,0.2);
+    background: rgba(200,168,75,0.04); margin-top: 8px;
+  }
+  .form-success-title {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 20px; color: var(--gold); margin-bottom: 8px;
+  }
+  .form-success-body {
+    font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 11px;
+    color: var(--mist); opacity: 0.5; line-height: 1.7;
+  }
+
+  /* ══════════════════════════════════════
+     RESPONSIVE
+     ══════════════════════════════════════ */
+  @media (max-width: 900px) {
+    .gestalt-intro-grid { grid-template-columns: 1fr; gap: 32px; }
+    .gestalt-table-head { display: none; }
+    .gestalt-row { grid-template-columns: 1fr; gap: 6px; padding: 20px 0; }
+    .gestalt-emergence { grid-template-columns: 1fr; gap: 16px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .book-layout { grid-template-columns: 1fr; gap: 40px; }
+    .begin-inner { grid-template-columns: 1fr; gap: 40px; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     NAV BAR — Icon mark + wordmark
+     ══════════════════════════════════════ -->
+<nav>
+  <a href="#" class="nav-mark">
+    <!-- Icon mark only at nav scale — just the Polaris star -->
+    <svg width="32" height="32" viewBox="-16 -16 32 32" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="navG" cx="50%" cy="50%" r="50%">
+          <stop offset="0%"   stop-color="#c8a84b" stop-opacity="0.4"/>
+          <stop offset="100%" stop-color="#c8a84b" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="navC" cx="38%" cy="35%" r="65%">
+          <stop offset="0%"   stop-color="#fff4cc"/>
+          <stop offset="100%" stop-color="#c8a84b"/>
+        </radialGradient>
+      </defs>
+      <circle cx="0" cy="0" r="14" fill="url(#navG)" class="glow-anim"/>
+      <!-- Upward spike — dominant -->
+      <line x1="0" y1="-14" x2="0" y2="-6" stroke="#c8a84b" stroke-width="1" opacity="0.65" stroke-linecap="round"/>
+      <!-- Faint cross spikes -->
+      <line x1="0" y1="4"   x2="0" y2="12"  stroke="#c8a84b" stroke-width="0.5" opacity="0.2" stroke-linecap="round"/>
+      <line x1="-12" y1="0" x2="-5" y2="0"  stroke="#c8a84b" stroke-width="0.5" opacity="0.2" stroke-linecap="round"/>
+      <line x1="5"   y1="0" x2="12" y2="0"  stroke="#c8a84b" stroke-width="0.5" opacity="0.2" stroke-linecap="round"/>
+      <!-- Constellation dots -->
+      <circle cx="6"  cy="4"  r="0.7" fill="#c8dce8" opacity="0.45"/>
+      <circle cx="10" cy="8"  r="0.6" fill="#c8dce8" opacity="0.32"/>
+      <circle cx="12" cy="12" r="0.7" fill="#c8dce8" opacity="0.28"/>
+      <!-- Core -->
+      <circle cx="0" cy="0" r="2.8" fill="url(#navC)" class="core-anim"/>
+      <circle cx="0" cy="0" r="1.1" fill="#fff8e8"/>
+    </svg>
+
+    <div class="nav-divider"></div>
+
+    <span class="nav-mark-wordmark">PRAEVA<sup>™</sup></span>
+    <span class="nav-tagline">Lead the Way</span>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#framework">Framework</a></li>
+    <li><a href="#gestalt">Foundation</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#book">Book</a></li>
+    <li><a href="#begin" class="nav-cta">Begin</a></li>
+  </ul>
+</nav>
+
+
+<!-- ══════════════════════════════════════
+     HERO — Full Polaris D mark, large
+     ══════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-mark">
+      <svg width="260" height="260" viewBox="-130 -130 260 260" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="hG" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stop-color="#c8a84b" stop-opacity="0.32"/>
+            <stop offset="100%" stop-color="#c8a84b" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="hC" cx="38%" cy="35%" r="65%">
+            <stop offset="0%"   stop-color="#fff4cc"/>
+            <stop offset="50%"  stop-color="#e8c86a"/>
+            <stop offset="100%" stop-color="#c8a84b"/>
+          </radialGradient>
+          <filter id="blur2" x="-60%" y="-60%" width="220%" height="220%">
+            <feGaussianBlur stdDeviation="3"/>
+          </filter>
+        </defs>
+
+        <g class="drift-anim">
+          <!-- Atmospheric glow -->
+          <circle cx="0" cy="0" r="90" fill="url(#hG)" class="glow-anim"/>
+          <!-- Diffraction spikes -->
+          <line x1="0" y1="-122" x2="0"    y2="-78"  stroke="#c8a84b" stroke-width="0.9" opacity="0.32" stroke-linecap="round"/>
+          <line x1="0" y1="-50"  x2="0"    y2="-18"  stroke="#c8a84b" stroke-width="0.5" opacity="0.13" stroke-linecap="round"/>
+          <line x1="-120" y1="0" x2="-18"  y2="0"    stroke="#c8a84b" stroke-width="0.5" opacity="0.14" stroke-linecap="round"/>
+          <line x1="18"   y1="0" x2="120"  y2="0"    stroke="#c8a84b" stroke-width="0.5" opacity="0.14" stroke-linecap="round"/>
+          <line x1="-78" y1="-78" x2="-14" y2="-14"  stroke="#c8a84b" stroke-width="0.3" opacity="0.07" stroke-linecap="round"/>
+          <line x1="78"  y1="-78" x2="14"  y2="-14"  stroke="#c8a84b" stroke-width="0.3" opacity="0.07" stroke-linecap="round"/>
+          <line x1="-78" y1="78"  x2="-14" y2="14"   stroke="#c8a84b" stroke-width="0.3" opacity="0.06" stroke-linecap="round"/>
+          <line x1="78"  y1="78"  x2="14"  y2="14"   stroke="#c8a84b" stroke-width="0.3" opacity="0.06" stroke-linecap="round"/>
+
+          <!-- VERITAS constellation — Ursa Minor stars, gold on dark -->
+          <!-- V --> <circle cx="46"  cy="30"  r="3.5" fill="#c8a84b" opacity="0.78"/>
+                     <text x="52" y="24" font-size="8" fill="#c8a84b" font-family="Cormorant Garamond,serif" font-style="italic" opacity="0.55">V</text>
+          <!-- E --> <circle cx="80"  cy="56"  r="3"   fill="#c8a84b" opacity="0.68"/>
+                     <text x="86" y="50" font-size="8" fill="#c8a84b" font-family="Cormorant Garamond,serif" font-style="italic" opacity="0.48">E</text>
+          <!-- R --> <circle cx="104" cy="86"  r="3.2" fill="#c8a84b" opacity="0.72"/>
+                     <text x="110" y="80" font-size="8" fill="#c8a84b" font-family="Cormorant Garamond,serif" font-style="italic" opacity="0.52">R</text>
+          <!-- I --> <circle cx="110" cy="114" r="2.8" fill="#c8a84b" opacity="0.62"/>
+                     <text x="116" y="108" font-size="8" fill="#c8a84b" font-family="Cormorant Garamond,serif" font-style="italic" opacity="0.48">I</text>
+          <!-- T --> <circle cx="98"  cy="118" r="3"   fill="#c8a84b" opacity="0.65"/>
+          <!-- A --> <circle cx="78"  cy="112" r="3.2" fill="#c8a84b" opacity="0.68"/>
+          <!-- S --> <circle cx="62"  cy="100" r="2.5" fill="#c8a84b" opacity="0.55"/>
+
+          <!-- Constellation lines -->
+          <polyline points="0,0 46,30 80,56 104,86 110,114 98,118 78,112 62,100"
+                    fill="none" stroke="#c8a84b" stroke-width="0.7" opacity="0.18"/>
+
+          <!-- Core -->
+          <circle cx="0" cy="0" r="22" fill="url(#hG)" filter="url(#blur2)"/>
+          <circle cx="0" cy="0" r="8"  fill="url(#hC)" class="core-anim"/>
+          <circle cx="0" cy="0" r="3.2" fill="#fff8e8"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="hero-wordmark">
+      <div class="hero-rule-top"></div>
+      <div class="hero-name">PRAEVA<sup>™</sup></div>
+      <div class="hero-rule-mid"></div>
+      <div class="hero-pv">Polaris Veritas</div>
+      <div class="hero-true-north">True North</div>
+    </div>
+
+    <div class="hero-sub">
+      <h2>Leadership is not a style.<br>It is an architecture.</h2>
+      <p>The KEYSTONE Framework™ gives senior leaders the tools to design organizations that perform, scale, and endure. Five load-bearing pillars. Discipline that maintains their integrity under pressure. And adaptability as what emerges when both are present.</p>
+      <div class="hero-cta-row">
+        <a href="#framework" class="btn-primary">Explore the Framework</a>
+        <a href="#about" class="btn-secondary">About PRAEVA</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     KEYSTONE BAND
+     ══════════════════════════════════════ -->
+<div class="keystone-band">
+  <div class="ks-item">
+    <div class="ks-num">The Practice</div>
+    <div class="ks-title">Executive Coaching & Advisory</div>
+    <div class="ks-body">One-on-one engagement with senior leaders navigating organizational complexity, strategic transition, and executive development.</div>
+  </div>
+  <div class="ks-item">
+    <div class="ks-num">The Framework</div>
+    <div class="ks-title">The KEYSTONE Framework™</div>
+    <div class="ks-body">Five load-bearing pillars. Discipline that maintains their integrity under pressure. Adaptability as what emerges when both are present.</div>
+  </div>
+  <div class="ks-item">
+    <div class="ks-num">The Work</div>
+    <div class="ks-title">Speaking & Organizational Design</div>
+    <div class="ks-body">Keynotes, workshops, and embedded advisory engagements for military, government, and enterprise leadership teams.</div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     ABOUT — Parchment, C mark, brand statement
+     ══════════════════════════════════════ -->
+<section class="about" id="about">
+
+  <!-- C mark — parchment version -->
+  <div class="about-mark-col">
+    <svg width="260" height="340" viewBox="-130 -180 260 340" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="aG" cx="50%" cy="50%" r="50%">
+          <stop offset="0%"   stop-color="#c8a84b" stop-opacity="0.22"/>
+          <stop offset="100%" stop-color="#c8a84b" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="aC" cx="38%" cy="35%" r="65%">
+          <stop offset="0%"   stop-color="#a07820"/>
+          <stop offset="100%" stop-color="#7a5614"/>
+        </radialGradient>
+      </defs>
+
+      <!-- Ghosted PV -->
+      <text x="-90" y="60" font-family="Cormorant Garamond,serif" font-style="italic"
+            font-weight="300" font-size="260" fill="#8a6010" opacity="0.04">P</text>
+
+      <g class="drift-anim">
+        <circle cx="0" cy="-100" r="62" fill="url(#aG)" class="glow-anim"/>
+        <line x1="0" y1="-162" x2="0"    y2="-118" stroke="#8a6010" stroke-width="0.9" opacity="0.35" stroke-linecap="round"/>
+        <line x1="0" y1="-82"  x2="0"    y2="-50"  stroke="#8a6010" stroke-width="0.5" opacity="0.15" stroke-linecap="round"/>
+        <line x1="-100" y1="-100" x2="-16" y2="-100" stroke="#8a6010" stroke-width="0.5" opacity="0.16" stroke-linecap="round"/>
+        <line x1="16"   y1="-100" x2="100" y2="-100" stroke="#8a6010" stroke-width="0.5" opacity="0.16" stroke-linecap="round"/>
+        <line x1="-64" y1="-164" x2="-12" y2="-112" stroke="#8a6010" stroke-width="0.3" opacity="0.07" stroke-linecap="round"/>
+        <line x1="64"  y1="-164" x2="12"  y2="-112" stroke="#8a6010" stroke-width="0.3" opacity="0.07" stroke-linecap="round"/>
+        <!-- Constellation — steel on parch -->
+        <circle cx="32" cy="-72" r="1.5" fill="#2e5d8e" opacity="0.4"/>
+        <circle cx="56" cy="-54" r="1.2" fill="#2e5d8e" opacity="0.32"/>
+        <circle cx="70" cy="-34" r="1.6" fill="#2e5d8e" opacity="0.35"/>
+        <circle cx="64" cy="-12" r="1.2" fill="#2e5d8e" opacity="0.26"/>
+        <polyline points="0,-100 32,-72 56,-54 70,-34 64,-12" fill="none" stroke="#2e5d8e" stroke-width="0.5" opacity="0.13"/>
+        <circle cx="0" cy="-100" r="18" fill="url(#aG)"/>
+        <circle cx="0" cy="-100" r="6"  fill="url(#aC)" class="core-anim"/>
+        <circle cx="0" cy="-100" r="2.4" fill="#c8a84b"/>
+      </g>
+
+      <!-- PV monogram -->
+      <g transform="translate(0,-16)">
+        <text x="-24" y="0" font-family="Cormorant Garamond,serif" font-style="italic"
+              font-weight="400" font-size="30" fill="#5a3e10" opacity="0.85">P</text>
+        <text x="2" y="0" font-family="Cormorant Garamond,serif" font-style="italic"
+              font-weight="400" font-size="30" fill="#5a3e10" opacity="0.85">V</text>
+        <line x1="-28" y1="4" x2="26" y2="4" stroke="#8a6010" stroke-width="0.6" opacity="0.35"/>
+        <text x="-1" y="15" font-family="DM Sans,sans-serif" font-weight="200" font-size="5.5"
+              letter-spacing="2.5" fill="#8a6010" opacity="0.48" text-anchor="middle">POLARIS VERITAS</text>
+      </g>
+
+      <line x1="-80" y1="4" x2="80" y2="4" stroke="#8a6010" stroke-width="0.6" opacity="0.24"/>
+
+      <text x="0" y="56" font-family="Cormorant Garamond,serif" font-weight="300" font-size="58"
+            letter-spacing="8" fill="#1a1208" text-anchor="middle">PRAEVA</text>
+      <text x="92" y="16" font-family="DM Sans,sans-serif" font-size="11" fill="#8a6010" font-weight="300">™</text>
+
+      <line x1="-58" y1="70" x2="58" y2="70" stroke="#8a6010" stroke-width="0.5" opacity="0.22"/>
+
+      <text x="0" y="88" font-family="DM Sans,sans-serif" font-weight="300" font-size="7"
+            letter-spacing="4" fill="#5a3e10" opacity="0.58" text-anchor="middle">LEAD THE WAY</text>
+    </svg>
+  </div>
+
+  <div class="about-text-col">
+    <div class="about-overline">About PRAEVA</div>
+    <h2 class="about-heading">True North is not a destination.<br>It is a <em>standard.</em></h2>
+    <div class="about-rule"></div>
+    <p class="about-body">PRAEVA™ is a leadership consultancy founded on a single conviction: that great organizations are designed, not assembled. They have architecture — five load-bearing pillars that give the structure its strength — and they have discipline, which is what keeps that structure true under load.</p>
+    <p class="about-body">The KEYSTONE Framework™ is the methodology that makes that architecture visible, assessable, and buildable. You can design the pillars. Discipline is what turns the blueprint into a building that stands — across military commands, government agencies, and enterprise organizations of any scale.</p>
+    <div class="about-rule"></div>
+    <div class="about-credentials">
+      Colonel Kelly McNeese, U.S. Army (Ret.)<br>
+      Founder & Principal, PRAEVA™<br>
+      38 years of command, strategy & executive leadership
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     KEYSTONE FRAMEWORK — FIVE PILLARS
+     ══════════════════════════════════════ -->
+<section class="framework" id="framework">
+  <div class="framework-overline">The KEYSTONE Framework™</div>
+  <h2 class="framework-heading">Five Pillars.<br><em>One Emergent Architecture.</em></h2>
+  <p class="framework-sub">Five load-bearing pillars. Discipline maintains their integrity under pressure. Adaptability emerges when both are present — not as a sixth pillar, but as what a well-designed organization naturally becomes.</p>
+
+  <!-- Polaris / True North anchor above pillars -->
+  <div class="polaris-connector">
+    <div class="polaris-node">
+      <!-- Tiny star icon -->
+      <svg width="18" height="18" viewBox="-9 -9 18 18" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="0" cy="0" r="8" fill="rgba(200,168,75,0.1)"/>
+        <line x1="0" y1="-8" x2="0" y2="-4" stroke="#c8a84b" stroke-width="0.9" stroke-linecap="round"/>
+        <line x1="0" y1="3" x2="0" y2="7"   stroke="#c8a84b" stroke-width="0.5" stroke-linecap="round" opacity="0.4"/>
+        <line x1="-7" y1="0" x2="-4" y2="0" stroke="#c8a84b" stroke-width="0.5" stroke-linecap="round" opacity="0.4"/>
+        <line x1="4" y1="0" x2="7" y2="0"   stroke="#c8a84b" stroke-width="0.5" stroke-linecap="round" opacity="0.4"/>
+        <circle cx="0" cy="0" r="2" fill="#c8a84b"/>
+      </svg>
+      <div>
+        <div class="polaris-node-name">Polaris Veritas</div>
+        <div class="polaris-node-sub">True North · The fixed point</div>
+      </div>
+    </div>
+    <div class="polaris-drop"></div>
+  </div>
+
+  <!-- Five pillars — structural, load-bearing, parallel -->
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-num">Pillar I</div>
+      <div class="pillar-name">Strategic Clarity</div>
+      <div class="pillar-body">The organization knows where it is going, why it is going there, and what success looks like at every level of command.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">Pillar II</div>
+      <div class="pillar-name">Executive Authority</div>
+      <div class="pillar-body">Leadership is exercised with appropriate weight, scope, and accountability at each tier — neither over-reaching nor abdicating.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">Pillar III</div>
+      <div class="pillar-name">Organizational Alignment</div>
+      <div class="pillar-body">Structure, roles, and reporting relationships are architected to serve the strategy — not inherited from history or convenience.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">Pillar IV</div>
+      <div class="pillar-name">Execution Cadence</div>
+      <div class="pillar-body">A rhythmic, disciplined operating tempo converts strategy into consistent outcomes across every echelon of the organization.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">Pillar V</div>
+      <div class="pillar-name">Scalable Delegation</div>
+      <div class="pillar-body">Decision rights are distributed at the right altitude — building organizational capacity without surrendering accountability.</div>
+    </div>
+  </div>
+
+  <!-- Constellation spine connecting pillars -->
+  <div class="pillar-spine">
+    <div class="pillar-spine-seg"></div>
+    <div class="pillar-spine-seg"></div>
+    <div class="pillar-spine-seg"></div>
+    <div class="pillar-spine-seg"></div>
+    <div class="pillar-spine-seg"></div>
+  </div>
+
+  <!-- Adaptability — emergent property, spanning band -->
+  <div class="adaptability">
+    <div class="adapt-label-col">
+      <div class="adapt-tag">Emergent Property</div>
+      <div class="adapt-name">Adaptability</div>
+      <div class="adapt-descriptor">the connective tissue of aligned pillars</div>
+    </div>
+    <div class="adapt-body">
+      Adaptability is not a sixth pillar to be built or a discipline to be trained. It is what emerges when the five pillars are load-bearing and discipline maintains their integrity under pressure. The pillars give the organization its structure. Discipline is what keeps that structure true when stress is applied — when the environment shifts, when the mission changes, when the unexpected arrives. An organization that has built well and maintained well does not react to change. It is already oriented toward it. This is the path between the stars. This is True North.
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ══════════════════════════════════════
+     FOOTER — Horizontal lockup, icon mark
+     ══════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+
+    <!-- Brand col -->
+    <div class="footer-brand">
+      <div class="footer-mark-row">
+        <!-- Icon mark at footer scale -->
+        <svg width="28" height="28" viewBox="-14 -14 28 28" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="fG" cx="50%" cy="50%" r="50%">
+              <stop offset="0%"   stop-color="#c8a84b" stop-opacity="0.35"/>
+              <stop offset="100%" stop-color="#c8a84b" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="fC" cx="38%" cy="35%" r="65%">
+              <stop offset="0%"   stop-color="#fff4cc"/>
+              <stop offset="100%" stop-color="#c8a84b"/>
+            </radialGradient>
+          </defs>
+          <circle cx="0" cy="0" r="12" fill="url(#fG)"/>
+          <line x1="0" y1="-12" x2="0" y2="-6" stroke="#c8a84b" stroke-width="0.9" opacity="0.6" stroke-linecap="round"/>
+          <line x1="0" y1="4"  x2="0" y2="10"  stroke="#c8a84b" stroke-width="0.4" opacity="0.18" stroke-linecap="round"/>
+          <line x1="-10" y1="0" x2="-5" y2="0"  stroke="#c8a84b" stroke-width="0.4" opacity="0.18" stroke-linecap="round"/>
+          <line x1="5"  y1="0" x2="10"  y2="0"  stroke="#c8a84b" stroke-width="0.4" opacity="0.18" stroke-linecap="round"/>
+          <circle cx="5" cy="4"  r="0.6" fill="#c8dce8" opacity="0.4"/>
+          <circle cx="9" cy="8"  r="0.5" fill="#c8dce8" opacity="0.3"/>
+          <circle cx="0" cy="0" r="2.5" fill="url(#fC)"/>
+          <circle cx="0" cy="0" r="1"   fill="#fff8e8"/>
+        </svg>
+
+        <div>
+          <div class="footer-wordmark">PRAEVA<sup>™</sup></div>
+          <div class="footer-pv">Polaris Veritas</div>
+        </div>
+      </div>
+      <p class="footer-body">A leadership consultancy and coaching practice. Five pillars. Discipline that holds them true. Adaptability as what emerges when both are present.</p>
+    </div>
+
+    <!-- Links col -->
+    <div>
+      <div class="footer-col-label">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#framework">The KEYSTONE Framework™</a></li>
+        <li><a href="#gestalt">Theoretical Foundation</a></li>
+        <li><a href="#work">Coaching &amp; Advisory</a></li>
+        <li><a href="#work">Speaking</a></li>
+        <li><a href="#book">The Book</a></li>
+        <li><a href="#begin">Begin</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact col -->
+    <div>
+      <div class="footer-col-label">Contact</div>
+      <ul class="footer-links">
+        <li><a href="#">Onalaska, Wisconsin</a></li>
+        <li><a href="#">praeva.com</a></li>
+        <li><a href="#">Schedule a Conversation</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <span class="footer-legal">© 2026 PRAEVA Coaching, LLC · All Rights Reserved · KEYSTONE Framework™ is a proprietary methodology</span>
+    <span class="footer-coord">δ = +89.34° · true north · always</span>
+  </div>
+</footer>
+
+
+<!-- ══════════════════════════════════════
+     GESTALT — THEORETICAL FOUNDATION
+     ══════════════════════════════════════ -->
+<section class="gestalt" id="gestalt">
+  <div class="gestalt-inner">
+    <div class="gestalt-overline">Theoretical Foundation</div>
+    <h2 class="gestalt-heading">The Whole Is Greater Than<br><em>the Sum of Its Pillars.</em></h2>
+
+    <div class="gestalt-intro-grid">
+      <div>
+        <p class="gestalt-body-text">Gestalt psychology offers more than a metaphor for the KEYSTONE Framework™ — it offers the structural explanation for why the framework must be understood and built as a whole. The Gestalt principle is precise: the whole possesses properties that no individual component contains. This is not a soft claim about perception. It is a structural one.</p>
+        <p class="gestalt-body-text">An organization that executes four pillars with excellence while neglecting the fifth will not achieve four-fifths of the result. It will fracture at the unresolved seam. Gestalt logic, applied to organizational design, is the argument against partial architecture — the theoretical foundation for why the KEYSTONE pillars must be built and held as a system.</p>
+        <p class="gestalt-body-text">Each of the five pillars maps with precision to a distinct Gestalt perceptual law — not as metaphor, but as structural correspondence.</p>
+      </div>
+      <div class="gestalt-pullquote">
+        <p>"There is no Adaptability at the pillar level. Adaptability is what happens when the architecture is whole."</p>
+        <cite>Leadership as Architecture · KEYSTONE Framework™</cite>
+      </div>
+    </div>
+
+    <div class="gestalt-table">
+      <div class="gestalt-table-head">
+        <span>Gestalt Law</span>
+        <span>KEYSTONE Pillar</span>
+        <span>Structural Correspondence</span>
+      </div>
+      <div class="gestalt-row">
+        <div class="gestalt-law">Figure-Ground</div>
+        <div class="gestalt-pillar">Strategic Clarity</div>
+        <div class="gestalt-desc">The discipline of separating signal from noise — determining what belongs to the foreground of organizational attention and what recedes. Leaders who cannot perform this function pursue everything and execute nothing well.</div>
+      </div>
+      <div class="gestalt-row">
+        <div class="gestalt-law">Prägnanz</div>
+        <div class="gestalt-pillar">Executive Authority</div>
+        <div class="gestalt-desc">The cognitive preference for the simplest stable form. Authority that is ambiguous produces escalation cascades and diffusion of accountability. Authority that is explicit resolves cleanly — the organization reads the structure without effort.</div>
+      </div>
+      <div class="gestalt-row">
+        <div class="gestalt-law">Closure</div>
+        <div class="gestalt-pillar">Organizational Alignment</div>
+        <div class="gestalt-desc">When values, incentives, structure, and roles are directionally coherent, people close the gap instinctively. They know what to do without being directed. Misalignment is the absence of closure: a disconnected pattern no one can complete without additional instruction.</div>
+      </div>
+      <div class="gestalt-row">
+        <div class="gestalt-law">Proximity</div>
+        <div class="gestalt-pillar">Execution Cadence</div>
+        <div class="gestalt-desc">Cadence creates temporal proximity — recurring rhythms of review, decision, and accountability that transform isolated actions into a unified operational pulse. Organizations without cadence do not lack effort. They lack the perceptual structure that gives effort coherent form.</div>
+      </div>
+      <div class="gestalt-row">
+        <div class="gestalt-law">Common Fate</div>
+        <div class="gestalt-pillar">Scalable Delegation</div>
+        <div class="gestalt-desc">Delegation that works is not distributed permission. It is distributed motion under shared intent — complex coordinated behavior from autonomous agents operating under shared structural rules. The organizational equivalent of a murmuration.</div>
+      </div>
+    </div>
+
+    <div class="gestalt-emergence">
+      <div>
+        <div class="emerge-tag">Emergent Property</div>
+        <div class="emerge-label">Adaptability</div>
+      </div>
+      <div class="emerge-body">In Gestalt theory, emergence is the phenomenon by which the whole produces properties that no component part contains — properties that simply do not exist at the level of the individual element. This is the precise mechanism behind the KEYSTONE Framework™'s most important claim. Adaptability cannot be designed, mandated, or purchased. It appears when the five pillars are in place, properly sequenced, and maintained with discipline. The organizations that earn Adaptability do not earn it by being more adaptive. They earn it by being more complete.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     WORK — EXPANDED SERVICES
+     ══════════════════════════════════════ -->
+<section class="work" id="work">
+  <div class="work-inner">
+    <div class="work-overline">The Work</div>
+    <h2 class="work-heading">How PRAEVA™ <em>Engages.</em></h2>
+    <p class="work-sub">Every engagement begins with the same question: where is the architecture failing? From that diagnosis, scope is determined — whether the work is one-on-one, embedded advisory, or organizational design at scale.</p>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-overline">The Practice</div>
+        <div class="service-title">Executive Coaching & Advisory</div>
+        <p class="service-body">One-on-one engagement with senior leaders navigating organizational complexity, strategic transition, and executive development. This is structural coaching — examining how a leader's decisions, authority patterns, and delegation behaviors are shaping the organization around them.</p>
+        <div class="service-rule"></div>
+        <ul class="service-list">
+          <li>Structural leadership assessment across five pillars</li>
+          <li>Decision rights and authority boundary mapping</li>
+          <li>Executive presence and organizational read</li>
+          <li>Senior transition and succession preparation</li>
+          <li>Quarterly diagnostic review cadence</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <div class="service-overline">The Design</div>
+        <div class="service-title">Organizational Design & Diagnostic</div>
+        <p class="service-body">Embedded advisory for organizations operating at the edge of their current architecture. The diagnostic identifies which pillar is under-built or misaligned — the design work builds the structural repair in sequence. Deployed across military commands, government agencies, and enterprise teams.</p>
+        <div class="service-rule"></div>
+        <ul class="service-list">
+          <li>Full KEYSTONE Framework™ organizational diagnostic</li>
+          <li>Structural failure mode identification</li>
+          <li>Authority and delegation architecture redesign</li>
+          <li>Governance cadence calendar development</li>
+          <li>90-day structural reset facilitation</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <div class="service-overline">The Platform</div>
+        <div class="service-title">Speaking & Leadership Development</div>
+        <p class="service-body">Keynote addresses and leadership development workshops for military, government, and enterprise audiences. From 45-minute keynotes to full-day workshops. The message is the same at every level: effort without architecture is not enough.</p>
+        <div class="service-rule"></div>
+        <ul class="service-list">
+          <li>Keynote: <em>Why Good People Aren't Enough</em></li>
+          <li>Keynote: <em>Leadership as Architecture</em> (military/government)</li>
+          <li>Workshop: KEYSTONE Framework™ for leadership teams</li>
+          <li>Executive seminar: Structural diagnosis and repair</li>
+          <li>Custom engagements for command and enterprise audiences</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     BOOK
+     ══════════════════════════════════════ -->
+<section class="book" id="book">
+  <div class="book-inner">
+    <div class="book-overline">The Book</div>
+    <h2 class="book-heading"><em>Leadership as Architecture</em></h2>
+
+    <div class="book-layout">
+      <div>
+        <div class="book-cover">
+          <div class="book-cover-title">Leadership<br>as Architecture</div>
+          <div class="book-cover-sub">The KEYSTONE Framework™ for Institutional Durability in an Age of Acceleration</div>
+          <div class="book-cover-rule"></div>
+          <div class="book-cover-author">Kelly McNeese</div>
+        </div>
+        <div class="book-notify">
+          <p>The manuscript is in final development. Register to be notified on publication.</p>
+          <div class="notify-form">
+            <input class="notify-input" type="email" placeholder="your@email.com"/>
+            <button class="notify-btn" onclick="this.textContent='✓'">Notify Me</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="book-content">
+        <p>The central argument is straightforward: execution breakdown is rarely a motivation problem. It is an architectural one. When escalation overloads the executive suite, when initiative proliferation fragments accountability, when political friction consumes decision-making energy — these are structural signals, and they respond to structural treatment.</p>
+        <p><em>Leadership as Architecture</em> is the doctrinal text behind the KEYSTONE Framework™. Informed by 38 years of command and organizational leadership, grounded in Galbraith, Rumelt, Drucker, Kahneman, and Taleb, and tested against the public record of complex organizations at scale.</p>
+
+        <div class="book-toc">
+          <div class="toc-row"><div class="toc-num">I</div><div class="toc-name">The Performance Illusion</div></div>
+          <div class="toc-row"><div class="toc-num">II</div><div class="toc-name">Complexity Acceleration</div></div>
+          <div class="toc-row"><div class="toc-num">III</div><div class="toc-name">The Matrix Authority Trap</div></div>
+          <div class="toc-row"><div class="toc-num">IV</div><div class="toc-name">Leadership as Architecture</div></div>
+          <div class="toc-row"><div class="toc-num">V–IX</div><div class="toc-name">The Five KEYSTONE Pillars</div></div>
+          <div class="toc-row"><div class="toc-num">X</div><div class="toc-name">AI as Architecture Multiplier</div></div>
+          <div class="toc-row"><div class="toc-num">XI</div><div class="toc-name">Decision Velocity in Digital Systems</div></div>
+          <div class="toc-row"><div class="toc-num">XII</div><div class="toc-name">Adaptability: The Structure That Lives</div></div>
+          <div class="toc-row"><div class="toc-num">XIII–XIX</div><div class="toc-name">Sustaining the Architecture</div></div>
+          <div class="toc-row"><div class="toc-num">★</div><div class="toc-name">Analytical Epilogue: The Framework in the Wild</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     BEGIN — CONTACT FORM
+     ══════════════════════════════════════ -->
+<section class="begin" id="begin">
+  <div class="begin-inner">
+    <div>
+      <div class="begin-overline">Begin</div>
+      <h2 class="begin-heading">Every engagement begins<br>with a <em>conversation.</em></h2>
+      <p class="begin-body">Whether you are navigating an organizational inflection point, preparing for senior transition, or building the architecture before conditions require it — the first step is a conversation.</p>
+      <div class="begin-detail">
+        <div class="begin-detail-label">Location</div>
+        <div class="begin-detail-val">Onalaska, Wisconsin · Serving clients nationally</div>
+      </div>
+      <div class="begin-detail">
+        <div class="begin-detail-label">Engagements</div>
+        <div class="begin-detail-val">Executive coaching · Organizational design · Speaking</div>
+      </div>
+      <div class="begin-detail">
+        <div class="begin-detail-label">Clientele</div>
+        <div class="begin-detail-val">Military commands · Government agencies · Enterprise leadership teams</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="contact-form-label">Schedule a Conversation</div>
+      <form class="contact-form" name="praeva-inquiry" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" onsubmit="handleSubmit(event)">
+        <input type="hidden" name="form-name" value="praeva-inquiry"/>
+        <p style="display:none"><label>Don't fill this out: <input name="bot-field"/></label></p>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First Name</label>
+            <input class="form-input" type="text" name="first-name" placeholder="First name" required/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name</label>
+            <input class="form-input" type="text" name="last-name" placeholder="Last name" required/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input class="form-input" type="email" name="email" placeholder="your@email.com" required/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Organization</label>
+          <input class="form-input" type="text" name="organization" placeholder="Organization or command"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Area of Interest</label>
+          <select class="form-select" name="area-of-interest">
+            <option value="" disabled selected>Select an area</option>
+            <option>Executive Coaching &amp; Advisory</option>
+            <option>Organizational Design &amp; Diagnostic</option>
+            <option>Speaking &amp; Leadership Development</option>
+            <option>The KEYSTONE Framework™ — General Inquiry</option>
+            <option>The Book — Publication Inquiry</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Your Situation</label>
+          <textarea class="form-textarea" name="situation" placeholder="What are you navigating? What is the architectural challenge?"></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send Inquiry</button>
+        <p class="form-note">All inquiries are handled directly by Colonel McNeese. You will receive a personal response within two business days.</p>
+      </form>
+      <div class="form-success" id="form-success">
+        <div class="form-success-title">Inquiry received.</div>
+        <div class="form-success-body">Thank you for reaching out. You will receive a personal response within two business days.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    e.target.style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  }
+</script>
+
+</body>
+</html>
