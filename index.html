@@ -94,101 +94,231 @@
   .core-anim  { animation: twinkle 3.5s ease-in-out infinite; }
   .drift-anim { animation: drift 9s ease-in-out infinite; }
 
-  /* ══════════════════════════════════════
-     NAV BAR
-     ══════════════════════════════════════ */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    height: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 48px;
-    background: rgba(10, 21, 32, 0.88);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(200,168,75,0.12);
-  }
+  /* ══ PRAEVA NAV ══ */
 
-  .nav-mark {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    text-decoration: none;
-  }
+/* ── PRAEVA NAV v2 ── */
+.praeva-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  background: rgba(10,35,66,0.97);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(184,134,11,0.22);
+  padding: 0 40px;
+}
+.praeva-nav::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, #B8860B 30%, #D4A017 70%, transparent 100%);
+  opacity: 0.6;
+}
+.nav-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: 0.1em;
+  color: #F5F0E8;
+  text-decoration: none;
+  margin-right: 40px;
+  flex-shrink: 0;
+  transition: opacity 0.2s;
+}
+.nav-brand:hover { opacity: 0.85; }
+.nav-brand sup { color: #B8860B; font-size: 11px; vertical-align: super; letter-spacing: 0; }
+.nav-primary-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+  flex: 1;
+}
+.nav-primary-links .nav-item { position: relative; }
+.nav-primary-links .nav-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.6);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  background: none;
+  outline: none;
+}
+.nav-primary-links .nav-link:hover { color: #F5F0E8; }
+.nav-primary-links .nav-link.active { color: #F5F0E8; }
+.nav-primary-links .nav-link.library-trigger.open {
+  color: #D4A017;
+  border-color: rgba(184,134,11,0.22);
+  background: rgba(184,134,11,0.1);
+}
+.nav-chevron {
+  width: 7px; height: 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 0.25s ease;
+  flex-shrink: 0; margin-top: 1px;
+}
+.library-trigger.open .nav-chevron { transform: rotate(-135deg) translateY(-2px); }
+.library-dropdown {
+  position: absolute;
+  top: calc(100% + 12px); left: -1px;
+  width: 310px;
+  background: #071829;
+  border: 1px solid rgba(184,134,11,0.22);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+  opacity: 0; pointer-events: none;
+  transform: translateY(-8px);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+  z-index: 100;
+}
+.library-dropdown.open { opacity: 1; pointer-events: all; transform: translateY(0); }
+.dd-header {
+  padding: 16px 22px 12px;
+  border-bottom: 1px solid rgba(184,134,11,0.15);
+}
+.dd-header-label {
+  font-family: 'Jost', sans-serif; font-weight: 500;
+  font-size: 8.5px; letter-spacing: 0.28em;
+  text-transform: uppercase; color: #B8860B; margin-bottom: 3px;
+}
+.dd-header-desc {
+  font-family: 'Cormorant Garamond', serif; font-size: 13px;
+  font-weight: 300; font-style: italic;
+  color: rgba(245,240,232,0.35); line-height: 1.4;
+}
+.dd-items { padding: 6px 0; }
+.dd-item {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 12px 22px; text-decoration: none; cursor: pointer;
+  transition: background 0.15s;
+  border-left: 2px solid transparent;
+  position: relative;
+}
+.dd-item:hover { background: rgba(245,240,232,0.04); border-left-color: #B8860B; }
+.dd-item.active { background: rgba(184,134,11,0.1); border-left-color: #B8860B; }
+.dd-item.coming-soon { opacity: 0.4; cursor: default; pointer-events: none; }
+.dd-item.os-slot { opacity: 0.25; pointer-events: none; cursor: default; }
+.dd-icon {
+  width: 30px; height: 30px;
+  border: 1px solid rgba(184,134,11,0.2);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+.dd-icon svg { width: 13px; height: 13px; stroke: #B8860B; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.dd-item.coming-soon .dd-icon svg,
+.dd-item.os-slot .dd-icon svg { stroke: rgba(245,240,232,0.3); }
+.dd-title {
+  font-family: 'Jost', sans-serif; font-weight: 500;
+  font-size: 12px; letter-spacing: 0.05em;
+  color: #F5F0E8; margin-bottom: 2px;
+}
+.dd-item.coming-soon .dd-title,
+.dd-item.os-slot .dd-title { color: rgba(245,240,232,0.4); }
+.dd-desc {
+  font-family: 'Jost', sans-serif; font-weight: 300;
+  font-size: 11px; line-height: 1.5;
+  color: rgba(245,240,232,0.35);
+}
+.dd-badge {
+  position: absolute; right: 18px; top: 50%; transform: translateY(-50%);
+  font-family: 'Jost', sans-serif; font-size: 8px; font-weight: 500;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: rgba(245,240,232,0.3);
+  border: 1px solid rgba(245,240,232,0.1); padding: 2px 6px;
+}
+.dd-divider { height: 1px; background: rgba(184,134,11,0.15); margin: 4px 22px; }
+.nav-cta {
+  display: flex; align-items: center; gap: 7px;
+  padding: 9px 20px;
+  background: transparent;
+  border: 1px solid #B8860B;
+  font-family: 'Jost', sans-serif; font-weight: 500;
+  font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: #B8860B; text-decoration: none; cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s, color 0.2s;
+  position: relative; overflow: hidden;
+}
+.nav-cta::before {
+  content: ''; position: absolute; inset: 0;
+  background: #B8860B; transform: scaleX(0); transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.nav-cta:hover::before { transform: scaleX(1); }
+.nav-cta:hover { color: #0A2342; }
+.nav-cta-text { position: relative; z-index: 1; }
+.nav-cta-arrow { position: relative; z-index: 1; font-size: 12px; transition: transform 0.2s; }
+.nav-cta:hover .nav-cta-arrow { transform: translateX(3px); }
+.nav-hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; padding: 4px; background: none; border: none; margin-left: auto;
+}
+.nav-hamburger span {
+  display: block; width: 22px; height: 1.5px;
+  background: rgba(245,240,232,0.6);
+  transition: all 0.25s ease; transform-origin: center;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); background: #B8860B; }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); background: #B8860B; }
+.mobile-drawer {
+  position: fixed; top: 68px; left: 0; right: 0;
+  background: #071829;
+  border-bottom: 1px solid rgba(184,134,11,0.2);
+  z-index: 999; max-height: 0; overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+.mobile-drawer.open { max-height: 500px; }
+.mobile-nav-items { padding: 16px 0 24px; }
+.mobile-nav-link {
+  display: block; padding: 13px 32px;
+  font-family: 'Jost', sans-serif; font-weight: 400;
+  font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(245,240,232,0.6); text-decoration: none;
+  border-left: 2px solid transparent; transition: all 0.15s;
+}
+.mobile-nav-link:hover, .mobile-nav-link.active {
+  color: #F5F0E8; border-left-color: #B8860B;
+  background: rgba(245,240,232,0.03);
+}
+.mobile-nav-section {
+  padding: 8px 32px 4px;
+  font-family: 'Jost', sans-serif; font-size: 8.5px;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: #B8860B; margin-top: 8px;
+}
+.mobile-nav-link.sub { padding-left: 44px; font-size: 11px; letter-spacing: 0.1em; color: rgba(245,240,232,0.4); }
+.mobile-nav-link.sub.coming-soon { opacity: 0.35; pointer-events: none; }
+.mobile-cta {
+  margin: 16px 32px 0; display: block; padding: 11px 20px;
+  border: 1px solid #B8860B; color: #B8860B;
+  font-family: 'Jost', sans-serif; font-size: 10px;
+  font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+  text-align: center; text-decoration: none; transition: all 0.2s;
+}
+.mobile-cta:hover { background: #B8860B; color: #0A2342; }
+@media (max-width: 860px) {
+  .praeva-nav { padding: 0 24px; }
+  .nav-primary-links, .nav-cta { display: none; }
+  .nav-hamburger { display: flex; }
+  .nav-brand { margin-right: 0; }
+}
 
-  .nav-mark-wordmark {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 300;
-    font-size: 22px;
-    letter-spacing: 0.18em;
-    color: var(--white);
-    line-height: 1;
-  }
-
-  .nav-mark-wordmark sup {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 9px;
-    font-weight: 300;
-    color: var(--gold);
-    vertical-align: super;
-    letter-spacing: 0;
-  }
-
-  .nav-divider {
-    width: 1px;
-    height: 20px;
-    background: rgba(200,168,75,0.3);
-  }
-
-  .nav-tagline {
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 200;
-    font-size: 9px;
-    letter-spacing: 0.3em;
-    color: var(--gold);
-    opacity: 0.7;
-    text-transform: uppercase;
-  }
-
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 36px;
-    list-style: none;
-  }
-
-  .nav-links a {
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--mist);
-    text-decoration: none;
-    opacity: 0.7;
-    transition: opacity 0.2s, color 0.2s;
-  }
-
-  .nav-links a:hover { opacity: 1; color: var(--gold); }
-
-  .nav-cta {
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    font-size: 10px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--gold) !important;
-    opacity: 1 !important;
-    border: 1px solid rgba(200,168,75,0.4);
-    padding: 8px 20px;
-    transition: background 0.2s, border-color 0.2s !important;
-  }
-  .nav-cta:hover {
-    background: rgba(200,168,75,0.1) !important;
-    border-color: var(--gold) !important;
-  }
 
   /* ══════════════════════════════════════
      HERO
@@ -787,8 +917,8 @@
 
   .footer-inner {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 48px;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
     margin-bottom: 56px;
   }
 
@@ -1287,51 +1417,66 @@
 <!-- ══════════════════════════════════════
      NAV BAR — Icon mark + wordmark
      ══════════════════════════════════════ -->
-<nav>
-  <a href="#" class="nav-mark">
-    <!-- Icon mark only at nav scale — just the Polaris star -->
-    <svg width="32" height="32" viewBox="-16 -16 32 32" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="navG" cx="50%" cy="50%" r="50%">
-          <stop offset="0%"   stop-color="#c8a84b" stop-opacity="0.4"/>
-          <stop offset="100%" stop-color="#c8a84b" stop-opacity="0"/>
-        </radialGradient>
-        <radialGradient id="navC" cx="38%" cy="35%" r="65%">
-          <stop offset="0%"   stop-color="#fff4cc"/>
-          <stop offset="100%" stop-color="#c8a84b"/>
-        </radialGradient>
-      </defs>
-      <circle cx="0" cy="0" r="14" fill="url(#navG)" class="glow-anim"/>
-      <!-- Upward spike — dominant -->
-      <line x1="0" y1="-14" x2="0" y2="-6" stroke="#c8a84b" stroke-width="1" opacity="0.65" stroke-linecap="round"/>
-      <!-- Faint cross spikes -->
-      <line x1="0" y1="4"   x2="0" y2="12"  stroke="#c8a84b" stroke-width="0.5" opacity="0.2" stroke-linecap="round"/>
-      <line x1="-12" y1="0" x2="-5" y2="0"  stroke="#c8a84b" stroke-width="0.5" opacity="0.2" stroke-linecap="round"/>
-      <line x1="5"   y1="0" x2="12" y2="0"  stroke="#c8a84b" stroke-width="0.5" opacity="0.2" stroke-linecap="round"/>
-      <!-- Constellation dots -->
-      <circle cx="6"  cy="4"  r="0.7" fill="#c8dce8" opacity="0.45"/>
-      <circle cx="10" cy="8"  r="0.6" fill="#c8dce8" opacity="0.32"/>
-      <circle cx="12" cy="12" r="0.7" fill="#c8dce8" opacity="0.28"/>
-      <!-- Core -->
-      <circle cx="0" cy="0" r="2.8" fill="url(#navC)" class="core-anim"/>
-      <circle cx="0" cy="0" r="1.1" fill="#fff8e8"/>
-    </svg>
 
-    <div class="nav-divider"></div>
-
-    <span class="nav-mark-wordmark">PRAEVA<sup>™</sup></span>
-    <span class="nav-tagline">Lead the Way</span>
-  </a>
-
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#framework">Framework</a></li>
-    <li><a href="#gestalt">Foundation</a></li>
-    <li><a href="#work">Work</a></li>
-    <li><a href="#book">Book</a></li>
-    <li><a href="#begin" class="nav-cta">Begin</a></li>
+<nav class="praeva-nav" id="praeva-nav">
+  <a href="https://praeva.com" class="nav-brand">PRAEVA<sup>™</sup></a>
+  <ul class="nav-primary-links">
+    <li class="nav-item"><a href="https://praeva.com/#framework" class="nav-link">Framework</a></li>
+    <li class="nav-item" id="library-item">
+      <button class="nav-link library-trigger" id="library-trigger" aria-expanded="false" aria-haspopup="true">
+        Library <span class="nav-chevron"></span>
+      </button>
+      <div class="library-dropdown" id="library-dropdown" role="menu">
+        <div class="dd-header">
+          <div class="dd-header-label">PRAEVA™ Content Library</div>
+          <div class="dd-header-desc">Doctrine, field application, and curated resources</div>
+        </div>
+        <div class="dd-items">
+          <a href="https://praeva.com/articles" class="dd-item coming-soon" role="menuitem">
+            <div class="dd-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+            <div><div class="dd-title">Articles</div><div class="dd-desc">Long-form doctrine essays and published pieces</div></div>
+            <span class="dd-badge">Forthcoming</span>
+          </a>
+          <a href="https://praeva.com/field-notes" class="dd-item" role="menuitem">
+            <div class="dd-icon"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
+            <div><div class="dd-title">Field Notes</div><div class="dd-desc">KEYSTONE Framework™ applied through concrete parallels</div></div>
+          </a>
+          <a href="https://praeva.com/resources" class="dd-item coming-soon" role="menuitem">
+            <div class="dd-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+            <div><div class="dd-title">Resources</div><div class="dd-desc">Books, white papers, and curated reading</div></div>
+            <span class="dd-badge">Forthcoming</span>
+          </a>
+          <div class="dd-divider"></div>
+          <div class="dd-item os-slot" aria-hidden="true">
+            <div class="dd-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg></div>
+            <div><div class="dd-title">Operating System</div><div class="dd-desc">Implementation tools and operating doctrine</div></div>
+            <span class="dd-badge">Coming Soon</span>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li class="nav-item"><a href="https://praeva.com/#begin" class="nav-link">Contact</a></li>
   </ul>
+  <a href="/diagnostic" class="nav-cta">
+    <span class="nav-cta-text">Take the Diagnostic</span>
+    <span class="nav-cta-arrow">→</span>
+  </a>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle navigation">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="mobile-drawer" id="mobile-drawer">
+  <div class="mobile-nav-items">
+    <a href="https://praeva.com/#framework" class="mobile-nav-link">Framework</a>
+    <div class="mobile-nav-section">Library</div>
+    <a href="https://praeva.com/articles" class="mobile-nav-link sub coming-soon">Articles</a>
+    <a href="https://praeva.com/field-notes" class="mobile-nav-link sub">Field Notes</a>
+    <a href="https://praeva.com/resources" class="mobile-nav-link sub coming-soon">Resources</a>
+    <a href="https://praeva.com/#begin" class="mobile-nav-link">Contact</a>
+    <a href="/diagnostic" class="mobile-cta">Take the Diagnostic →</a>
+  </div>
+</div>
+
 
 
 <!-- ══════════════════════════════════════
@@ -1654,7 +1799,7 @@
         <li><a href="#work">Coaching &amp; Advisory</a></li>
         <li><a href="#work">Speaking</a></li>
         <li><a href="#book">The Book</a></li>
-        <li><a href="#begin">Begin</a></li>
+        <li><a href="#begin">Contact</a></li>
       </ul>
     </div>
 
@@ -1662,9 +1807,18 @@
     <div>
       <div class="footer-col-label">Contact</div>
       <ul class="footer-links">
-        <li><a href="#">Onalaska, Wisconsin</a></li>
-        <li><a href="#">praeva.com</a></li>
-        <li><a href="#">Schedule a Conversation</a></li>
+        <li><a href="mailto:kelly@praeva.com">kelly@praeva.com</a></li>
+        <li><a href="#begin">Schedule a Conversation</a></li>
+      </ul>
+    </div>
+
+    <!-- Library col -->
+    <div>
+      <div class="footer-col-label">Library</div>
+      <ul class="footer-links">
+        <li><a href="/field-notes">Field Notes</a></li>
+        <li><a href="/articles/battle-rhythm">Articles</a></li>
+        <li><a href="/diagnostic">Take the Diagnostic</a></li>
       </ul>
     </div>
 
@@ -1922,5 +2076,33 @@
   }
 </script>
 
+
+<script>
+
+// ── PRAEVA NAV JS ──
+(function() {
+  var trigger = document.getElementById('library-trigger');
+  var dropdown = document.getElementById('library-dropdown');
+  var libraryItem = document.getElementById('library-item');
+  var closeTimer;
+  if (!trigger || !dropdown) return;
+  function openDD() { clearTimeout(closeTimer); trigger.classList.add('open'); dropdown.classList.add('open'); trigger.setAttribute('aria-expanded','true'); }
+  function scheduleClose() { closeTimer = setTimeout(function(){ trigger.classList.remove('open'); dropdown.classList.remove('open'); trigger.setAttribute('aria-expanded','false'); }, 120); }
+  trigger.addEventListener('click', function(){ dropdown.classList.contains('open') ? (trigger.classList.remove('open'), dropdown.classList.remove('open'), trigger.setAttribute('aria-expanded','false')) : openDD(); });
+  libraryItem.addEventListener('mouseenter', openDD);
+  libraryItem.addEventListener('mouseleave', scheduleClose);
+  dropdown.addEventListener('mouseenter', function(){ clearTimeout(closeTimer); });
+  dropdown.addEventListener('mouseleave', scheduleClose);
+  document.addEventListener('click', function(e){ if (!libraryItem.contains(e.target)) { trigger.classList.remove('open'); dropdown.classList.remove('open'); trigger.setAttribute('aria-expanded','false'); } });
+  document.addEventListener('keydown', function(e){ if (e.key==='Escape') { trigger.classList.remove('open'); dropdown.classList.remove('open'); trigger.setAttribute('aria-expanded','false'); trigger.focus(); } });
+  var hamburger = document.getElementById('nav-hamburger');
+  var drawer = document.getElementById('mobile-drawer');
+  if (hamburger && drawer) {
+    hamburger.addEventListener('click', function(){ hamburger.classList.toggle('open'); drawer.classList.toggle('open'); });
+    window.addEventListener('resize', function(){ if (window.innerWidth > 860) { hamburger.classList.remove('open'); drawer.classList.remove('open'); } });
+  }
+})();
+
+</script>
 </body>
 </html>
