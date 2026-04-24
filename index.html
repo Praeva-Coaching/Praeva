@@ -2071,10 +2071,18 @@
 <script>
   function handleSubmit(e) {
     e.preventDefault();
-    e.target.style.display = 'none';
-    document.getElementById('form-success').style.display = 'block';
-  }
-</script>
+        const form = e.target;
+        const data = new FormData(form);
+        fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(data).toString()
+        })
+              .then(() => {
+                      form.style.display = 'none';
+                      document.getElementById('form-success').style.display = 'block';
+              })
+              .catch(err => console.error('Form submission error:', err));
 
 
 <script>
