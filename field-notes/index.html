@@ -1,667 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Field Notes — PRAEVA™</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --navy: #0A2342;
-  --navy-mid: #0f2d52;
-  --gold: #B8860B;
-  --gold-light: #D4A017;
-  --gold-pale: rgba(184,134,11,0.12);
-  --cream: #F5F0E8;
-  --cream-dark: #EDE7D9;
-  --text: #1C1C1C;
-  --muted: #6b6b6b;
-  --border: rgba(184,134,11,0.2);
-}
-
-html { scroll-behavior: smooth; }
-
-body {
-  background: var(--navy);
-  color: var(--cream);
-  font-family: 'Jost', sans-serif;
-  font-weight: 300;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-/* ── GRAIN OVERLAY ── */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.6;
-}
-
-/* ── NAV ── */
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 48px;
-  height: 64px;
-  background: rgba(10,35,66,0.92);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-}
-
-.nav-brand {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 600;
-  font-size: 18px;
-  letter-spacing: 0.1em;
-  color: var(--cream);
-  text-decoration: none;
-}
-
-.nav-brand span { color: var(--gold); }
-
-.nav-links {
-  display: flex;
-  gap: 32px;
-  list-style: none;
-}
-
-.nav-links a {
-  font-family: 'Jost', sans-serif;
-  font-weight: 400;
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(245,240,232,0.6);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.nav-links a:hover,
-.nav-links a.active { color: var(--gold); }
-
-/* ── HERO ── */
-.hero {
-  position: relative;
-  padding: 140px 48px 80px;
-  max-width: 1100px;
-  margin: 0 auto;
-  z-index: 1;
-}
-
-.hero-eyebrow {
-  font-family: 'Jost', sans-serif;
-  font-weight: 500;
-  font-size: 10px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 20px;
-  opacity: 0;
-  animation: fadeUp 0.6s ease forwards;
-}
-
-.hero-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 300;
-  font-size: clamp(44px, 6vw, 72px);
-  line-height: 1.08;
-  color: var(--cream);
-  margin-bottom: 24px;
-  opacity: 0;
-  animation: fadeUp 0.6s 0.1s ease forwards;
-}
-
-.hero-title em {
-  font-style: italic;
-  color: var(--gold-light);
-}
-
-.hero-desc {
-  font-family: 'Jost', sans-serif;
-  font-weight: 300;
-  font-size: 15px;
-  line-height: 1.8;
-  color: rgba(245,240,232,0.65);
-  max-width: 560px;
-  opacity: 0;
-  animation: fadeUp 0.6s 0.2s ease forwards;
-}
-
-/* Decorative rule */
-.hero-rule {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin: 40px 0 0;
-  opacity: 0;
-  animation: fadeUp 0.6s 0.3s ease forwards;
-}
-
-.hero-rule-line {
-  height: 1px;
-  width: 60px;
-  background: var(--gold);
-  opacity: 0.4;
-}
-
-.hero-rule-text {
-  font-family: 'Jost', sans-serif;
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(245,240,232,0.35);
-}
-
-/* ── FILTERS ── */
-.filters-wrap {
-  position: relative;
-  z-index: 1;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 48px 48px;
-}
-
-.filters-section {
-  margin-bottom: 24px;
-}
-
-.filter-label {
-  font-family: 'Jost', sans-serif;
-  font-weight: 500;
-  font-size: 9px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: rgba(245,240,232,0.35);
-  margin-bottom: 10px;
-}
-
-.filter-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.filter-btn {
-  background: transparent;
-  border: 1px solid rgba(245,240,232,0.15);
-  color: rgba(245,240,232,0.5);
-  font-family: 'Jost', sans-serif;
-  font-weight: 400;
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  padding: 7px 16px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-transform: uppercase;
-}
-
-.filter-btn:hover {
-  border-color: var(--gold);
-  color: var(--gold);
-}
-
-.filter-btn.active {
-  background: var(--gold);
-  border-color: var(--gold);
-  color: var(--navy);
-  font-weight: 500;
-}
-
-/* ── GRID ── */
-.grid-wrap {
-  position: relative;
-  z-index: 1;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 48px 100px;
-}
-
-.results-count {
-  font-family: 'Jost', sans-serif;
-  font-weight: 300;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  color: rgba(245,240,232,0.3);
-  margin-bottom: 28px;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 24px;
-}
-
-/* ── CARD ── */
-.card {
-  background: rgba(245,240,232,0.04);
-  border: 1px solid rgba(184,134,11,0.15);
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
-  display: flex;
-  flex-direction: column;
-}
-
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--navy), var(--gold), var(--gold-light));
-  opacity: 0;
-  transition: opacity 0.25s ease;
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(184,134,11,0.4);
-  background: rgba(245,240,232,0.07);
-}
-
-.card:hover::before { opacity: 1; }
-
-.card-header {
-  padding: 28px 28px 20px;
-  border-bottom: 1px solid rgba(184,134,11,0.1);
-}
-
-.card-tags {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 14px;
-}
-
-.tag {
-  font-family: 'Jost', sans-serif;
-  font-weight: 500;
-  font-size: 9px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  padding: 3px 10px;
-}
-
-.tag-pillar {
-  background: var(--gold-pale);
-  color: var(--gold-light);
-  border: 1px solid rgba(184,134,11,0.25);
-}
-
-.tag-type {
-  background: rgba(245,240,232,0.06);
-  color: rgba(245,240,232,0.45);
-  border: 1px solid rgba(245,240,232,0.1);
-}
-
-.card-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 400;
-  font-size: 22px;
-  line-height: 1.25;
-  color: var(--cream);
-}
-
-.card-title em {
-  font-style: italic;
-  color: var(--gold-light);
-}
-
-/* Card body */
-.card-body {
-  padding: 20px 28px 24px;
-  flex: 1;
-}
-
-.card-excerpt {
-  font-family: 'Jost', sans-serif;
-  font-weight: 300;
-  font-size: 13px;
-  line-height: 1.75;
-  color: rgba(245,240,232,0.55);
-  margin-bottom: 20px;
-}
-
-.card-pillars {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.card-pillar-dot {
-  font-family: 'Jost', sans-serif;
-  font-size: 9px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--gold);
-  opacity: 0.7;
-}
-
-/* Card footer */
-.card-footer {
-  padding: 16px 28px;
-  border-top: 1px solid rgba(184,134,11,0.1);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.card-date {
-  font-family: 'Jost', sans-serif;
-  font-weight: 300;
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  color: rgba(245,240,232,0.25);
-}
-
-.card-action {
-  font-family: 'Jost', sans-serif;
-  font-weight: 500;
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--gold);
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-
-.card:hover .card-action { opacity: 1; }
-
-/* ── MODAL ── */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(10,35,66,0.92);
-  backdrop-filter: blur(8px);
-  z-index: 200;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-
-.modal-overlay.open {
-  opacity: 1;
-  pointer-events: all;
-}
-
-.modal {
-  background: var(--cream);
-  color: var(--text);
-  max-width: 680px;
-  width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
-  position: relative;
-  transform: translateY(20px);
-  transition: transform 0.3s ease;
-  box-shadow: 0 40px 120px rgba(0,0,0,0.5);
-}
-
-.modal-overlay.open .modal {
-  transform: translateY(0);
-}
-
-.modal-top-bar {
-  height: 3px;
-  background: linear-gradient(90deg, var(--navy), var(--gold), var(--gold-light));
-}
-
-.modal-header {
-  background: var(--navy);
-  padding: 32px 40px 28px;
-  position: relative;
-}
-
-.modal-close {
-  position: absolute;
-  top: 20px; right: 24px;
-  background: none;
-  border: 1px solid rgba(245,240,232,0.2);
-  color: rgba(245,240,232,0.5);
-  font-size: 18px;
-  width: 32px; height: 32px;
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: all 0.2s;
-  line-height: 1;
-}
-
-.modal-close:hover {
-  border-color: var(--gold);
-  color: var(--gold);
-}
-
-.modal-eyebrow {
-  font-family: 'Jost', sans-serif;
-  font-weight: 500;
-  font-size: 9px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 10px;
-}
-
-.modal-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 300;
-  font-size: 28px;
-  line-height: 1.2;
-  color: var(--cream);
-}
-
-.modal-title em {
-  font-style: italic;
-  color: var(--gold-light);
-}
-
-.modal-body {
-  padding: 36px 40px;
-}
-
-.modal-text {
-  font-family: 'Jost', sans-serif;
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 1.85;
-  color: #2a2a2a;
-  margin-bottom: 16px;
-  white-space: pre-wrap;
-}
-
-.modal-text strong {
-  font-weight: 500;
-  color: var(--navy);
-}
-
-.modal-divider {
-  height: 1px;
-  background: rgba(184,134,11,0.2);
-  margin: 24px 0;
-}
-
-.modal-elements {
-  background: var(--navy);
-  padding: 24px 28px;
-  margin-bottom: 24px;
-}
-
-.modal-elements-label {
-  font-family: 'Jost', sans-serif;
-  font-weight: 500;
-  font-size: 9px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 16px;
-}
-
-.modal-element {
-  display: flex;
-  gap: 14px;
-  margin-bottom: 12px;
-  font-family: 'Jost', sans-serif;
-  font-size: 13px;
-  line-height: 1.6;
-  color: var(--cream);
-  font-weight: 300;
-}
-
-.modal-element:last-child { margin-bottom: 0; }
-
-.modal-element-arrow {
-  color: var(--gold);
-  flex-shrink: 0;
-}
-
-.modal-element strong {
-  font-weight: 500;
-  color: var(--gold-light);
-}
-
-.modal-closing {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 18px;
-  font-weight: 400;
-  font-style: italic;
-  color: var(--navy);
-  line-height: 1.5;
-  text-align: center;
-  margin-bottom: 28px;
-}
-
-.modal-footer {
-  border-top: 1px solid rgba(184,134,11,0.2);
-  padding: 20px 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: gap;
-  gap: 12px;
-}
-
-.modal-brand {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 600;
-  font-size: 14px;
-  letter-spacing: 0.08em;
-  color: var(--navy);
-}
-
-.modal-brand span { color: var(--gold); }
-
-.modal-copy-btn {
-  background: transparent;
-  border: 1px solid var(--gold);
-  color: var(--navy);
-  font-family: 'Jost', sans-serif;
-  font-weight: 500;
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  padding: 9px 22px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.modal-copy-btn:hover,
-.modal-copy-btn.copied {
-  background: var(--navy);
-  color: var(--gold-light);
-  border-color: var(--navy);
-}
-
-/* ── EMPTY STATE ── */
-.empty-state {
-  grid-column: 1/-1;
-  text-align: center;
-  padding: 80px 0;
-  color: rgba(245,240,232,0.2);
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
-  font-style: italic;
-}
-
-/* ── FOOTER ── */
-footer {
-  position: relative;
-  z-index: 1;
-  border-top: 1px solid var(--border);
-  padding: 32px 48px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.footer-brand {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 600;
-  font-size: 16px;
-  letter-spacing: 0.1em;
-  color: var(--cream);
-  opacity: 0.6;
-}
-
-.footer-brand span { color: var(--gold); }
-
-.footer-copy {
-  font-family: 'Jost', sans-serif;
-  font-weight: 300;
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  color: rgba(245,240,232,0.25);
-}
-
-/* ── ANIMATIONS ── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.card { animation: fadeUp 0.5s ease both; }
-.card:nth-child(1) { animation-delay: 0.05s; }
-.card:nth-child(2) { animation-delay: 0.1s; }
-.card:nth-child(3) { animation-delay: 0.15s; }
-.card:nth-child(4) { animation-delay: 0.2s; }
-.card:nth-child(5) { animation-delay: 0.25s; }
-
-/* ── RESPONSIVE ── */
-@media (max-width: 768px) {
-  nav { padding: 0 24px; }
-  .nav-links { display: none; }
-  .hero, .filters-wrap, .grid-wrap { padding-left: 24px; padding-right: 24px; }
-  .hero { padding-top: 110px; }
-  .modal-header, .modal-body, .modal-footer { padding-left: 24px; padding-right: 24px; }
-  footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Field Notes — PRAEVA™</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0A2342;
+      --navy-mid: #0f2d52;
+      --gold: #B8860B;
+      --gold-light: #D4A017;
+      --gold-pale: rgba(184,134,11,0.12);
+      --cream: #F5F0E8;
+      --cream-dark: #EDE7D9;
+      --text: #1C1C1C;
+      --muted: #6b6b6b;
+      --border: rgba(184,134,11,0.2);
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--navy); color: var(--cream); font-family: 'Jost', sans-serif; font-weight: 300; min-height: 100vh; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.6; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 64px; background: rgba(10,35,66,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .nav-brand { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 18px; letter-spacing: 0.1em; color: var(--cream); text-decoration: none; }
+    .nav-brand span { color: var(--gold); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { font-family: 'Jost', sans-serif; font-weight: 400; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(245,240,232,0.6); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+    .hero { position: relative; padding: 140px 48px 80px; max-width: 1100px; margin: 0 auto; z-index: 1; }
+    .hero-eyebrow { font-family: 'Jost', sans-serif; font-weight: 500; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; opacity: 0; animation: fadeUp 0.6s ease forwards; }
+    .hero-title { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(44px, 6vw, 72px); line-height: 1.08; color: var(--cream); margin-bottom: 24px; opacity: 0; animation: fadeUp 0.6s 0.1s ease forwards; }
+    .hero-title em { font-style: italic; color: var(--gold-light); }
+    .hero-desc { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 15px; line-height: 1.8; color: rgba(245,240,232,0.65); max-width: 560px; opacity: 0; animation: fadeUp 0.6s 0.2s ease forwards; }
+    .hero-rule { display: flex; align-items: center; gap: 16px; margin: 40px 0 0; opacity: 0; animation: fadeUp 0.6s 0.3s ease forwards; }
+    .hero-rule-line { height: 1px; width: 60px; background: var(--gold); opacity: 0.4; }
+    .hero-rule-text { font-family: 'Jost', sans-serif; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(245,240,232,0.35); }
+    .filters-wrap { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 48px 48px; }
+    .filters-section { margin-bottom: 24px; }
+    .filter-label { font-family: 'Jost', sans-serif; font-weight: 500; font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(245,240,232,0.35); margin-bottom: 10px; }
+    .filter-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .filter-btn { background: transparent; border: 1px solid rgba(245,240,232,0.15); color: rgba(245,240,232,0.5); font-family: 'Jost', sans-serif; font-weight: 400; font-size: 11px; letter-spacing: 0.12em; padding: 7px 16px; cursor: pointer; transition: all 0.2s ease; text-transform: uppercase; }
+    .filter-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .filter-btn.active { background: var(--gold); border-color: var(--gold); color: var(--navy); font-weight: 500; }
+    .grid-wrap { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 48px 100px; }
+    .results-count { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 11px; letter-spacing: 0.1em; color: rgba(245,240,232,0.3); margin-bottom: 28px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+    .card { background: rgba(245,240,232,0.04); border: 1px solid rgba(184,134,11,0.15); position: relative; overflow: hidden; cursor: pointer; transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease; display: flex; flex-direction: column; }
+    .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--navy), var(--gold), var(--gold-light)); opacity: 0; transition: opacity 0.25s ease; }
+    .card:hover { transform: translateY(-4px); border-color: rgba(184,134,11,0.4); background: rgba(245,240,232,0.07); }
+    .card:hover::before { opacity: 1; }
+    .card-header { padding: 28px 28px 20px; border-bottom: 1px solid rgba(184,134,11,0.1); }
+    .card-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+    .tag { font-family: 'Jost', sans-serif; font-weight: 500; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; padding: 3px 10px; }
+    .tag-pillar { background: var(--gold-pale); color: var(--gold-light); border: 1px solid rgba(184,134,11,0.25); }
+    .tag-type { background: rgba(245,240,232,0.06); color: rgba(245,240,232,0.45); border: 1px solid rgba(245,240,232,0.1); }
+    .card-title { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 22px; line-height: 1.25; color: var(--cream); }
+    .card-title em { font-style: italic; color: var(--gold-light); }
+    .card-body { padding: 20px 28px 24px; flex: 1; }
+    .card-excerpt { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 13px; line-height: 1.75; color: rgba(245,240,232,0.55); margin-bottom: 20px; }
+    .card-footer { padding: 16px 28px; border-top: 1px solid rgba(184,134,11,0.1); display: flex; align-items: center; justify-content: space-between; }
+    .card-date { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 11px; letter-spacing: 0.08em; color: rgba(245,240,232,0.25); }
+    .card-action { font-family: 'Jost', sans-serif; font-weight: 500; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); opacity: 0; transition: opacity 0.2s; }
+    .card:hover .card-action { opacity: 1; }
+    .modal-overlay { position: fixed; inset: 0; background: rgba(10,35,66,0.92); backdrop-filter: blur(8px); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 24px; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal { background: var(--cream); color: var(--text); max-width: 680px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; transform: translateY(20px); transition: transform 0.3s ease; box-shadow: 0 40px 120px rgba(0,0,0,0.5); }
+    .modal-overlay.open .modal { transform: translateY(0); }
+    .modal-top-bar { height: 3px; background: linear-gradient(90deg, var(--navy), var(--gold), var(--gold-light)); }
+    .modal-header { background: var(--navy); padding: 32px 40px 28px; position: relative; }
+    .modal-close { position: absolute; top: 20px; right: 24px; background: none; border: 1px solid rgba(245,240,232,0.2); color: rgba(245,240,232,0.5); font-size: 18px; width: 32px; height: 32px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; line-height: 1; }
+    .modal-close:hover { border-color: var(--gold); color: var(--gold); }
+    .modal-eyebrow { font-family: 'Jost', sans-serif; font-weight: 500; font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .modal-title { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 28px; line-height: 1.2; color: var(--cream); }
+    .modal-title em { font-style: italic; color: var(--gold-light); }
+    .modal-body { padding: 36px 40px; }
+    .modal-text { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 14px; line-height: 1.85; color: #2a2a2a; margin-bottom: 16px; white-space: pre-wrap; }
+    .modal-text strong { font-weight: 500; color: var(--navy); }
+    .modal-divider { height: 1px; background: rgba(184,134,11,0.2); margin: 24px 0; }
+    .modal-elements { background: var(--navy); padding: 24px 28px; margin-bottom: 24px; }
+    .modal-elements-label { font-family: 'Jost', sans-serif; font-weight: 500; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .modal-element { display: flex; gap: 14px; margin-bottom: 12px; font-family: 'Jost', sans-serif; font-size: 13px; line-height: 1.6; color: var(--cream); font-weight: 300; }
+    .modal-element:last-child { margin-bottom: 0; }
+    .modal-element-arrow { color: var(--gold); flex-shrink: 0; }
+    .modal-element strong { font-weight: 500; color: var(--gold-light); }
+    .modal-closing { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 400; font-style: italic; color: var(--navy); line-height: 1.5; text-align: center; margin-bottom: 28px; }
+    .modal-footer { border-top: 1px solid rgba(184,134,11,0.2); padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .modal-brand { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 14px; letter-spacing: 0.08em; color: var(--navy); }
+    .modal-brand span { color: var(--gold); }
+    .modal-copy-btn { background: transparent; border: 1px solid var(--gold); color: var(--navy); font-family: 'Jost', sans-serif; font-weight: 500; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; padding: 9px 22px; cursor: pointer; transition: all 0.2s ease; }
+    .modal-copy-btn:hover, .modal-copy-btn.copied { background: var(--navy); color: var(--gold-light); border-color: var(--navy); }
+    .empty-state { grid-column: 1/-1; text-align: center; padding: 80px 0; color: rgba(245,240,232,0.2); font-family: 'Cormorant Garamond', serif; font-size: 22px; font-style: italic; }
+    footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 32px 48px; display: flex; align-items: center; justify-content: space-between; max-width: 1100px; margin: 0 auto; }
+    .footer-brand { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 16px; letter-spacing: 0.1em; color: var(--cream); opacity: 0.6; }
+    .footer-brand span { color: var(--gold); }
+    .footer-copy { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 10px; letter-spacing: 0.12em; color: rgba(245,240,232,0.25); }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .card { animation: fadeUp 0.5s ease both; }
+    .card:nth-child(1) { animation-delay: 0.05s; }
+    .card:nth-child(2) { animation-delay: 0.1s; }
+    .card:nth-child(3) { animation-delay: 0.15s; }
+    .card:nth-child(4) { animation-delay: 0.2s; }
+    .card:nth-child(5) { animation-delay: 0.25s; }
+    @media (max-width: 768px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .hero, .filters-wrap, .grid-wrap { padding-left: 24px; padding-right: 24px; }
+      .hero { padding-top: 110px; }
+      .modal-header, .modal-body, .modal-footer { padding-left: 24px; padding-right: 24px; }
+      footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-brand">PRAEVA<span>™</span></a>
+  <a href="/" class="nav-brand">PRAEVA<span>™</span></a>
   <ul class="nav-links">
-    <li><a href="#">Framework</a></li>
-    <li><a href="#">Diagnostic</a></li>
-    <li><a href="#" class="active">Field Notes</a></li>
-    <li><a href="#">Contact</a></li>
+    <li><a href="/framework">Framework</a></li>
+    <li><a href="/diagnostic">Diagnostic</a></li>
+    <li><a href="/field-notes" class="active">Field Notes</a></li>
+    <li><a href="/#contact">Contact</a></li>
   </ul>
 </nav>
 
@@ -704,7 +164,7 @@ footer {
 
 <!-- GRID -->
 <div class="grid-wrap">
-  <div class="results-count" id="results-count">1 post</div>
+  <div class="results-count" id="results-count"></div>
   <div class="grid" id="grid"></div>
 </div>
 
@@ -731,6 +191,83 @@ footer {
 // ── DATA ──
 const posts = [
   {
+    id: 3,
+    pillar: "all",
+    pillarLabel: "Framework-Wide · Formal Introduction",
+    type: "cross-domain",
+    typeLabel: "Cross-Domain",
+    title: "The KEYSTONE Framework™ — formally introduced.",
+    excerpt: "Most execution failures aren't motivation problems. They're architectural ones. Five structural pillars. One foundation. One emergent property. This is the architecture.",
+    date: "April 2026",
+    fullContent: {
+      eyebrow: "KEYSTONE Framework™ · Formal Introduction",
+      title: "The KEYSTONE Framework™ —<br><em>formally introduced.</em>",
+      body: [
+        { type: "text", content: "Most execution failures aren't motivation problems. They're architectural ones.\n\nLeaders who struggle to scale, sustain performance, or adapt to change have often built column organizations — structures where load concentrates on individuals rather than distributing through the system. Strong when the column holds. Catastrophic when it doesn't.\n\nThe KEYSTONE Framework is the alternative." },
+        { type: "divider" },
+        { type: "elements", label: "Five structural pillars — installed in deliberate sequence", items: [
+          { label: "Strategic Clarity", desc: "The discipline of exclusion. Defining what the organization will not pursue." },
+          { label: "Executive Authority", desc: "Engineering decision velocity through explicit decision rights." },
+          { label: "Organizational Alignment", desc: "Calibrating behavioral gravity through incentive design." },
+          { label: "Execution Cadence", desc: "The governance calendar as architecture." },
+          { label: "Scalable Delegation", desc: "Transferring authority within explicit, documented boundaries." }
+        ]},
+        { type: "text", content: "One foundation every pillar rests on:\n\n<strong>Communication Fidelity</strong> — The mechanism that keeps tension between pillars productive. The five pillars generate the structural conditions for organizational performance. Communication fidelity maintains the compression that makes the arch load-bearing." },
+        { type: "text", content: "And one emergent property:\n\n<strong>Adaptability</strong> — Not the sixth pillar to install. The proof that the five are working." },
+        { type: "divider" },
+        { type: "text", content: "This is arch architecture, not column architecture. Load distributed through structure. Performance that holds when any single element is under pressure.\n\nThe sequence is not arbitrary. Each pillar creates the structural precondition that makes the next one functional. Get the order wrong, and you don't just slow progress — you generate predictable failure modes." },
+        { type: "closing", content: "The leader's highest contribution is not to be the strongest load-bearer.\nIt is to set the keystone." }
+      ],
+      copyText: `For the past two weeks, I've been building toward this.
+
+Today, I want to formally introduce the KEYSTONE Framework™.
+
+Here's the premise:
+
+Most execution failures aren't motivation problems. They're architectural ones.
+
+Leaders who struggle to scale, sustain performance, or adapt to change have often built column organizations — structures where load concentrates on individuals rather than distributing through the system. Strong when the column holds. Catastrophic when it doesn't.
+
+The KEYSTONE Framework is the alternative.
+
+Five structural pillars, sequenced deliberately — each addressing a distinct class of organizational failure:
+
+🔷 Strategic Clarity — The discipline of exclusion. Defining what the organization will not pursue.
+
+🔷 Executive Authority — Engineering decision velocity through explicit decision rights.
+
+🔷 Organizational Alignment — Calibrating behavioral gravity through incentive design.
+
+🔷 Execution Cadence — The governance calendar as architecture.
+
+🔷 Scalable Delegation — Transferring authority within explicit, documented boundaries.
+
+One foundation every pillar rests on:
+
+🛡️ Communication Fidelity — The mechanism that keeps tension between pillars productive. The five pillars generate the structural conditions for performance. Communication fidelity maintains the compression that makes the arch load-bearing.
+
+And one emergent property:
+
+🔑 Adaptability — Not the sixth pillar to install. The proof that the five are working.
+
+This is arch architecture, not column architecture. Load distributed through structure. Performance that holds when any single element is under pressure.
+
+The sequence is not arbitrary. Each pillar creates the structural precondition that makes the next one functional. Get the order wrong, and you don't just slow progress — you generate predictable failure modes.
+
+Want to know where your architecture stands right now?
+
+I built a free diagnostic at praeva.com/diagnostic — 15 questions, five minutes, and it will identify your lowest-scoring pillar as your entry point.
+
+This framework is the foundation of my work at PRAEVA™ and the subject of my forthcoming book, Leadership as Architecture.
+
+Over the coming weeks, I'll go deeper on each pillar — what it addresses, what breaks when it's absent, and what adequacy actually looks like.
+
+If this resonates, follow along. If your organization is carrying load it shouldn't have to — let's talk.
+
+#LeadershipAsArchitecture #KEYSTONEFramework #OrganizationalDesign #ExecutiveLeadership #PRAEVA`
+    }
+  },
+  {
     id: 1,
     pillar: "5",
     pillarLabel: "Pillar 05 · Scalable Delegation",
@@ -755,86 +292,38 @@ const posts = [
         ]},
         { type: "closing", content: "The question isn't whether your people are capable enough to decide.\nIt's whether you've built the architecture that lets them." }
       ],
-      copyText: `A hospital runs 24 hours a day, seven days a week, across dozens of departments, with hundreds of decisions happening simultaneously.
-
-No administrator is present for most of them.
-
-That's not a gap in oversight. That's the architecture working.
-
-When delegation is designed correctly in a hospital, an attending physician doesn't call the department chair to confirm a treatment decision within their scope. A charge nurse doesn't wait for the floor supervisor to authorize a protocol-covered intervention. An on-call resident doesn't escalate a textbook admission to a senior who's three calls deep at 2 AM.
-
-They act — because the authority architecture tells them what they own, where their lane ends, and what requires escalation. The thresholds are documented. The precedents exist. The risk boundaries are drawn.
-
-When that architecture breaks down, something visible happens: capable, credentialed people start waiting. They perform the motion of independent decision-making while quietly seeking signals from above before they commit. The formal structure says they're empowered. Their behavior says they don't believe it.
-
-That's authority fiction. And it's as dangerous in a hospital as it is in any other organization — it just shows up faster.
-
-The parallel to a garrison environment is direct. A battalion that runs on the commander's personal presence isn't delegating — it's creating a single point of failure. The day the commander is forward, unavailable, or simply overwhelmed, the organization discovers whether the architecture was real or nominal.
-
-The fifth pillar of the KEYSTONE Framework — Scalable Delegation — is the structural answer to both. It's the principled architecture through which decision authority is distributed in proportion to demonstrated capability, structural accountability, and strategic intent.
-
-Three elements make it functional rather than fictional:
-
-→ Documented thresholds — explicit boundaries that tell people what they own without asking
-→ Archived precedent — prior decisions that become reference points so judgment doesn't rebuild from zero
-→ Explicit risk boundaries — clarity on what requires escalation before someone faces the decision under pressure
-
-The question isn't whether your people are capable enough to decide.
-
-It's whether you've built the architecture that lets them.
-
-#Leadership #OrganizationalDesign #Delegation #ScalableDelegation #KEYSTONEFramework #LeadershipAsArchitecture #PRAEVA`
+      copyText: `A hospital runs 24 hours a day, seven days a week, across dozens of departments, with hundreds of decisions happening simultaneously. No administrator is present for most of them. That's not a gap in oversight. That's the architecture working. When delegation is designed correctly in a hospital, an attending physician doesn't call the department chair to confirm a treatment decision within their scope. A charge nurse doesn't wait for the floor supervisor to authorize a protocol-covered intervention. An on-call resident doesn't escalate a textbook admission to a senior who's three calls deep at 2 AM. They act — because the authority architecture tells them what they own, where their lane ends, and what requires escalation. The thresholds are documented. The precedents exist. The risk boundaries are drawn. When that architecture breaks down, something visible happens: capable, credentialed people start waiting. They perform the motion of independent decision-making while quietly seeking signals from above before they commit. The formal structure says they're empowered. Their behavior says they don't believe it. That's authority fiction. And it's as dangerous in a hospital as it is in any other organization — it just shows up faster. The parallel to a garrison environment is direct. A battalion that runs on the commander's personal presence isn't delegating — it's creating a single point of failure. The day the commander is forward, unavailable, or simply overwhelmed, the organization discovers whether the architecture was real or nominal. The fifth pillar of the KEYSTONE Framework — Scalable Delegation — is the structural answer to both. Three elements make it functional rather than fictional: → Documented thresholds — explicit boundaries that tell people what they own without asking → Archived precedent — prior decisions that become reference points so judgment doesn't rebuild from zero → Explicit risk boundaries — clarity on what requires escalation before someone faces the decision under pressure The question isn't whether your people are capable enough to decide. It's whether you've built the architecture that lets them. #Leadership #OrganizationalDesign #Delegation #ScalableDelegation #KEYSTONEFramework #LeadershipAsArchitecture #PRAEVA`
     }
   },
   {
-        id: 2,
-        pillar: "all",
-        pillarLabel: "Framework-Wide \u00b7 Adaptability",
-        type: "civilian",
-        typeLabel: "Civilian Parallel",
-        title: "Agility is not adaptability.",
-        excerpt: "In 2015, Zappos eliminated managers in the name of adaptability. Within a year, nearly a third of the workforce was gone. The lesson is not that the experiment failed \u2014 it is what failed.",
-        date: "April 2026",
-        fullContent: {
-                eyebrow: "KEYSTONE Framework\u2122 \u00b7 On Adaptability",
-                title: "Agility is not<br><em>adaptability.</em>",
-                body: [
-                  { type: "text", content: "In 2015, Zappos ran one of the most earnest experiments in organizational agility of the last decade.\n\nCEO Tony Hsieh eliminated managers. Job titles went away. Authority was distributed across self-organizing circles under a system called Holacracy. The premise was that removing hierarchy would make the company more responsive to change." },
-                  { type: "text", content: "Eighteen percent of the workforce took the buyout. Another eleven percent left without one. Nearly a third of the company was gone by year\u2019s end (<em>Fortune</em>, 2019). Employees reported adding five hours a week in meetings just to operate the new system. A few years later, Zappos quietly brought managers back (<em>Quartz</em>, 2020)." },
-                  { type: "text", content: "The instructive part is not that the experiment failed. It is what failed." },
-                  { type: "text", content: "Hsieh was not wrong that organizations need to adapt. He was wrong about where adaptability comes from. <strong>Adaptability is not produced by dismantling structure.</strong> It is an emergent property of five structural pillars operating in integrity \u2014 Strategic Clarity, Executive Authority, Organizational Alignment, Execution Cadence, and Scalable Delegation. Remove one, and the system does not become freer. It becomes less able to reconfigure when conditions shift, because there is no longer a coherent thing to reconfigure." },
-                  { type: "text", content: "What Zappos built in place of hierarchy was not an adaptive organization. It was a network with no sensing function, no trigger discipline, and no reconfiguration protocol. When people struggled, there was no authority empowered to decide. When decisions were made, there was no cadence to interrogate them. The friction did not go away. It relocated into meetings." },
-                  { type: "divider" },
-                  { type: "elements", label: "The Degradation Doctrine at work", items: [
-                    { label: "Non-linear exposure", desc: "an organization with four strong pillars and one degraded pillar is not four-fifths adaptive \u2014 it is exposed" },
-                    { label: "Compounding friction", desc: "each missing pillar removes a structural compensating mechanism, loading friction onto every other pillar" },
-                    { label: "Wrong-pillar intervention", desc: "Hsieh diagnosed a Scalable Delegation problem \u2014 front-line authority trapped in five or six layers of management \u2014 and dismantled Executive Authority instead" }
-                            ]},
-                  { type: "text", content: "The most useful finding in the Zappos case is not the failure. It is the course correction. By 2017, the company had introduced a marketplace system in which teams operate as internal businesses managing their own profit-and-loss statements. Managers returned. Accountability was reconstituted. What Zappos rebuilt was not hierarchy \u2014 it was the architecture that adaptability requires." },
-                  { type: "closing", content: "Agility without architecture is motion without direction.\nAdaptability is what a sound architecture produces when it is stressed \u2014 not what replaces the architecture." }
-                        ],
-                copyText: `In 2015, Zappos ran one of the most earnest experiments in organizational agility of the last decade.
-
-                CEO Tony Hsieh eliminated managers. Job titles went away. Authority was distributed across self-organizing circles under a system called Holacracy. The premise was that removing hierarchy would make the company more responsive to change.
-
-                Eighteen percent of the workforce took the buyout. Another eleven percent left without one. Nearly a third of the company was gone by year\u2019s end. Employees reported adding five hours a week in meetings just to operate the new system. A few years later, Zappos quietly brought managers back.
-
-                The instructive part is not that the experiment failed. It is what failed.
-
-                Hsieh was not wrong that organizations need to adapt. He was wrong about where adaptability comes from. Adaptability is not produced by dismantling structure. It is an emergent property of five structural pillars operating in integrity \u2014 Strategic Clarity, Executive Authority, Organizational Alignment, Execution Cadence, and Scalable Delegation. Remove one, and the system does not become freer. It becomes less able to reconfigure when conditions shift, because there is no longer a coherent thing to reconfigure.
-
-                What Zappos built in place of hierarchy was not an adaptive organization. It was a network with no sensing function, no trigger discipline, and no reconfiguration protocol. When people struggled, there was no authority empowered to decide. When decisions were made, there was no cadence to interrogate them. The friction did not go away. It relocated into meetings.
-
-                Agility without architecture is motion without direction. Adaptability is what a sound architecture produces when it is stressed \u2014 not what replaces the architecture.
-
-                If your organization is chasing adaptability by flattening its structure, it is probably not becoming more adaptive. It is becoming more exposed.
-
-                Fifteen questions will tell you which pillar is carrying the most load in your organization \u2014 and which one is most likely to give first.
-
-                praeva.com/diagnostic
-
-                #Leadership #OrganizationalDesign #Adaptability #KEYSTONEFramework #PRAEVA`
-        }
+    id: 2,
+    pillar: "all",
+    pillarLabel: "Framework-Wide · Adaptability",
+    type: "civilian",
+    typeLabel: "Civilian Parallel",
+    title: "Agility is not adaptability.",
+    excerpt: "In 2015, Zappos eliminated managers in the name of adaptability. Within a year, nearly a third of the workforce was gone. The lesson is not that the experiment failed — it is what failed.",
+    date: "April 2026",
+    fullContent: {
+      eyebrow: "KEYSTONE Framework™ · On Adaptability",
+      title: "Agility is not<br><em>adaptability.</em>",
+      body: [
+        { type: "text", content: "In 2015, Zappos ran one of the most earnest experiments in organizational agility of the last decade.\n\nCEO Tony Hsieh eliminated managers. Job titles went away. Authority was distributed across self-organizing circles under a system called Holacracy. The premise was that removing hierarchy would make the company more responsive to change." },
+        { type: "text", content: "Eighteen percent of the workforce took the buyout. Another eleven percent left without one. Nearly a third of the company was gone by year's end (<em>Fortune</em>, 2019). Employees reported adding five hours a week in meetings just to operate the new system. A few years later, Zappos quietly brought managers back (<em>Quartz</em>, 2020)." },
+        { type: "text", content: "The instructive part is not that the experiment failed. It is what failed." },
+        { type: "text", content: "Hsieh was not wrong that organizations need to adapt. He was wrong about where adaptability comes from. <strong>Adaptability is not produced by dismantling structure.</strong> It is an emergent property of five structural pillars operating in integrity — Strategic Clarity, Executive Authority, Organizational Alignment, Execution Cadence, and Scalable Delegation. Remove one, and the system does not become freer. It becomes less able to reconfigure when conditions shift, because there is no longer a coherent thing to reconfigure." },
+        { type: "text", content: "What Zappos built in place of hierarchy was not an adaptive organization. It was a network with no sensing function, no trigger discipline, and no reconfiguration protocol. When people struggled, there was no authority empowered to decide. When decisions were made, there was no cadence to interrogate them. The friction did not go away. It relocated into meetings." },
+        { type: "divider" },
+        { type: "elements", label: "The Degradation Doctrine at work", items: [
+          { label: "Non-linear exposure", desc: "an organization with four strong pillars and one degraded pillar is not four-fifths adaptive — it is exposed" },
+          { label: "Compounding friction", desc: "each missing pillar removes a structural compensating mechanism, loading friction onto every other pillar" },
+          { label: "Wrong-pillar intervention", desc: "Hsieh diagnosed a Scalable Delegation problem — front-line authority trapped in five or six layers of management — and dismantled Executive Authority instead" }
+        ]},
+        { type: "text", content: "The most useful finding in the Zappos case is not the failure. It is the course correction. By 2017, the company had introduced a marketplace system in which teams operate as internal businesses managing their own profit-and-loss statements. Managers returned. Accountability was reconstituted. What Zappos rebuilt was not hierarchy — it was the architecture that adaptability requires." },
+        { type: "closing", content: "Agility without architecture is motion without direction.\nAdaptability is what a sound architecture produces when it is stressed — not what replaces the architecture." }
+      ],
+      copyText: `In 2015, Zappos ran one of the most earnest experiments in organizational agility of the last decade. CEO Tony Hsieh eliminated managers. Job titles went away. Authority was distributed across self-organizing circles under a system called Holacracy. The premise was that removing hierarchy would make the company more responsive to change. Eighteen percent of the workforce took the buyout. Another eleven percent left without one. Nearly a third of the company was gone by year's end. Employees reported adding five hours a week in meetings just to operate the new system. A few years later, Zappos quietly brought managers back. The instructive part is not that the experiment failed. It is what failed. Hsieh was not wrong that organizations need to adapt. He was wrong about where adaptability comes from. Adaptability is not produced by dismantling structure. It is an emergent property of five structural pillars operating in integrity — Strategic Clarity, Executive Authority, Organizational Alignment, Execution Cadence, and Scalable Delegation. Remove one, and the system does not become freer. It becomes less able to reconfigure when conditions shift, because there is no longer a coherent thing to reconfigure. What Zappos built in place of hierarchy was not an adaptive organization. It was a network with no sensing function, no trigger discipline, and no reconfiguration protocol. When people struggled, there was no authority empowered to decide. When decisions were made, there was no cadence to interrogate them. The friction did not go away. It relocated into meetings. Agility without architecture is motion without direction. Adaptability is what a sound architecture produces when it is stressed — not what replaces the architecture. If your organization is chasing adaptability by flattening its structure, it is probably not becoming more adaptive. It is becoming more exposed. Fifteen questions will tell you which pillar is carrying the most load in your organization — and which one is most likely to give first. praeva.com/diagnostic #Leadership #OrganizationalDesign #Adaptability #KEYSTONEFramework #PRAEVA`
+    }
   }
 ];
 
@@ -857,12 +346,10 @@ function renderGrid() {
   const grid = document.getElementById('grid');
   const count = document.getElementById('results-count');
   count.textContent = `${filtered.length} ${filtered.length === 1 ? 'post' : 'posts'}`;
-
   if (filtered.length === 0) {
     grid.innerHTML = '<div class="empty-state">No posts match the current filters.</div>';
     return;
   }
-
   grid.innerHTML = filtered.map(post => `
     <div class="card" onclick="openModal(${post.id})" style="animation-delay:${filtered.indexOf(post) * 0.05 + 0.05}s">
       <div class="card-header">
@@ -888,13 +375,10 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const filterType = btn.dataset.filter;
     const value = btn.dataset.value;
-
     document.querySelectorAll(`.filter-btn[data-filter="${filterType}"]`).forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-
     if (filterType === 'pillar') activePillar = value;
     if (filterType === 'type') activeType = value;
-
     renderGrid();
   });
 });
@@ -904,18 +388,12 @@ function openModal(id) {
   const post = posts.find(p => p.id === id);
   if (!post) return;
   activePost = post;
-
   document.getElementById('modal-eyebrow').textContent = post.fullContent.eyebrow;
   document.getElementById('modal-title').innerHTML = post.fullContent.title;
-
   const bodyEl = document.getElementById('modal-body');
   bodyEl.innerHTML = post.fullContent.body.map(block => {
-    if (block.type === 'text') {
-      return `<p class="modal-text">${block.content}</p>`;
-    }
-    if (block.type === 'divider') {
-      return `<div class="modal-divider"></div>`;
-    }
+    if (block.type === 'text') return `<p class="modal-text">${block.content}</p>`;
+    if (block.type === 'divider') return `<div class="modal-divider"></div>`;
     if (block.type === 'elements') {
       const items = block.items.map(item => `
         <div class="modal-element">
@@ -923,27 +401,17 @@ function openModal(id) {
           <span><strong>${item.label}</strong> — ${item.desc}</span>
         </div>
       `).join('');
-      return `
-        <div class="modal-elements">
-          <div class="modal-elements-label">${block.label}</div>
-          ${items}
-        </div>
-      `;
+      return `<div class="modal-elements"><div class="modal-elements-label">${block.label}</div>${items}</div>`;
     }
-    if (block.type === 'closing') {
-      return `<div class="modal-closing">${block.content.replace('\n', '<br>')}</div>`;
-    }
+    if (block.type === 'closing') return `<div class="modal-closing">${block.content.replace('\n', '<br>')}</div>`;
     return '';
   }).join('');
-
-  // Footer
   bodyEl.innerHTML += `
     <div class="modal-footer" style="margin: 0 -40px -36px; padding: 20px 40px;">
       <div class="modal-brand">PRAEVA<span style="color:var(--gold)">™</span></div>
       <button class="modal-copy-btn" onclick="copyPostText()" id="modal-copy-btn">Copy for LinkedIn</button>
     </div>
   `;
-
   document.getElementById('modal-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -958,9 +426,7 @@ document.getElementById('modal-overlay').addEventListener('click', function(e) {
   if (e.target === this) closeModal();
 });
 
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeModal();
-});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
 function copyPostText() {
   if (!activePost) return;
@@ -976,10 +442,7 @@ function copyPostText() {
     document.execCommand('copy');
     btn.textContent = 'Copied ✓';
     btn.classList.add('copied');
-    setTimeout(() => {
-      btn.textContent = 'Copy for LinkedIn';
-      btn.classList.remove('copied');
-    }, 2000);
+    setTimeout(() => { btn.textContent = 'Copy for LinkedIn'; btn.classList.remove('copied'); }, 2000);
   } catch(e) {
     btn.textContent = 'Select & Copy';
   }
