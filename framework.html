@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The KEYSTONE Framework™ — PRAEVA™</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0A2342;
+      --navy-mid: #0f2d52;
+      --gold: #B8860B;
+      --gold-light: #D4A017;
+      --gold-pale: rgba(184,134,11,0.12);
+      --cream: #F5F0E8;
+      --cream-dark: #EDE7D9;
+      --text: #1C1C1C;
+      --muted: #6b6b6b;
+      --border: rgba(184,134,11,0.2);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--cream);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* GRAIN */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      background: rgba(10,35,66,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: 18px;
+      letter-spacing: 0.1em;
+      color: var(--cream);
+      text-decoration: none;
+    }
+    .nav-brand span { color: var(--gold); }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.6);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      padding: 140px 48px 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+      z-index: 1;
+    }
+    .hero-eyebrow {
+      font-family: 'Jost', sans-serif;
+      font-weight: 500;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(44px, 6vw, 72px);
+      line-height: 1.08;
+      color: var(--cream);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.1s ease forwards;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+    .hero-lead {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.85;
+      color: rgba(245,240,232,0.65);
+      max-width: 640px;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.2s ease forwards;
+    }
+    .hero-rule {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 40px;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.3s ease forwards;
+    }
+    .hero-rule-line {
+      height: 1px;
+      width: 60px;
+      background: var(--gold);
+      opacity: 0.4;
+    }
+    .hero-rule-text {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.35);
+    }
+
+    /* GRAPHIC SECTION */
+    .graphic-section {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 48px 80px;
+    }
+    .graphic-wrap {
+      position: relative;
+      border: 1px solid rgba(184,134,11,0.2);
+      background: rgba(245,240,232,0.03);
+      overflow: hidden;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s ease forwards;
+    }
+    .graphic-wrap::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--navy), var(--gold), var(--gold-light), var(--navy));
+    }
+    .graphic-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* PILLARS */
+    .pillars-section {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 48px 80px;
+    }
+    .section-label {
+      font-family: 'Jost', sans-serif;
+      font-weight: 500;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+    .pillar-card {
+      background: rgba(245,240,232,0.03);
+      border: 1px solid rgba(184,134,11,0.12);
+      padding: 36px 32px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.25s ease, border-color 0.25s ease;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards;
+    }
+    .pillar-card:hover {
+      background: rgba(245,240,232,0.06);
+      border-color: rgba(184,134,11,0.3);
+    }
+    .pillar-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 2px;
+      height: 100%;
+      background: var(--gold);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .pillar-card:hover::before { opacity: 1; }
+
+    .pillar-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 48px;
+      line-height: 1;
+      color: rgba(184,134,11,0.15);
+      position: absolute;
+      top: 24px;
+      right: 28px;
+      letter-spacing: -0.02em;
+    }
+    .pillar-name {
+      font-family: 'Jost', sans-serif;
+      font-weight: 500;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .pillar-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 26px;
+      line-height: 1.2;
+      color: var(--cream);
+      margin-bottom: 14px;
+    }
+    .pillar-desc {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 13px;
+      line-height: 1.8;
+      color: rgba(245,240,232,0.5);
+    }
+    .pillar-tag {
+      display: inline-block;
+      margin-top: 18px;
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(184,134,11,0.5);
+      border: 1px solid rgba(184,134,11,0.2);
+      padding: 4px 12px;
+    }
+
+    /* Foundation card — full width */
+    .pillar-card.foundation {
+      grid-column: 1 / -1;
+      border-color: rgba(184,134,11,0.25);
+      background: rgba(184,134,11,0.04);
+    }
+    .pillar-card.foundation::before { background: linear-gradient(180deg, var(--gold), var(--gold-light)); }
+    .pillar-card.foundation .pillar-number { font-size: 64px; color: rgba(184,134,11,0.1); }
+
+    /* Adaptability card — full width, gold accent */
+    .pillar-card.adaptability {
+      grid-column: 1 / -1;
+      border-color: rgba(184,134,11,0.3);
+      background: rgba(184,134,11,0.06);
+      text-align: center;
+      padding: 48px 40px;
+    }
+    .pillar-card.adaptability .pillar-name { justify-content: center; }
+    .pillar-card.adaptability .pillar-title { font-size: 34px; }
+    .pillar-card.adaptability .pillar-desc { max-width: 600px; margin: 0 auto; }
+    .pillar-card.adaptability::before { width: 100%; height: 2px; background: linear-gradient(90deg, var(--navy), var(--gold), var(--gold-light), var(--navy)); }
+
+    /* DOCTRINE BLOCK */
+    .doctrine-section {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 48px 80px;
+    }
+    .doctrine-block {
+      border: 1px solid rgba(184,134,11,0.2);
+      background: rgba(245,240,232,0.03);
+      padding: 48px 52px;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.3s ease forwards;
+    }
+    .doctrine-block::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--navy), var(--gold), var(--gold-light), var(--navy));
+    }
+    .doctrine-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(20px, 2.5vw, 28px);
+      line-height: 1.5;
+      color: var(--cream);
+      font-style: italic;
+      margin-bottom: 32px;
+    }
+    .doctrine-quote em { color: var(--gold-light); font-style: normal; }
+    .doctrine-body {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 1.9;
+      color: rgba(245,240,232,0.6);
+    }
+    .doctrine-body + .doctrine-body { margin-top: 16px; }
+    .doctrine-attr {
+      margin-top: 32px;
+      font-family: 'Jost', sans-serif;
+      font-weight: 500;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.6;
+    }
+
+    /* CTA */
+    .cta-section {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 48px 100px;
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .cta-card {
+      flex: 1;
+      min-width: 280px;
+      border: 1px solid rgba(184,134,11,0.2);
+      padding: 40px 36px;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.5s ease forwards;
+      text-decoration: none;
+      display: block;
+      transition: background 0.25s, border-color 0.25s;
+      cursor: pointer;
+    }
+    .cta-card:hover {
+      background: rgba(245,240,232,0.05);
+      border-color: rgba(184,134,11,0.4);
+    }
+    .cta-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--navy), var(--gold), var(--gold-light));
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .cta-card:hover::before { opacity: 1; }
+    .cta-eyebrow {
+      font-family: 'Jost', sans-serif;
+      font-weight: 500;
+      font-size: 9px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 1.25;
+      color: var(--cream);
+      margin-bottom: 12px;
+    }
+    .cta-desc {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 13px;
+      line-height: 1.75;
+      color: rgba(245,240,232,0.45);
+      margin-bottom: 24px;
+    }
+    .cta-link {
+      font-family: 'Jost', sans-serif;
+      font-weight: 500;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* FOOTER */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 32px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .footer-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: 16px;
+      letter-spacing: 0.1em;
+      color: var(--cream);
+      opacity: 0.6;
+    }
+    .footer-brand span { color: var(--gold); }
+    .footer-copy {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: rgba(245,240,232,0.25);
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .pillar-card:nth-child(1) { animation-delay: 0.1s; }
+    .pillar-card:nth-child(2) { animation-delay: 0.15s; }
+    .pillar-card:nth-child(3) { animation-delay: 0.2s; }
+    .pillar-card:nth-child(4) { animation-delay: 0.25s; }
+    .pillar-card:nth-child(5) { animation-delay: 0.3s; }
+    .pillar-card:nth-child(6) { animation-delay: 0.35s; }
+    .pillar-card:nth-child(7) { animation-delay: 0.4s; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .hero, .graphic-section, .pillars-section, .doctrine-section, .cta-section { padding-left: 24px; padding-right: 24px; }
+      .hero { padding-top: 110px; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .pillar-card.foundation, .pillar-card.adaptability { grid-column: 1; }
+      .doctrine-block { padding: 32px 28px; }
+      footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-brand">PRAEVA<span>™</span></a>
+  <ul class="nav-links">
+    <li><a href="/framework" class="active">Framework</a></li>
+    <li><a href="/diagnostic">Diagnostic</a></li>
+    <li><a href="/field-notes">Field Notes</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">PRAEVA™ · The KEYSTONE Framework™</div>
+  <h1 class="hero-title">Five Pillars.<br><em>One Architecture.</em></h1>
+  <p class="hero-lead">Execution breakdown is rarely a motivation problem. It is an architectural one. The KEYSTONE Framework names the five structural conditions every organization must design deliberately — or will get by default, badly.</p>
+  <div class="hero-rule">
+    <div class="hero-rule-line"></div>
+    <div class="hero-rule-text">The architecture, in full</div>
+    <div class="hero-rule-line"></div>
+  </div>
+</section>
+
+<!-- FRAMEWORK GRAPHIC -->
+<div class="graphic-section">
+  <div class="graphic-wrap">
+    <img src="/Keystone_Framework.png" alt="The KEYSTONE Framework™ — Five Pillars. One Keystone. One Foundation." />
+  </div>
+</div>
+
+<!-- PILLARS -->
+<div class="pillars-section">
+  <div class="section-label">The Five Pillars — Installed in Sequence</div>
+
+  <div class="pillars-grid">
+
+    <!-- Foundation -->
+    <div class="pillar-card foundation">
+      <span class="pillar-number">F</span>
+      <div class="pillar-name">Foundation · Precursor, not Pillar</div>
+      <div class="pillar-title">Communication Fidelity</div>
+      <p class="pillar-desc">The mechanism that keeps tension between pillars productive. The five pillars generate the structural conditions for organizational performance. Communication fidelity maintains the compression that makes the arch load-bearing. Drift does not begin in the metrics — it begins in the first transmission cycle after the message was sent.</p>
+      <span class="pillar-tag">The foundation every pillar rests on</span>
+    </div>
+
+    <!-- Pillar 01 -->
+    <div class="pillar-card">
+      <span class="pillar-number">01</span>
+      <div class="pillar-name">Pillar One</div>
+      <div class="pillar-title">Strategic Clarity</div>
+      <p class="pillar-desc">The discipline of exclusion. Organizations rarely fail because they lacked ambition — they fail because they pursued too many ambitions simultaneously. Strategic Clarity defines the aperture: what the organization will not pursue, so that what it will pursue becomes executable.</p>
+      <span class="pillar-tag">The discipline of exclusion</span>
+    </div>
+
+    <!-- Pillar 02 -->
+    <div class="pillar-card">
+      <span class="pillar-number">02</span>
+      <div class="pillar-name">Pillar Two</div>
+      <div class="pillar-title">Executive Authority</div>
+      <p class="pillar-desc">Engineering decision velocity through explicit decision rights. When authority boundaries are ambiguous, decisions escalate. When escalation becomes routine, the executive becomes the constraint. Explicit decision architecture maps who owns what — and makes the boundary visible before the pressure arrives.</p>
+      <span class="pillar-tag">Engineering decision velocity</span>
+    </div>
+
+    <!-- Pillar 03 -->
+    <div class="pillar-card">
+      <span class="pillar-number">03</span>
+      <div class="pillar-name">Pillar Three</div>
+      <div class="pillar-title">Organizational Alignment</div>
+      <p class="pillar-desc">Calibrating behavioral gravity through incentive design. What the organization measures, rewards, and penalizes defines the behavioral field — regardless of what the strategy document says. Alignment is not a values problem. It is a structural one. The design of incentives is the design of behavior.</p>
+      <span class="pillar-tag">Behavioral gravity</span>
+    </div>
+
+    <!-- Pillar 04 -->
+    <div class="pillar-card">
+      <span class="pillar-number">04</span>
+      <div class="pillar-name">Pillar Four</div>
+      <div class="pillar-title">Execution Cadence</div>
+      <p class="pillar-desc">The governance calendar as architecture. Cadence is not a meeting schedule. It is the organization's primary learning mechanism — the designed rhythm through which performance is observed, decisions are surfaced, and structural deviation is detected before it compounds. Without it, drift is invisible until it becomes a crisis.</p>
+      <span class="pillar-tag">The calendar as architecture</span>
+    </div>
+
+    <!-- Pillar 05 -->
+    <div class="pillar-card">
+      <span class="pillar-number">05</span>
+      <div class="pillar-name">Pillar Five</div>
+      <div class="pillar-title">Scalable Delegation</div>
+      <p class="pillar-desc">Transferring authority within explicit, documented boundaries. Authority without structure is not empowerment — it is abandonment. Scalable delegation is the principled architecture through which decision authority is distributed in proportion to demonstrated capability, structural accountability, and strategic intent.</p>
+      <span class="pillar-tag">Authority without abdication</span>
+    </div>
+
+    <!-- Adaptability -->
+    <div class="pillar-card adaptability">
+      <div class="pillar-name">The Keystone · Set last — locks the arch</div>
+      <div class="pillar-title">Adaptability</div>
+      <p class="pillar-desc">Not the sixth pillar to install. The proof that the five are working. Adaptability is not a program, a culture initiative, or a leadership behavior. It is the state that emerges when all five pillars are operating with disciplined integrity. When any pillar degrades, adaptability degrades — non-linearly. The leader's highest contribution is not to be the strongest load-bearer. It is to set the keystone.</p>
+      <span class="pillar-tag">The emergent property of the five pillars working as designed</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- DOCTRINE -->
+<div class="doctrine-section">
+  <div class="section-label">The Governing Argument</div>
+  <div class="doctrine-block">
+    <div class="doctrine-quote">
+      "Organizations fail the way columns fail: by concentrating load on individuals rather than distributing it through <em>structure</em>."
+    </div>
+    <p class="doctrine-body">The arch is one of the oldest load-bearing structures in human history. It has outlasted virtually every alternative structural form because of a single design insight: properly distributed load is stronger than concentrated load. A column carries load by being strong enough to bear it alone. An arch carries load by distributing it — through geometry, through the relationship between its elements, through the keystone that locks the distribution in place.</p>
+    <p class="doctrine-body">The KEYSTONE Framework builds arch organizations. Five structural pillars, sequenced deliberately, each pressing against the next. The leader's work is not to be the load-bearer — it is to set the angles correctly and let the architecture hold.</p>
+    <div class="doctrine-attr">Kelly McNeese · Colonel, U.S. Army (Ret.) · Founder & Principal, PRAEVA™</div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="section-label" style="width:100%; padding-bottom:0; margin-bottom:0;">Where to go next</div>
+
+  <a class="cta-card" href="/diagnostic">
+    <div class="cta-eyebrow">Free · 5 Minutes</div>
+    <div class="cta-title">Take the Diagnostic</div>
+    <p class="cta-desc">Fifteen questions — three per pillar — scored live. Identifies your lowest-scoring pillar as your entry point. No account required.</p>
+    <div class="cta-link">Take the Diagnostic →</div>
+  </a>
+
+  <a class="cta-card" href="/field-notes">
+    <div class="cta-eyebrow">Applied Doctrine</div>
+    <div class="cta-title">Field Notes</div>
+    <p class="cta-desc">Short-form doctrine drawn from the KEYSTONE Framework™ — each post examines a structural principle through a concrete organizational parallel.</p>
+    <div class="cta-link">Read Field Notes →</div>
+  </a>
+
+  <a class="cta-card" href="/#contact">
+    <div class="cta-eyebrow">PRAEVA™ Practice</div>
+    <div class="cta-title">Work with Kelly</div>
+    <p class="cta-desc">Organizational design engagements, leadership coaching, and speaking. Available to senior leaders and executive teams.</p>
+    <div class="cta-link">Get in Touch →</div>
+  </a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">PRAEVA<span>™</span></div>
+  <div class="footer-copy">© 2025 PRAEVA™ · Leadership as Architecture · praeva.com</div>
+</footer>
+
+</body>
+</html>
