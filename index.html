@@ -1584,6 +1584,83 @@ Library  }
   </div>
 </div>
 
+<!-- ═══════════════════════════════════════
+     OUTCOMES STRIP
+     ═══════════════════════════════════════ -->
+<section class="outcomes-strip">
+  <div class="outcomes-inner">
+    <div class="outcomes-label">WHAT PRAEVA BUILDS</div>
+    <div class="outcomes-grid">
+      <div class="outcome-item"><div class="outcome-marker">—</div><div class="outcome-text">Strategic direction that holds under resource pressure</div></div>
+      <div class="outcome-item"><div class="outcome-marker">—</div><div class="outcome-text">Decision velocity at every tier of the organization</div></div>
+      <div class="outcome-item"><div class="outcome-marker">—</div><div class="outcome-text">Structural alignment between strategy, roles, and incentives</div></div>
+      <div class="outcome-item"><div class="outcome-marker">—</div><div class="outcome-text">Execution discipline that sustains through leadership transition</div></div>
+  THE KEYSTONE FRAMEWORK    <div class="outcome-item"><div class="outcome-marker">—</div><div class="outcome-text">Delegation architecture that scales capacity without surrendering accountability</div></div>
+    </div>
+kelly@praeva.com     WHO THIS IS FOR
+     ═══════════════════════════════════════ -->
+<section class="who-section">
+  <div class="who-inner">
+    <div class="who-overline">WHO THIS IS FOR</div>
+    <h2 class="who-heading">The right leaders recognize the problem<br><em>before it recognizes them.</em></h2>
+    <div class="who-grid">
+      <div class="who-card"><div class="who-card-title">Senior Executives</div><div class="who-card-desc">CEOs, COOs, and division heads navigating scale, succession, or structural ambiguity that talent alone cannot resolve.</div></div>
+      <div class="who-card"><div class="who-card-title">Military &amp; Government Leaders</div><div class="who-card-desc">Command-level officers and agency executives leading complex institutions under operational pressure with constrained resources.</div></div>
+      <div class="who-card"><div class="who-card-title">Founders at Growth Thresholds</div><div class="who-card-desc">Leaders whose organizations have outgrown the structures that got them here — and who know it before the performance data confirms it.</div></div>
+      <div class="who-card"><div class="who-card-title">Enterprise Transformation Teams</div><div class="who-card-desc">Executives charged with structural redesign, post-merger integration, or institutional reconfiguration at scale.</div></div>
+    </div>
+  </div>
+/* ══ OUTCOMES STRIP ══ */
+.outcomes-strip { background: var(--navy2); border-top: 1px solid rgba(200,168,75,0.15); border-bottom: 1px solid rgba(200,168,75,0.15); padding: 60px 40px; }
+.outcomes-inner { max-width: 1100px; margin: 0 auto; }
+.outcomes-label { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 36px; }
+.outcomes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px 40px; }
+.outcome-item { display: flex; gap: 16px; align-items: flex-start; }
+.outcome-marker { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--gold); line-height: 1.6; flex-shrink: 0; margin-top: 1px; }
+.outcome-text { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 300; color: rgba(245,240,234,0.82); line-height: 1.55; }
+
+/* ══ WHO THIS IS FOR ══ */
+.who-section { background: var(--parch); padding: 100px 40px; }
+.who-inner { max-width: 1100px; margin: 0 auto; }
+.who-overline { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+.who-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 4vw, 52px); font-weight: 300; color: var(--navy); line-height: 1.2; margin-bottom: 60px; }
+.who-heading em { font-style: italic; color: var(--gold); }
+.who-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2px; }
+.who-card { background: rgba(10,35,66,0.06); border: 1px solid rgba(10,35,66,0.1); padding: 32px 28px; transition: background 0.2s; }
+.who-card:hover { background: rgba(10,35,66,0.1); }
+.who-card-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 500; color: var(--navy); margin-bottom: 12px; }
+.who-card-desc { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 300; color: rgba(10,35,66,0.7); line-height: 1.65; }
+
+/* ══ CREDIBILITY ══ */
+.credibility-section { background: var(--navy2); padding: 100px 40px; border-top: 1px solid rgba(200,168,75,0.15); }
+.credibility-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+.credibility-overline { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+.credibility-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(30px, 3.5vw, 48px); font-weight: 300; color: var(--white); line-height: 1.25; margin-bottom: 32px; }
+.credibility-heading em { font-style: italic; color: var(--gold); }
+.credibility-body { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 300; color: rgba(245,240,234,0.7); line-height: 1.8; max-width: 740px; margin: 0 auto 64px; }
+.credibility-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; border: 1px solid rgba(200,168,75,0.2); background: rgba(200,168,75,0.2); }
+@media (max-width: 700px) { .credibility-stats { grid-template-columns: repeat(2, 1fr); } }
+.credibility-stat { background: var(--navy2); padding: 36px 20px; text-align: center; }
+.stat-number { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; color: var(--gold); line-height: 1; margin-bottom: 10px; }
+.stat-label { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 400; letter-spacing: 0.08em; color: rgba(245,240,234,0.45); text-transform: uppercase; line-height: 1.5; }
+
+.begin-inner {<!-- ═══════════════════════════════════════
+     BUILT THROUGH PRACTICE — Credibility
+     ═══════════════════════════════════════ -->
+<section class="credibility-section">
+  <div class="credibility-inner">
+    <div class="credibility-overline">BUILT THROUGH PRACTICE</div>
+    <h2 class="credibility-heading">Not derived from observation.<br><em>Distilled from command.</em></h2>
+    <p class="credibility-body">The KEYSTONE Framework was not produced in a research institution or a graduate seminar. It was built across thirty-eight years of organizational command — in military units from company to theater echelon, across four continents, in garrison and deployed environments, through transitions, rotations, and conditions that did not forgive structural ambiguity. The doctrine confirmed what practice discovered. In that order.</p>
+    <div class="credibility-stats">
+      <div class="credibility-stat"><div class="stat-number">38</div><div class="stat-label">Years of organizational leadership</div></div>
+      <div class="credibility-stat"><div class="stat-number">4</div><div class="stat-label">Continents of operational command</div></div>
+      <div class="credibility-stat"><div class="stat-number">200+</div><div class="stat-label">To several thousand personnel led</div></div>
+      <div class="credibility-stat"><div class="stat-number">30</div><div class="stat-label">Years in uniform, company to theater</div></div>
+    </div>
+  </div>
+</section>
+
 
 <!-- ══════════════════════════════════════
      ABOUT — Parchment, C mark, brand statement
