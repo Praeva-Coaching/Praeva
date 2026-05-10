@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leadership as Architecture — A Forthcoming Book by Kelly McNeese | PRAEVA</title>
+  <meta name="description" content="Leadership as Architecture introduces the KEYSTONE Framework — a structural approach to building organizations that perform, endure, and scale. Forthcoming from Kelly McNeese.">
+  <meta property="og:title" content="Leadership as Architecture — Kelly McNeese">
+  <meta property="og:description" content="The KEYSTONE Framework for organizational durability in an age of acceleration. A forthcoming book.">
+  <meta property="og:type" content="book">
+  <meta property="og:url" content="https://praeva.com/book">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy: #0A2342;
+      --navy-soft: #15375E;
+      --gold: #B8860B;
+      --gold-bright: #D4A017;
+      --cream: #F5F0E8;
+      --cream-deep: #EBE3D5;
+      --ink: #1A1A1A;
+      --ink-soft: #3A3A3A;
+      --rule: rgba(10, 35, 66, 0.18);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Jost', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.7;
+      letter-spacing: 0.01em;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Grain overlay — consistent with site-wide design */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.05;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/></svg>");
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .container--narrow {
+      max-width: 720px;
+    }
+
+    /* Site nav — matches praeva.com header pattern */
+    .site-nav {
+      padding: 1.75rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .site-nav__inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .site-nav__brand {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      color: var(--navy);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .site-nav__links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .site-nav__links a {
+      color: var(--navy);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 400;
+      transition: color 0.2s ease;
+    }
+
+    .site-nav__links a:hover {
+      color: var(--gold);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 5rem 0 4rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .hero__eyebrow {
+      font-size: 0.78rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero__title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2.6rem, 6vw, 4.8rem);
+      font-weight: 500;
+      line-height: 1.05;
+      color: var(--navy);
+      letter-spacing: -0.01em;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero__subtitle {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+      color: var(--ink-soft);
+      font-weight: 400;
+      line-height: 1.4;
+      margin-bottom: 2rem;
+      max-width: 680px;
+    }
+
+    .hero__byline {
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      color: var(--navy);
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .hero__byline span {
+      color: var(--gold);
+      margin: 0 0.6rem;
+    }
+
+    /* Epigraph */
+    .epigraph {
+      padding: 4rem 0;
+      text-align: center;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .epigraph__quote {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
+      line-height: 1.45;
+      color: var(--navy);
+      max-width: 760px;
+      margin: 0 auto;
+      font-weight: 400;
+    }
+
+    .epigraph__quote::before,
+    .epigraph__quote::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+      margin: 1.5rem auto;
+    }
+
+    /* Positioning section */
+    .positioning {
+      padding: 5rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .positioning__lead {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.5rem;
+      line-height: 1.5;
+      color: var(--navy);
+      font-weight: 400;
+      margin-bottom: 2rem;
+    }
+
+    .positioning p {
+      margin-bottom: 1.5rem;
+      color: var(--ink-soft);
+      font-size: 1.05rem;
+    }
+
+    .positioning p strong {
+      color: var(--navy);
+      font-weight: 500;
+    }
+
+    /* Pillars block */
+    .pillars {
+      padding: 5rem 0;
+      background: var(--cream-deep);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .pillars__heading {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+      color: var(--navy);
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .pillars__sub {
+      color: var(--ink-soft);
+      font-style: italic;
+      margin-bottom: 3rem;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.15rem;
+    }
+
+    .pillar-list {
+      list-style: none;
+      counter-reset: pillar;
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .pillar-list li {
+      counter-increment: pillar;
+      padding: 1.5rem 0 1.5rem 4rem;
+      border-top: 1px solid var(--rule);
+      position: relative;
+    }
+
+    .pillar-list li:last-child {
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .pillar-list li::before {
+      content: counter(pillar, upper-roman);
+      position: absolute;
+      left: 0;
+      top: 1.5rem;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.4rem;
+      color: var(--gold);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .pillar-list h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.4rem;
+      color: var(--navy);
+      font-weight: 600;
+      margin-bottom: 0.15rem;
+    }
+
+    .pillar-list .pillar-sub {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.01em;
+    }
+
+    .pillar-list p {
+      color: var(--ink-soft);
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+
+    .pillars__keystone {
+      margin-top: 2.5rem;
+      padding: 1.75rem 2rem;
+      background: var(--navy);
+      color: var(--cream);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 1.15rem;
+      line-height: 1.5;
+      border-left: 4px solid var(--gold);
+    }
+
+    .pillars__keystone strong {
+      font-style: normal;
+      color: var(--gold-bright);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    /* For whom */
+    .for-whom {
+      padding: 5rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .for-whom__heading {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+      color: var(--navy);
+      font-weight: 500;
+      margin-bottom: 2rem;
+    }
+
+    .for-whom__list {
+      list-style: none;
+      display: grid;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .for-whom__list li {
+      padding-left: 1.5rem;
+      position: relative;
+      color: var(--ink-soft);
+      font-size: 1.05rem;
+    }
+
+    .for-whom__list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.75rem;
+      width: 0.5rem;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .for-whom p {
+      color: var(--ink-soft);
+      font-size: 1.05rem;
+      max-width: 640px;
+    }
+
+    /* Capture section — primary CTA */
+    .capture {
+      padding: 6rem 0;
+      background: var(--navy);
+      color: var(--cream);
+      position: relative;
+    }
+
+    .capture::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .capture__inner {
+      max-width: 620px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 0 2rem;
+    }
+
+    .capture__eyebrow {
+      font-size: 0.78rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--gold-bright);
+      font-weight: 500;
+      margin-bottom: 1.25rem;
+    }
+
+    .capture__heading {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 500;
+      line-height: 1.2;
+      margin-bottom: 1.25rem;
+      color: var(--cream);
+    }
+
+    .capture__lead {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 1.2rem;
+      line-height: 1.5;
+      color: var(--cream-deep);
+      margin-bottom: 2.5rem;
+      opacity: 0.92;
+    }
+
+    /* Kit form */
+    .capture-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .capture-form__row {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .capture-form input[type="email"],
+    .capture-form input[type="text"] {
+      flex: 1;
+      min-width: 200px;
+      padding: 0.95rem 1.1rem;
+      background: rgba(245, 240, 232, 0.08);
+      border: 1px solid rgba(245, 240, 232, 0.25);
+      color: var(--cream);
+      font-family: 'Jost', sans-serif;
+      font-size: 1rem;
+      font-weight: 300;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .capture-form input[type="email"]::placeholder,
+    .capture-form input[type="text"]::placeholder {
+      color: rgba(245, 240, 232, 0.55);
+    }
+
+    .capture-form input:focus {
+      outline: none;
+      border-color: var(--gold-bright);
+      background: rgba(245, 240, 232, 0.12);
+    }
+
+    .capture-form button {
+      padding: 0.95rem 2rem;
+      background: var(--gold);
+      border: 1px solid var(--gold);
+      color: var(--navy);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .capture-form button:hover {
+      background: var(--gold-bright);
+      border-color: var(--gold-bright);
+    }
+
+    .capture-form button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .capture__fineprint {
+      margin-top: 1.5rem;
+      font-size: 0.82rem;
+      color: rgba(245, 240, 232, 0.6);
+      letter-spacing: 0.04em;
+    }
+
+    .capture__success {
+      display: none;
+      padding: 1.5rem;
+      background: rgba(212, 160, 23, 0.12);
+      border: 1px solid var(--gold);
+      color: var(--cream);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 1.15rem;
+      line-height: 1.5;
+    }
+
+    .capture__success.is-visible {
+      display: block;
+    }
+
+    /* Closing tagline */
+    .closing {
+      padding: 5rem 0;
+      text-align: center;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .closing__statement {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 500;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      letter-spacing: -0.005em;
+    }
+
+    .closing__qualifier {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      color: var(--ink-soft);
+      max-width: 620px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    /* Secondary nav block */
+    .also {
+      padding: 4rem 0;
+      text-align: center;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .also p {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.2rem;
+      color: var(--ink-soft);
+      font-style: italic;
+      margin-bottom: 1.5rem;
+    }
+
+    .also__links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .also__links a {
+      font-size: 0.85rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--navy);
+      text-decoration: none;
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 0.25rem;
+      font-weight: 400;
+      transition: color 0.2s ease;
+    }
+
+    .also__links a:hover {
+      color: var(--gold);
+    }
+
+    /* Footer */
+    .site-foot {
+      padding: 3rem 0;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--ink-soft);
+      letter-spacing: 0.06em;
+    }
+
+    .site-foot a {
+      color: var(--navy);
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    /* Mobile */
+    @media (max-width: 720px) {
+      .container { padding: 0 1.25rem; }
+      .site-nav__links { gap: 1rem; }
+      .site-nav__links a { font-size: 0.78rem; letter-spacing: 0.08em; }
+      .hero { padding: 3rem 0 2.5rem; }
+      .epigraph, .positioning, .pillars, .for-whom, .closing, .also { padding: 3rem 0; }
+      .capture { padding: 4rem 0; }
+      .capture-form__row { flex-direction: column; }
+      .pillar-list li { padding-left: 3rem; }
+      .pillar-list li::before { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SITE NAV -->
+  <header class="site-nav">
+    <div class="container">
+      <div class="site-nav__inner">
+        <a href="/" class="site-nav__brand">PRAEVA</a>
+        <ul class="site-nav__links">
+          <li><a href="/framework">Framework</a></li>
+          <li><a href="/field-notes">Field Notes</a></li>
+          <li><a href="/book">The Book</a></li>
+          <li><a href="/#begin">Begin</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container container--narrow">
+      <div class="hero__eyebrow">A Forthcoming Book</div>
+      <h1 class="hero__title">Leadership as<br>Architecture</h1>
+      <p class="hero__subtitle">The KEYSTONE Framework for organizational durability in an age of acceleration.</p>
+      <p class="hero__byline">Kelly McNeese <span>·</span> COL, U.S. Army (Ret.) <span>·</span> Founder, PRAEVA</p>
+    </div>
+  </section>
+
+  <!-- EPIGRAPH -->
+  <section class="epigraph">
+    <div class="container">
+      <p class="epigraph__quote">Organizations do not fail for lack of ambition. They fail for lack of architecture.</p>
+    </div>
+  </section>
+
+  <!-- POSITIONING -->
+  <section class="positioning">
+    <div class="container container--narrow">
+      <p class="positioning__lead">Most leadership failures are not character failures. They are structural ones.</p>
+      <p>When decisions that should resolve two levels down keep landing on your desk &mdash; that is structural. When teams work hard in different directions and their efforts do not add up &mdash; that is structural. When priorities proliferate and nothing receives the focus it needs &mdash; that is structural. When governance produces discussion instead of decisions &mdash; that is structural. When delegation does not stick and authority quietly flows back to the top &mdash; that is structural.</p>
+      <p><strong>These are design failures. They respond to design solutions.</strong></p>
+      <p><em>Leadership as Architecture</em> presents the KEYSTONE Framework: a five-pillar system for building organizations that perform, endure, and scale beyond any single leader's personal capacity. The framework is the product of thirty-eight years of command, organizational design, and leadership development &mdash; pressure-tested in environments where the cost of structural ambiguity is measured in lives, missions, and institutional credibility.</p>
+      <p>This book is the doctrinal text behind that work.</p>
+    </div>
+  </section>
+
+  <!-- PILLARS -->
+  <section class="pillars">
+    <div class="container container--narrow">
+      <h2 class="pillars__heading">The Five Pillars</h2>
+      <p class="pillars__sub">Each one a designed counter-force against a specific structural drift.</p>
+      <ol class="pillar-list">
+        <li>
+          <h3>Strategic Clarity</h3>
+          <p class="pillar-sub">The Discipline of Exclusion</p>
+          <p>The discipline of deciding what the organization will <em>not</em> pursue, so that what it does pursue is properly resourced and executable.</p>
+        </li>
+        <li>
+          <h3>Executive Authority</h3>
+          <p class="pillar-sub">Engineering Decision Velocity</p>
+          <p>Explicit decision rights and numeric thresholds at every leadership tier, so decisions resolve at the right level &mdash; not in your inbox.</p>
+        </li>
+        <li>
+          <h3>Organizational Alignment</h3>
+          <p class="pillar-sub">Behavioral Gravity</p>
+          <p>Incentives, metrics, and accountabilities calibrated so that people's rational daily choices add up to the strategy you actually want.</p>
+        </li>
+        <li>
+          <h3>Execution Cadence</h3>
+          <p class="pillar-sub">The Calendar as Architecture</p>
+          <p>A governance rhythm of weekly operational pulse, monthly strategic review, and quarterly architectural reset that produces real decisions and real learning &mdash; not meeting theater.</p>
+        </li>
+        <li>
+          <h3>Scalable Delegation</h3>
+          <p class="pillar-sub">Authority Without Abdication</p>
+          <p>The transfer of genuine decision authority &mdash; not just tasks &mdash; to the level where information is richest, supported by documented boundaries and precedent.</p>
+        </li>
+      </ol>
+      <div class="pillars__keystone">
+        <strong>The Keystone</strong>
+        Adaptability is not a sixth pillar. It is the emergent property of an architecture that is sound — the proof that the structure holds. When the five pillars are designed correctly and held in tension by communication fidelity, the organization responds to change without waiting for the leader to direct it.
+      </div>
+    </div>
+  </section>
+
+  <!-- FOR WHOM -->
+  <section class="for-whom">
+    <div class="container container--narrow">
+      <h2 class="for-whom__heading">Who this book is for</h2>
+      <ul class="for-whom__list">
+        <li>Founders running organizations through real scaling pressure</li>
+        <li>Executives, COOs, and senior leaders responsible for the design and performance of complex enterprises</li>
+        <li>Commanding officers and senior civilian leaders inside institutional environments</li>
+        <li>Organizational development professionals and executive coaches who work alongside those leaders</li>
+      </ul>
+      <p>You do not need a background in organizational theory to use this framework. You need to recognize the symptoms — the overload, the drift, the decisions that will not stay made — and be willing to look at them as design problems rather than people problems.</p>
+    </div>
+  </section>
+
+  <!-- CAPTURE -->
+  <section class="capture" id="join">
+    <div class="capture__inner">
+      <div class="capture__eyebrow">Early Reader List</div>
+      <h2 class="capture__heading">Be notified when the book is released.</h2>
+      <p class="capture__lead">Occasional dispatches from the development of the framework, plus first notice when the book ships. No marketing volume. No filler.</p>
+
+      <!--
+        ===========================================================
+        KIT FORM INTEGRATION
+        ===========================================================
+        Replace the form below with the embedded form code from your
+        Kit account once the "Book Waitlist" form is created.
+
+        Two integration options:
+
+        OPTION A — Kit JS embed (recommended; uses Kit's own tracking)
+        Paste the <script> tag and <form> wrapper Kit provides.
+
+        OPTION B — Native HTML POST to Kit (cleaner styling control)
+        Set the form action to:
+          https://app.kit.com/forms/{FORM_ID}/subscriptions
+        Field names Kit expects:
+          email_address  (required)
+          fields[first_name]  (optional)
+
+        The markup below is OPTION B, ready to receive the form ID.
+        ===========================================================
+      -->
+      <form
+        class="capture-form"
+        action="https://app.kit.com/forms/REPLACE_WITH_KIT_FORM_ID/subscriptions"
+        method="post"
+        data-sv-form="REPLACE_WITH_KIT_FORM_ID"
+        data-uid="REPLACE_WITH_KIT_UID"
+        data-format="inline"
+        data-version="5"
+        id="bookWaitlistForm"
+      >
+        <input type="text" name="fields[first_name]" placeholder="First name" autocomplete="given-name">
+        <div class="capture-form__row">
+          <input type="email" name="email_address" placeholder="Email address" required autocomplete="email">
+          <button type="submit">Join the List</button>
+        </div>
+      </form>
+
+      <div class="capture__success" id="bookWaitlistSuccess">
+        Thank you. You will hear from me when the book is ready and not before.
+      </div>
+
+      <p class="capture__fineprint">Your address is used only for book and Field Notes correspondence. Unsubscribe anytime.</p>
+    </div>
+  </section>
+
+  <!-- CLOSING STATEMENT -->
+  <section class="closing">
+    <div class="container container--narrow">
+      <p class="closing__statement">Leadership is architecture.</p>
+      <p class="closing__qualifier">The only question is whether you design it deliberately &mdash; or discover its absence when it fails.</p>
+    </div>
+  </section>
+
+  <!-- ALSO -->
+  <section class="also">
+    <div class="container container--narrow">
+      <p>Want to see the framework before the book ships?</p>
+      <div class="also__links">
+        <a href="/framework">View the Framework</a>
+        <a href="/diagnostic">Take the Diagnostic</a>
+        <a href="/field-notes">Read the Field Notes</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-foot">
+    <div class="container">
+      <p>&copy; 2026 Praeva Coaching, LLC. KEYSTONE Framework™ is a trademark of Praeva Coaching, LLC. <a href="/#begin">Contact</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // Optional progressive enhancement: handle Kit submission inline so the user
+    // stays on the page after subscribing. Kit returns JSON when X-Requested-With
+    // is set; we show the success block instead of redirecting away.
+    (function () {
+      const form = document.getElementById('bookWaitlistForm');
+      const success = document.getElementById('bookWaitlistSuccess');
+      if (!form || !success) return;
+
+      form.addEventListener('submit', async function (e) {
+        // If Kit form ID hasn't been wired yet, allow native submission.
+        if (form.action.indexOf('REPLACE_WITH_KIT_FORM_ID') !== -1) return;
+
+        e.preventDefault();
+        const button = form.querySelector('button[type="submit"]');
+        const originalLabel = button.textContent;
+        button.disabled = true;
+        button.textContent = 'Submitting…';
+
+        try {
+          const formData = new FormData(form);
+          await fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+          });
+          form.style.display = 'none';
+          success.classList.add('is-visible');
+        } catch (err) {
+          // Fallback: native submit
+          form.submit();
+        } finally {
+          button.disabled = false;
+          button.textContent = originalLabel;
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>
