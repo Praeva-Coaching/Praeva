@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Cadence Scorecard — PRAEVA™</title>
+<meta name="description" content="The Cadence Scorecard — a five-minute self-assessment. Is your rhythm governing your organization, or just filling its calendar? Place yourself on the spectrum from scheduling to governing.">
+<link rel="canonical" href="https://praeva.com/scorecard">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+/* ── PRAEVA NAV v2 ── */
+.praeva-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  background: rgba(10,35,66,0.97);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(184,134,11,0.22);
+  padding: 0 40px;
+}
+.praeva-nav::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, #B8860B 30%, #D4A017 70%, transparent 100%);
+  opacity: 0.6;
+}
+.nav-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: 0.1em;
+  color: #F5F0E8;
+  text-decoration: none;
+  margin-right: 40px;
+  flex-shrink: 0;
+  transition: opacity 0.2s;
+}
+.nav-brand:hover { opacity: 0.85; }
+.nav-brand sup { color: #B8860B; font-size: 11px; vertical-align: super; letter-spacing: 0; }
+.nav-primary-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+  flex: 1;
+}
+.nav-primary-links .nav-item { position: relative; }
+.nav-primary-links .nav-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.6);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  background: none;
+  outline: none;
+}
+.nav-primary-links .nav-link:hover { color: #F5F0E8; }
+.nav-primary-links .nav-link.active { color: #F5F0E8; }
+.nav-primary-links .nav-link.library-trigger.open {
+  color: #D4A017;
+  border-color: rgba(184,134,11,0.22);
+  background: rgba(184,134,11,0.1);
+}
+.nav-chevron {
+  width: 7px; height: 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 0.25s ease;
+  flex-shrink: 0; margin-top: 1px;
+}
+.library-trigger.open .nav-chevron { transform: rotate(-135deg) translateY(-2px); }
+.library-dropdown {
+  position: absolute;
+  top: calc(100% + 12px); left: -1px;
+  width: 310px;
+  background: #071829;
+  border: 1px solid rgba(184,134,11,0.22);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+  opacity: 0; pointer-events: none;
+  transform: translateY(-8px);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+  z-index: 100;
+}
+.library-dropdown.open { opacity: 1; pointer-events: all; transform: translateY(0); }
+.dd-header {
+  padding: 16px 22px 12px;
+  border-bottom: 1px solid rgba(184,134,11,0.15);
+}
+.dd-header-label {
+  font-family: 'Jost', sans-serif; font-weight: 500;
+  font-size: 8.5px; letter-spacing: 0.28em;
+  text-transform: uppercase; color: #B8860B; margin-bottom: 3px;
+}
+.dd-header-desc {
+  font-family: 'Cormorant Garamond', serif; font-size: 13px;
+  font-weight: 300; font-style: italic;
+  color: rgba(245,240,232,0.35); line-height: 1.4;
+}
+.dd-items { padding: 6px 0; }
+.dd-item {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 12px 22px; text-decoration: none; cursor: pointer;
+  transition: background 0.15s;
+  border-left: 2px solid transparent;
+  position: relative;
+}
+.dd-item:hover { background: rgba(245,240,232,0.04); border-left-color: #B8860B; }
+.dd-item.active { background: rgba(184,134,11,0.1); border-left-color: #B8860B; }
+.dd-item.coming-soon { opacity: 0.4; cursor: default; pointer-events: none; }
+.dd-item.os-slot { opacity: 0.25; pointer-events: none; cursor: default; }
+.dd-icon {
+  width: 30px; height: 30px;
+  border: 1px solid rgba(184,134,11,0.2);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+.dd-icon svg { width: 13px; height: 13px; stroke: #B8860B; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.dd-item.coming-soon .dd-icon svg,
+.dd-item.os-slot .dd-icon svg { stroke: rgba(245,240,232,0.3); }
+.dd-title {
+  font-family: 'Jost', sans-serif; font-weight: 500;
+  font-size: 12px; letter-spacing: 0.05em;
+  color: #F5F0E8; margin-bottom: 2px;
+}
+.dd-item.coming-soon .dd-title,
+.dd-item.os-slot .dd-title { color: rgba(245,240,232,0.4); }
+.dd-desc {
+  font-family: 'Jost', sans-serif; font-weight: 300;
+  font-size: 11px; line-height: 1.5;
+  color: rgba(245,240,232,0.35);
+}
+.dd-badge {
+  position: absolute; right: 18px; top: 50%; transform: translateY(-50%);
+  font-family: 'Jost', sans-serif; font-size: 8px; font-weight: 500;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: rgba(245,240,232,0.3);
+  border: 1px solid rgba(245,240,232,0.1); padding: 2px 6px;
+}
+.dd-divider { height: 1px; background: rgba(184,134,11,0.15); margin: 4px 22px; }
+.nav-cta {
+  display: flex; align-items: center; gap: 7px;
+  padding: 9px 20px;
+  background: transparent;
+  border: 1px solid #B8860B;
+  font-family: 'Jost', sans-serif; font-weight: 500;
+  font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: #B8860B; text-decoration: none; cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s, color 0.2s;
+  position: relative; overflow: hidden;
+}
+.nav-cta::before {
+  content: ''; position: absolute; inset: 0;
+  background: #B8860B; transform: scaleX(0); transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.nav-cta:hover::before { transform: scaleX(1); }
+.nav-cta:hover { color: #0A2342; }
+.nav-cta-text { position: relative; z-index: 1; }
+.nav-cta-arrow { position: relative; z-index: 1; font-size: 12px; transition: transform 0.2s; }
+.nav-cta:hover .nav-cta-arrow { transform: translateX(3px); }
+.nav-hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; padding: 4px; background: none; border: none; margin-left: auto;
+}
+.nav-hamburger span {
+  display: block; width: 22px; height: 1.5px;
+  background: rgba(245,240,232,0.6);
+  transition: all 0.25s ease; transform-origin: center;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); background: #B8860B; }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); background: #B8860B; }
+.mobile-drawer {
+  position: fixed; top: 68px; left: 0; right: 0;
+  background: #071829;
+  border-bottom: 1px solid rgba(184,134,11,0.2);
+  z-index: 999; max-height: 0; overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+.mobile-drawer.open { max-height: 500px; }
+.mobile-nav-items { padding: 16px 0 24px; }
+.mobile-nav-link {
+  display: block; padding: 13px 32px;
+  font-family: 'Jost', sans-serif; font-weight: 400;
+  font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(245,240,232,0.6); text-decoration: none;
+  border-left: 2px solid transparent; transition: all 0.15s;
+}
+.mobile-nav-link:hover, .mobile-nav-link.active {
+  color: #F5F0E8; border-left-color: #B8860B;
+  background: rgba(245,240,232,0.03);
+}
+.mobile-nav-section {
+  padding: 8px 32px 4px;
+  font-family: 'Jost', sans-serif; font-size: 8.5px;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: #B8860B; margin-top: 8px;
+}
+.mobile-nav-link.sub { padding-left: 44px; font-size: 11px; letter-spacing: 0.1em; color: rgba(245,240,232,0.4); }
+.mobile-nav-link.sub.coming-soon { opacity: 0.35; pointer-events: none; }
+.mobile-cta {
+  margin: 16px 32px 0; display: block; padding: 11px 20px;
+  border: 1px solid #B8860B; color: #B8860B;
+  font-family: 'Jost', sans-serif; font-size: 10px;
+  font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+  text-align: center; text-decoration: none; transition: all 0.2s;
+}
+.mobile-cta:hover { background: #B8860B; color: #0A2342; }
+@media (max-width: 860px) {
+  .praeva-nav { padding: 0 24px; }
+  .nav-primary-links, .nav-cta { display: none; }
+  .nav-hamburger { display: flex; }
+  .nav-brand { margin-right: 0; }
+}
+
+:root { --navy: #0A2342; --navy2: #0D2D57; --gold: #B8860B; --gold2: #D4A017; --cream: #F5F0E8; --cream2: #EDE8DC; --white: #FFFFFF; --text: #1A1A1A; --muted: #5A5A5A; --border: rgba(184,134,11,0.25); }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Jost', sans-serif; font-weight: 300; background: var(--cream); color: var(--text); line-height: 1.7; overflow-x: hidden; }
+.hero { background: var(--navy); padding: 136px 3rem 80px; text-align: center; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(184,134,11,0.08) 0%, transparent 70%); pointer-events: none; }
+.hero-eyebrow { font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+.hero h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2.4rem, 5vw, 3.8rem); color: var(--cream); line-height: 1.15; margin-bottom: 1.5rem; letter-spacing: 0.02em; }
+.hero h1 em { font-style: italic; color: var(--gold); }
+.hero-sub { font-size: 1rem; font-weight: 300; color: rgba(245,240,232,0.7); max-width: 640px; margin: 0 auto 2.5rem; line-height: 1.8; }
+.hero-meta { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; }
+.hero-meta-item { text-align: center; }
+.hero-meta-item .num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--gold); display: block; }
+.hero-meta-item .label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(245,240,232,0.5); }
+.intro-strip { background: var(--cream2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 3rem; text-align: center; }
+.intro-strip p { max-width: 720px; margin: 0 auto; font-size: 1.05rem; font-weight: 300; color: var(--muted); line-height: 1.9; }
+.intro-strip p strong { color: var(--navy); font-weight: 500; }
+.diagnostic-wrap { max-width: 860px; margin: 0 auto; padding: 5rem 2rem 6rem; }
+.pillar-block { margin-bottom: 4rem; background: var(--white); border: 1px solid var(--border); border-top: 3px solid var(--gold); border-radius: 2px; overflow: hidden; }
+.pillar-head { background: var(--navy); padding: 1.5rem 2rem; display: flex; align-items: baseline; gap: 1.5rem; }
+.pillar-num { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 300; color: rgba(184,134,11,0.5); line-height: 1; flex-shrink: 0; }
+.pillar-roman { font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.2rem; }
+.pillar-title { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 1.5rem; color: var(--cream); line-height: 1.2; }
+.pillar-body { padding: 2rem; }
+.question-item { margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(184,134,11,0.12); }
+.question-item:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.q-meta { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.6rem; }
+.q-badge { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 2px; font-weight: 500; }
+.badge-data { background: rgba(10,35,66,0.08); color: var(--navy2); }
+.badge-dir { background: rgba(184,134,11,0.12); color: #7a5a00; }
+.badge-trend { background: rgba(184,134,11,0.22); color: #5a3f00; }
+.q-num { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; }
+.question-text { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 400; color: var(--navy); line-height: 1.5; margin-bottom: 1rem; }
+.scale-wrap { display: flex; gap: 0.5rem; align-items: center; }
+.scale-label { font-size: 0.65rem; letter-spacing: 0.1em; color: var(--muted); white-space: nowrap; }
+.scale-options { display: flex; gap: 0.35rem; flex: 1; }
+.scale-options input[type="radio"] { display: none; }
+.scale-options label { flex: 1; text-align: center; padding: 0.55rem 0; border: 1px solid rgba(10,35,66,0.2); border-radius: 2px; font-size: 0.8rem; font-weight: 500; color: var(--muted); cursor: pointer; transition: all 0.15s; user-select: none; }
+.scale-options label:hover { border-color: var(--gold); color: var(--navy); background: rgba(184,134,11,0.06); }
+.scale-options input[type="radio"]:checked + label { background: var(--navy); border-color: var(--navy); color: var(--cream); }
+.scale-desc { display: flex; justify-content: space-between; margin-top: 0.35rem; }
+.scale-desc span { font-size: 0.6rem; letter-spacing: 0.08em; color: var(--muted); text-transform: uppercase; }
+.progress-bar-wrap { position: sticky; top: 68px; z-index: 50; background: var(--navy2); padding: 0.75rem 3rem; display: flex; align-items: center; gap: 1.5rem; border-bottom: 1px solid rgba(184,134,11,0.2); }
+.progress-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); white-space: nowrap; }
+.progress-track { flex: 1; height: 3px; background: rgba(245,240,232,0.15); border-radius: 2px; overflow: hidden; }
+.progress-fill { height: 100%; background: var(--gold); border-radius: 2px; transition: width 0.3s ease; width: 0%; }
+.progress-pct { font-size: 0.7rem; font-weight: 500; color: var(--cream); min-width: 3rem; text-align: right; }
+.lead-section { background: var(--navy); border: 1px solid rgba(184,134,11,0.3); border-radius: 2px; padding: 2.5rem; margin-bottom: 4rem; }
+.lead-section h3 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 1.6rem; color: var(--cream); margin-bottom: 0.5rem; }
+.lead-section p { font-size: 0.88rem; color: rgba(245,240,232,0.65); margin-bottom: 1.5rem; line-height: 1.8; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+.form-group.full { grid-column: 1 / -1; }
+.form-group label { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); }
+.form-group input, .form-group select { background: rgba(245,240,232,0.07); border: 1px solid rgba(184,134,11,0.3); border-radius: 2px; padding: 0.7rem 0.9rem; font-family: 'Jost', sans-serif; font-size: 0.88rem; font-weight: 300; color: var(--cream); outline: none; transition: border-color 0.2s; appearance: none; }
+.form-group input::placeholder { color: rgba(245,240,232,0.3); }
+.form-group input:focus, .form-group select:focus { border-color: var(--gold); background: rgba(245,240,232,0.1); }
+.form-group select option { background: var(--navy); color: var(--cream); }
+.submit-section { margin-top: 3rem; text-align: center; }
+.btn-submit { display: inline-block; background: var(--gold); color: var(--navy); font-family: 'Jost', sans-serif; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; padding: 1rem 3rem; border: none; border-radius: 2px; cursor: pointer; transition: all 0.2s; }
+.btn-submit:hover { background: var(--gold2); transform: translateY(-1px); }
+.btn-submit:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+.submit-note { margin-top: 1rem; font-size: 0.75rem; color: var(--muted); line-height: 1.7; }
+.score-preview { background: var(--cream2); border: 1px solid var(--border); border-radius: 2px; padding: 2rem; margin-bottom: 3rem; display: none; }
+.score-preview.visible { display: block; }
+.score-preview h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--navy); margin-bottom: 1.5rem; }
+.score-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin-bottom: 1rem; }
+.score-card { text-align: center; background: var(--white); border: 1px solid var(--border); border-radius: 2px; padding: 1rem 0.5rem; }
+.score-card .s-pillar { font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; line-height: 1.4; }
+.score-card .s-val { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 400; color: var(--navy); line-height: 1; }
+.score-card .s-max { font-size: 0.65rem; color: var(--muted); }
+.score-card.lowest { border-top: 3px solid #c0392b; }
+.score-card.highest { border-top: 3px solid #27ae60; }
+.score-note { font-size: 0.85rem; color: var(--muted); line-height: 1.8; font-style: italic; }
+.success-msg { display: none; background: var(--navy); border: 1px solid rgba(184,134,11,0.4); border-radius: 2px; padding: 3rem; text-align: center; }
+.success-msg.visible { display: block; }
+.success-msg h3 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 2rem; color: var(--cream); margin-bottom: 1rem; }
+.success-msg p { font-size: 0.9rem; color: rgba(245,240,232,0.65); line-height: 1.8; max-width: 480px; margin: 0 auto; }
+.gold-rule { width: 60px; height: 1px; background: var(--gold); margin: 1.5rem auto; }
+footer { background: var(--navy); border-top: 1px solid rgba(184,134,11,0.2); padding: 2.5rem 3rem; text-align: center; }
+.footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--cream); margin-bottom: 0.5rem; }
+.footer-copy { font-size: 0.65rem; letter-spacing: 0.12em; color: rgba(245,240,232,0.35); }
+@media (max-width: 680px) { .praeva-nav { padding: 0 1.25rem; } .hero { padding: 110px 1.5rem 60px; } .progress-bar-wrap { padding: 0.75rem 1.5rem; } .diagnostic-wrap { padding: 3rem 1.25rem 4rem; } .pillar-body { padding: 1.5rem; } .form-row { grid-template-columns: 1fr; } .score-grid { grid-template-columns: repeat(3, 1fr); } .hero-meta { gap: 2rem; } }
+
+/* ── CADENCE SCORECARD ── */
+/* hero spectrum (on navy) */
+.sc-spectrum{position:relative;max-width:480px;margin:36px auto 0;padding:0 6px}
+.sc-spectrum-track{position:absolute;top:6px;left:36px;right:36px;height:1px;background:rgba(184,134,11,0.5)}
+.sc-spectrum-row{display:flex;justify-content:space-between;position:relative}
+.sc-spectrum-point{display:flex;flex-direction:column;align-items:center;gap:11px}
+.sc-dot{width:13px;height:13px;border-radius:50%;background:var(--gold);position:relative;z-index:1}
+.sc-sp-label{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.05em;color:rgba(245,240,232,0.55)}
+.sc-spectrum-point:last-child .sc-sp-label{color:#F5F0E8;font-weight:500}
+/* instrument (on cream body) */
+.sc-wrap{max-width:720px;margin:0 auto;padding:4rem 2rem 6rem}
+#scQuestions{background:var(--white);border:1px solid var(--border);border-top:3px solid var(--gold);border-radius:2px;padding:1.2rem 2.2rem}
+.sc-q{padding:28px 0;border-bottom:1px solid rgba(184,134,11,0.14)}
+.sc-q:last-child{border-bottom:none}
+.sc-q-num{font-family:'Jost',sans-serif;font-size:11px;font-weight:600;letter-spacing:.25em;color:var(--gold);margin-bottom:11px}
+.sc-q-text{font-family:'Cormorant Garamond',serif;font-size:1.45rem;line-height:1.32;color:var(--navy);margin-bottom:20px}
+.sc-options{display:flex;flex-direction:column;gap:10px}
+.sc-opt{display:flex;align-items:flex-start;gap:13px;padding:14px 18px;border:1px solid var(--border);cursor:pointer;transition:border-color .18s,background .18s;position:relative;border-radius:2px}
+.sc-opt:hover{border-color:var(--gold);background:rgba(184,134,11,0.04)}
+.sc-opt input{position:absolute;opacity:0;width:0;height:0}
+.sc-opt::before{content:'';flex-shrink:0;width:16px;height:16px;border-radius:50%;border:1.5px solid rgba(10,35,66,0.3);margin-top:2px;transition:border-color .18s,background .18s}
+.sc-opt.selected{border-color:var(--gold);background:rgba(184,134,11,0.09)}
+.sc-opt.selected::before{border-color:var(--gold);background:radial-gradient(circle at center,var(--gold) 0 4.5px,transparent 5.5px)}
+.sc-opt-text{font-family:'Jost',sans-serif;font-weight:300;font-size:15px;line-height:1.5;color:var(--text)}
+.sc-progress{display:flex;align-items:center;gap:14px;margin:36px auto 24px;max-width:600px}
+.sc-progress-track{flex:1;height:2px;background:rgba(10,35,66,0.12)}
+.sc-progress-fill{height:100%;width:0;background:var(--gold);transition:width .3s ease}
+.sc-progress-pct{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.12em;color:var(--muted);white-space:nowrap}
+.sc-submit-wrap{text-align:center}
+#scBtn[disabled]{opacity:.4;cursor:not-allowed}
+/* result (navy panel) */
+.sc-result{display:none;margin:48px auto 0;max-width:640px;padding:40px 32px 44px;background:var(--navy);border:1px solid rgba(184,134,11,0.4);border-radius:2px}
+.sc-result.show{display:block;animation:scFade .5s ease}
+@keyframes scFade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.sc-result-eyebrow{font-family:'Jost',sans-serif;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;text-align:center}
+.sc-result-spectrum{display:flex;justify-content:center;flex-wrap:wrap;gap:9px;margin-bottom:24px}
+.sc-rb{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,240,232,0.4);border:1px solid rgba(245,240,232,0.18);padding:6px 15px;transition:all .25s}
+.sc-rb.active{color:var(--navy);background:var(--gold);border-color:var(--gold);font-weight:600}
+.sc-result-title{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:2.6rem;line-height:1.05;color:var(--cream);text-align:center;margin:0}
+.sc-result .gold-rule{height:1px;width:60px;background:var(--gold);margin:16px auto 20px}
+.sc-result-desc{font-family:'Cormorant Garamond',serif;font-size:1.25rem;line-height:1.6;color:rgba(245,240,232,0.88);text-align:center;max-width:520px;margin:0 auto 28px}
+.sc-result-cta{display:flex;flex-direction:column;align-items:center;gap:16px}
+.sc-result-link{font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.06em;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(184,134,11,0.5);padding-bottom:3px;transition:color .2s}
+.sc-result-link:hover{color:var(--gold2)}
+.sc-retake{background:none;border:none;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,0.4);cursor:pointer;transition:color .2s}
+.sc-retake:hover{color:var(--cream)}
+@media(max-width:600px){#scQuestions{padding:1rem 1.3rem}.sc-q-text{font-size:1.25rem}.sc-result-title{font-size:2rem}.sc-result-desc{font-size:1.1rem}}
+
+/* lead capture (inside navy result panel) */
+.sc-lead{margin:30px auto 0;max-width:450px;padding-top:26px;border-top:1px solid rgba(184,134,11,0.22)}
+.sc-lead-prompt{font-family:'Jost',sans-serif;font-weight:300;font-size:14px;line-height:1.55;color:rgba(245,240,232,0.82);text-align:center;margin-bottom:16px}
+.sc-lead-prompt .sc-band-name{color:var(--gold2);font-weight:500}
+.sc-lead-row{display:flex;gap:10px}
+.sc-lead-input{flex:1;min-width:0;background:rgba(255,255,255,0.06);border:1px solid rgba(184,134,11,0.35);border-radius:2px;padding:12px 14px;font-family:'Jost',sans-serif;font-size:14px;color:var(--cream);outline:none;transition:border-color .2s}
+.sc-lead-input::placeholder{color:rgba(245,240,232,0.4)}
+.sc-lead-input:focus{border-color:var(--gold)}
+.sc-lead-btn{background:var(--gold);color:var(--navy);border:none;border-radius:2px;font-family:'Jost',sans-serif;font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:0 22px;cursor:pointer;white-space:nowrap;transition:background .2s}
+.sc-lead-btn:hover{background:var(--gold2)}
+.sc-lead-note{font-family:'Jost',sans-serif;font-size:10.5px;letter-spacing:.03em;color:rgba(245,240,232,0.4);text-align:center;margin-top:12px;line-height:1.5}
+.sc-lead-success{display:none;font-family:'Cormorant Garamond',serif;font-size:1.18rem;font-style:italic;line-height:1.5;color:var(--gold2);text-align:center;margin:30px auto 0;max-width:450px;padding-top:26px;border-top:1px solid rgba(184,134,11,0.22)}
+.sc-lead-success.show{display:block}
+@media(max-width:480px){.sc-lead-row{flex-direction:column}.sc-lead-btn{padding:12px}}
+</style>
+</head>
+<body>
+
+<nav class="praeva-nav" id="praeva-nav">
+  <a href="https://praeva.com" class="nav-brand">PRAEVA<sup>™</sup></a>
+  <ul class="nav-primary-links">
+    <li class="nav-item"><a href="https://praeva.com/#framework" class="nav-link">Framework</a></li>
+    <li class="nav-item" id="library-item">
+      <button class="nav-link library-trigger" id="library-trigger" aria-expanded="false" aria-haspopup="true">
+        Library <span class="nav-chevron"></span>
+      </button>
+      <div class="library-dropdown" id="library-dropdown" role="menu">
+        <div class="dd-header">
+          <div class="dd-header-label">PRAEVA™ Content Library</div>
+          <div class="dd-header-desc">Doctrine, field application, and curated resources</div>
+        </div>
+        <div class="dd-items">
+          <a href="https://praeva.com/articles" class="dd-item" role="menuitem">
+            <div class="dd-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+            <div><div class="dd-title">Articles</div><div class="dd-desc">Long-form doctrine essays and published pieces</div></div>
+          </a>
+          <a href="https://praeva.com/field-notes" class="dd-item" role="menuitem">
+            <div class="dd-icon"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
+            <div><div class="dd-title">Field Notes</div><div class="dd-desc">KEYSTONE Framework™ applied through concrete parallels</div></div>
+          </a>
+          <a href="https://praeva.com/resources" class="dd-item coming-soon" role="menuitem">
+            <div class="dd-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+            <div><div class="dd-title">Resources</div><div class="dd-desc">Books, white papers, and curated reading</div></div>
+            <span class="dd-badge">Forthcoming</span>
+          </a>
+          <div class="dd-divider"></div>
+          <div class="dd-item os-slot" aria-hidden="true">
+            <div class="dd-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg></div>
+            <div><div class="dd-title">Operating System</div><div class="dd-desc">Implementation tools and operating doctrine</div></div>
+            <span class="dd-badge">Coming Soon</span>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li class="nav-item"><a href="https://praeva.com/#begin" class="nav-link">Contact</a></li>
+  </ul>
+  <a href="/diagnostic" class="nav-cta">
+    <span class="nav-cta-text">Take the Diagnostic</span>
+    <span class="nav-cta-arrow">→</span>
+  </a>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle navigation">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-drawer" id="mobile-drawer">
+  <div class="mobile-nav-items">
+    <a href="https://praeva.com/#framework" class="mobile-nav-link">Framework</a>
+    <div class="mobile-nav-section">Library</div>
+    <a href="https://praeva.com/articles" class="mobile-nav-link sub coming-soon">Articles</a>
+    <a href="https://praeva.com/field-notes" class="mobile-nav-link sub">Field Notes</a>
+    <a href="https://praeva.com/resources" class="mobile-nav-link sub coming-soon">Resources</a>
+    <a href="https://praeva.com/#begin" class="mobile-nav-link">Contact</a>
+    <a href="/diagnostic" class="mobile-cta">Take the Diagnostic →</a>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-eyebrow">A 5-Minute Self-Assessment</div>
+  <h1>The Cadence<br><em>Scorecard</em></h1>
+  <p class="hero-sub">Is your rhythm governing your organization — or just filling its calendar? Six questions, answered honestly, place you on the spectrum from scheduling to governing.</p>
+  <div class="sc-spectrum">
+    <div class="sc-spectrum-track"></div>
+    <div class="sc-spectrum-row">
+      <div class="sc-spectrum-point"><span class="sc-dot"></span><span class="sc-sp-label">Scheduling</span></div>
+      <div class="sc-spectrum-point"><span class="sc-dot"></span><span class="sc-sp-label">Drifting</span></div>
+      <div class="sc-spectrum-point"><span class="sc-dot"></span><span class="sc-sp-label">Governing</span></div>
+    </div>
+  </div>
+</section>
+<div class="sc-wrap">
+    <div id="scQuestions">
+      <div class="sc-q">
+        <div class="sc-q-num">01</div>
+        <div class="sc-q-text">If you cancelled your most important recurring meeting for a month…</div>
+        <div class="sc-options">
+        <label class="sc-opt"><input type="radio" name="q1" value="0"><span class="sc-opt-text">Not much would break.</span></label>
+        <label class="sc-opt"><input type="radio" name="q1" value="1"><span class="sc-opt-text">Some things would slip — we'd catch them eventually.</span></label>
+        <label class="sc-opt"><input type="radio" name="q1" value="2"><span class="sc-opt-text">Decisions would stall and problems would surface within days.</span></label>
+        </div>
+      </div>
+      <div class="sc-q">
+        <div class="sc-q-num">02</div>
+        <div class="sc-q-text">Your recurring meetings mostly…</div>
+        <div class="sc-options">
+        <label class="sc-opt"><input type="radio" name="q2" value="0"><span class="sc-opt-text">keep people informed and aligned.</span></label>
+        <label class="sc-opt"><input type="radio" name="q2" value="1"><span class="sc-opt-text">review status and surface issues.</span></label>
+        <label class="sc-opt"><input type="radio" name="q2" value="2"><span class="sc-opt-text">force a specific decision before anyone leaves.</span></label>
+        </div>
+      </div>
+      <div class="sc-q">
+        <div class="sc-q-num">03</div>
+        <div class="sc-q-text">The frequency of your governance rhythms is set by…</div>
+        <div class="sc-options">
+        <label class="sc-opt"><input type="radio" name="q3" value="0"><span class="sc-opt-text">habit — it's what has always been on the calendar.</span></label>
+        <label class="sc-opt"><input type="radio" name="q3" value="1"><span class="sc-opt-text">a rough sense of importance.</span></label>
+        <label class="sc-opt"><input type="radio" name="q3" value="2"><span class="sc-opt-text">how fast each thing drifts when left alone.</span></label>
+        </div>
+      </div>
+      <div class="sc-q">
+        <div class="sc-q-num">04</div>
+        <div class="sc-q-text">Your standing agendas read like…</div>
+        <div class="sc-options">
+        <label class="sc-opt"><input type="radio" name="q4" value="0"><span class="sc-opt-text">a recurring invite with a loose topic.</span></label>
+        <label class="sc-opt"><input type="radio" name="q4" value="1"><span class="sc-opt-text">a list of things to talk about.</span></label>
+        <label class="sc-opt"><input type="radio" name="q4" value="2"><span class="sc-opt-text">a contract — decisions, owners, evidence required before the room clears.</span></label>
+        </div>
+      </div>
+      <div class="sc-q">
+        <div class="sc-q-num">05</div>
+        <div class="sc-q-text">Where two functions that don't report to each other share one outcome, what holds them together?</div>
+        <div class="sc-options">
+        <label class="sc-opt"><input type="radio" name="q5" value="0"><span class="sc-opt-text">goodwill between the leads.</span></label>
+        <label class="sc-opt"><input type="radio" name="q5" value="1"><span class="sc-opt-text">escalation when something breaks.</span></label>
+        <label class="sc-opt"><input type="radio" name="q5" value="2"><span class="sc-opt-text">a fixed rhythm both are required to attend.</span></label>
+        </div>
+      </div>
+      <div class="sc-q">
+        <div class="sc-q-num">06</div>
+        <div class="sc-q-text">Attendance at your cross-boundary rhythms is…</div>
+        <div class="sc-options">
+        <label class="sc-opt"><input type="radio" name="q6" value="0"><span class="sc-opt-text">optional — people skip when they're busy.</span></label>
+        <label class="sc-opt"><input type="radio" name="q6" value="1"><span class="sc-opt-text">expected, but the first thing to go under pressure.</span></label>
+        <label class="sc-opt"><input type="radio" name="q6" value="2"><span class="sc-opt-text">non-negotiable — treated as the command relationship itself.</span></label>
+        </div>
+      </div>
+    </div>
+    <div class="sc-progress">
+      <div class="sc-progress-track"><div class="sc-progress-fill" id="scFill"></div></div>
+      <span class="sc-progress-pct" id="scPct">0 / 6</span>
+    </div>
+    <div class="sc-submit-wrap"><button type="button" class="btn-submit" id="scBtn" disabled>Score My Cadence</button></div>
+    <div class="sc-result" id="scResult">
+      <div class="sc-result-eyebrow">Your Result</div>
+      <div class="sc-result-spectrum">
+        <span class="sc-rb" data-band="Scheduling">Scheduling</span>
+        <span class="sc-rb" data-band="Drifting">Drifting</span>
+        <span class="sc-rb" data-band="Governing">Governing</span>
+      </div>
+      <h3 class="sc-result-title" id="scResultTitle"></h3>
+      <div class="gold-rule"></div>
+      <p class="sc-result-desc" id="scResultDesc"></p>
+      <form name="cadence-scorecard" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="sc-lead" id="scLead">
+        <input type="hidden" name="form-name" value="cadence-scorecard">
+        <p style="display:none"><label>Leave blank: <input name="bot-field"></label></p>
+        <input type="hidden" name="result_band" id="sc_band">
+        <input type="hidden" name="total_score" id="sc_total">
+        <div class="sc-lead-prompt">Want the <span class="sc-band-name">Governing</span> playbook? Enter your email and I will send you the one-page Cadence guide built for your result.</div>
+        <div class="sc-lead-row">
+          <input type="email" name="email" id="scEmail" class="sc-lead-input" placeholder="you@organization.com" required>
+          <button type="submit" class="sc-lead-btn">Send it →</button>
+        </div>
+        <div class="sc-lead-note">Your email is held for the playbook and occasional notes on leadership architecture. No spam.</div>
+      </form>
+      <div class="sc-lead-success" id="scLeadSuccess">Thank you. Your <span class="sc-band-name">Governing</span> Cadence playbook is on its way — watch your inbox.</div>
+      <div class="sc-result-cta">
+        <a href="https://praeva.com/articles/when-rhythm-becomes-authority/" class="sc-result-link">Read: When Rhythm Becomes Authority →</a>
+        <button type="button" class="sc-retake" id="scRetake">Retake the scorecard</button>
+      </div>
+    </div>
+  </div>
+
+<footer>
+  <div class="footer-brand">PRAEVA™ — Leadership as Architecture</div>
+  <div class="gold-rule" style="margin: 1rem auto;"></div>
+  <div class="footer-copy">© 2026 PRAEVA Coaching, LLC · All Rights Reserved · KEYSTONE Framework™ is a proprietary methodology</div>
+</footer>
+<script>
+(function(){
+  var TOTAL=6;
+  var fill=document.getElementById('scFill');
+  var pct=document.getElementById('scPct');
+  var btn=document.getElementById('scBtn');
+  var result=document.getElementById('scResult');
+  var bands=[
+    {name:'Scheduling',min:0,max:4,desc:"Your calendar is full, but it is not governing. Meetings recur without forcing decisions — motion is being mistaken for progress. The rhythm exists; the enforcement does not. Start by making every standing event force a decision, or deleting it."},
+    {name:'Drifting',min:5,max:8,desc:"Real work is happening, but it is leaking at the seams. Some intervals govern; others run on habit. The gap between your augmented pace and your governing rhythm is where coherence is quietly lost. Tighten each interval to the rate of drift, and make the agenda an enforcement contract."},
+    {name:'Governing',min:9,max:12,desc:"Your cadence is load-bearing. It forces decisions, surfaces drift early, and holds the seams whether or not this quarter's relationships are warm. The rhythm — not goodwill — is doing the work. Protect it: the governing meeting is the first thing to decay under pressure."}
+  ];
+  function answered(){return document.querySelectorAll('#scQuestions input[type=radio]:checked').length;}
+  function update(){var a=answered();fill.style.width=Math.round(a/TOTAL*100)+'%';pct.textContent=a+' / '+TOTAL;btn.disabled=(a<TOTAL);}
+  document.querySelectorAll('#scQuestions input[type=radio]').forEach(function(r){
+    r.addEventListener('change',function(){
+      var q=r.closest('.sc-q');
+      q.querySelectorAll('.sc-opt').forEach(function(o){o.classList.remove('selected');});
+      r.closest('.sc-opt').classList.add('selected');
+      update();
+    });
+  });
+  btn.addEventListener('click',function(){
+    if(answered()<TOTAL)return;
+    var total=0;
+    document.querySelectorAll('#scQuestions input[type=radio]:checked').forEach(function(r){total+=parseInt(r.value,10);});
+    var band=bands.filter(function(b){return total>=b.min&&total<=b.max;})[0];
+    document.getElementById('scResultTitle').textContent=band.name;
+    document.getElementById('scResultDesc').textContent=band.desc;
+    document.getElementById('sc_band').value=band.name;
+    document.getElementById('sc_total').value=String(total);
+    document.querySelectorAll('.sc-band-name').forEach(function(el){el.textContent=band.name;});
+    document.querySelectorAll('.sc-rb').forEach(function(el){el.classList.toggle('active',el.getAttribute('data-band')===band.name);});
+    result.classList.add('show');
+    result.scrollIntoView({behavior:'smooth',block:'center'});
+  });
+  document.getElementById('scRetake').addEventListener('click',function(){
+    document.querySelectorAll('#scQuestions input[type=radio]:checked').forEach(function(r){r.checked=false;});
+    document.querySelectorAll('.sc-opt.selected').forEach(function(o){o.classList.remove('selected');});
+    result.classList.remove('show');update();
+    var _lf=document.getElementById('scLead');if(_lf)_lf.style.display='';
+    var _ls=document.getElementById('scLeadSuccess');if(_ls)_ls.classList.remove('show');
+    var _se=document.getElementById('scEmail');if(_se)_se.value='';
+    document.getElementById('scQuestions').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+  var lead=document.getElementById('scLead');
+  if(lead){lead.addEventListener('submit',function(e){
+    e.preventDefault();
+    var body=new URLSearchParams(new FormData(lead)).toString();
+    fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body})
+      .then(function(){lead.style.display='none';document.getElementById('scLeadSuccess').classList.add('show');})
+      .catch(function(){alert('Something went wrong — please try again, or email kelly@praeva.com directly.');});
+  });}
+  update();
+})();
+</script>
+<script>
+// ── PRAEVA NAV JS ──
+(function() {
+  var trigger = document.getElementById('library-trigger');
+  var dropdown = document.getElementById('library-dropdown');
+  var libraryItem = document.getElementById('library-item');
+  var closeTimer;
+  if (!trigger || !dropdown) return;
+  function openDD() { clearTimeout(closeTimer); trigger.classList.add('open'); dropdown.classList.add('open'); trigger.setAttribute('aria-expanded','true'); }
+  function scheduleClose() { closeTimer = setTimeout(function(){ trigger.classList.remove('open'); dropdown.classList.remove('open'); trigger.setAttribute('aria-expanded','false'); }, 120); }
+  trigger.addEventListener('click', function(){ dropdown.classList.contains('open') ? (trigger.classList.remove('open'), dropdown.classList.remove('open'), trigger.setAttribute('aria-expanded','false')) : openDD(); });
+  libraryItem.addEventListener('mouseenter', openDD);
+  libraryItem.addEventListener('mouseleave', scheduleClose);
+  dropdown.addEventListener('mouseenter', function(){ clearTimeout(closeTimer); });
+  dropdown.addEventListener('mouseleave', scheduleClose);
+  document.addEventListener('click', function(e){ if (!libraryItem.contains(e.target)) { trigger.classList.remove('open'); dropdown.classList.remove('open'); trigger.setAttribute('aria-expanded','false'); } });
+  document.addEventListener('keydown', function(e){ if (e.key==='Escape') { trigger.classList.remove('open'); dropdown.classList.remove('open'); trigger.setAttribute('aria-expanded','false'); trigger.focus(); } });
+  var hamburger = document.getElementById('nav-hamburger');
+  var drawer = document.getElementById('mobile-drawer');
+  if (hamburger && drawer) {
+    hamburger.addEventListener('click', function(){ hamburger.classList.toggle('open'); drawer.classList.toggle('open'); });
+    window.addEventListener('resize', function(){ if (window.innerWidth > 860) { hamburger.classList.remove('open'); drawer.classList.remove('open'); } });
+  }
+})();
+</script>
+</body>
+</html>
