@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Five Pillars Under AI — PRAEVA™</title>
+<meta name="description" content="A practitioner's walk through the five KEYSTONE pillars under AI load — the failure mode to watch for in each, and the diagnostic questions a leadership team can run on itself in an afternoon.">
+<link rel="canonical" href="https://praeva.com/articles/five-pillars-under-ai/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Five Pillars Under AI — PRAEVA™">
+<meta property="og:description" content="A practitioner's walk through the five KEYSTONE pillars under AI load — the failure mode to watch for in each, and the diagnostic questions a leadership team can run on itself in an afternoon.">
+<meta property="og:url" content="https://praeva.com/articles/five-pillars-under-ai/">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0A2342;--navy-mid:#0f2d52;--gold:#B8860B;--gold-light:#D4A017;--cream:#F5F0E8;--border:rgba(184,134,11,0.2)}
+html{scroll-behavior:smooth}
+body{background:var(--navy);color:var(--cream);font-family:'Jost',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.6}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;background:rgba(10,35,66,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-brand{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:18px;letter-spacing:.1em;color:var(--cream);text-decoration:none}
+.nav-brand span{color:var(--gold)}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-family:'Jost',sans-serif;font-weight:400;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,240,232,0.6);text-decoration:none;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+.wrap{position:relative;z-index:1;max-width:720px;margin:0 auto;padding:0 28px}
+/* hero */
+.art-hero{padding:132px 0 0}
+.art-eyebrow{font-family:'Jost',sans-serif;font-weight:500;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:22px}
+.art-title{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(40px,6vw,60px);line-height:1.08;color:var(--cream);margin-bottom:20px}
+.art-dek{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:clamp(19px,2.4vw,24px);line-height:1.45;color:var(--gold-light);margin-bottom:26px}
+.art-meta{font-family:'Jost',sans-serif;font-weight:400;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,240,232,0.4)}
+.art-rule{height:1px;background:linear-gradient(90deg,var(--gold),rgba(184,134,11,0));margin:34px 0 8px;opacity:.7}
+/* body */
+.art-body{padding:14px 0 40px}
+.art-body p{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:21px;line-height:1.78;color:rgba(245,240,232,0.92);margin:0 0 26px}
+.art-h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(27px,3.4vw,34px);line-height:1.2;color:var(--cream);margin:52px 0 18px;padding-top:26px;border-top:1px solid rgba(184,134,11,0.22)}
+.diag{background:rgba(184,134,11,0.06);border-left:2px solid var(--gold);border-radius:0 8px 8px 0;padding:22px 26px 24px;margin:30px 0 34px}
+.diag-label{font-family:'Jost',sans-serif;font-weight:600;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.diag ul{list-style:none;display:flex;flex-direction:column;gap:14px}
+.diag li{font-family:'Cormorant Garamond',serif;font-size:19px;line-height:1.5;color:rgba(245,240,232,0.9);padding-left:24px;position:relative}
+.diag li::before{content:'→';position:absolute;left:0;top:0;color:var(--gold);font-family:'Jost',sans-serif;font-size:15px}
+.art-signoff{font-family:'Cormorant Garamond',serif!important;font-style:italic;font-size:23px!important;color:var(--gold-light)!important;text-align:center;margin:44px 0 10px!important}
+/* end links */
+.art-end{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;border-top:1px solid var(--border);margin-top:30px;padding:34px 0 0}
+.art-end a{font-family:'Jost',sans-serif;font-weight:400;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,240,232,0.6);text-decoration:none;transition:color .2s}
+.art-end a:hover{color:var(--gold)}
+.art-end .next{color:var(--gold-light)}
+/* footer */
+footer{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;padding:30px 48px;border-top:1px solid var(--border);margin-top:60px}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:16px;letter-spacing:.1em;color:var(--cream)}
+.footer-brand span{color:var(--gold)}
+.footer-copy{font-family:'Jost',sans-serif;font-weight:300;font-size:11px;letter-spacing:.06em;color:rgba(245,240,232,0.45)}
+@media(max-width:680px){nav{padding:0 24px}.nav-links{gap:18px}.art-body p{font-size:19px}footer{padding:24px;flex-direction:column;gap:8px;text-align:center}}
+@media(max-width:560px){.nav-links li:nth-child(1),.nav-links li:nth-child(2){display:none}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="https://praeva.com" class="nav-brand">PRAEVA<span>™</span></a>
+  <ul class="nav-links">
+    <li><a href="https://praeva.com/#framework">Framework</a></li>
+    <li><a href="https://praeva.com/diagnostic">Diagnostic</a></li>
+    <li><a href="https://praeva.com/field-notes" class="active">Field Notes</a></li>
+    <li><a href="https://praeva.com/#begin">Contact</a></li>
+  </ul>
+</nav>
+<div class="wrap">
+  <header class="art-hero">
+    <div class="art-eyebrow">PRAEVA™ · AI Thread · Article 2 of 2</div>
+    <h1 class="art-title">The Five Pillars Under AI</h1>
+    <p class="art-dek">A Practitioner's Diagnostic</p>
+    <div class="art-meta">8 min read</div>
+    <div class="art-rule"></div>
+  </header>
+  <article class="art-body">
+<p>The companion argument to this one makes a single claim: AI is a load, not a tool, and what absorbs a load is architecture. This piece is the practice. If AI is a stress test on five load-bearing pillars, then a leadership team should be able to walk its own organization pillar by pillar and find, concretely, where the structure is bending. What follows is that walk — each pillar, what it looks like under AI load, the failure mode to watch for, and a short set of diagnostic questions you can put to your own leadership team in an afternoon. The questions matter more than the prose. Answer them honestly and the architecture’s weak joints will name themselves.</p>
+<p>One instruction before you start. Answer for the organization as it actually behaves, not as the org chart says it should. The gap between those two is usually where the load is doing its damage.</p>
+<h2 class="art-h2">Pillar One — Strategic Clarity Under AI</h2>
+<p>Strategic Clarity is the shared answer to “what is this for” that lets a hundred local decisions point the same way. Under AI load it is the first thing to fail, because AI lowers the cost of experimentation so far that experimentation starts to feel like strategy.</p>
+<p>The failure mode is permission mistaken for direction. When anyone can spin up an AI workflow in an afternoon, every team does — and each deployment is justified locally, on its own terms, each one defensible. What is missing is the connective thesis that would let those deployments compound. The organization accumulates motion and mistakes it for progress.</p>
+<p>The architectural signature of the problem is linguistic. Listen for “we are exploring AI,” “we are being thoughtful about AI,” “we are not falling behind.” None of those is a thesis; each is a posture. A thesis is specific enough to tell you what to build and what to refuse: we use AI to compress the time between a client signal and our response, everywhere that delay costs us trust. From a sentence like that, a hundred decisions resolve themselves.</p>
+<div class="diag"><div class="diag-label">Diagnostic Questions</div><ul>
+<li>Can every member of the leadership team state, in two sentences, what AI is for in this organization — and do the statements converge?</li>
+<li>Does our AI thesis tell us what to refuse, or only what to pursue? (A thesis that refuses nothing is not a thesis.)</li>
+<li>When a team proposes an AI deployment, is it evaluated against a shared purpose, or justified on its own local terms?</li>
+</ul></div>
+<h2 class="art-h2">Pillar Two — Executive Authority Under AI</h2>
+<p>Executive Authority is altitude: the declared height at which each kind of decision gets made. Under AI load the undeclared decisions multiply faster than any organization can negotiate them one by one.</p>
+<p>The failure mode is the standing negotiation. What AI may we deploy, what data may it touch, which outputs do we trust enough to act on without re-checking — in most organizations none of this is declared, so each instance becomes an argument, usually settled by whoever is most confident rather than whoever is most accountable. The reflex correction is to convene an AI committee, which diffuses the authority rather than placing it and slows every decision it was meant to speed.</p>
+<p>The architectural correction is a boundary, not a body: a declaration of which AI decisions live with function leads, which with the executive team, and which are delegated outright with guardrails. Altitude set once returns speed continuously, because people stop seeking permission for what was already theirs.</p>
+<div class="diag"><div class="diag-label">Diagnostic Questions</div><ul>
+<li>Who is authorized to decide that an AI output is trustworthy enough to act on without human re-checking — and is that written down anywhere?</li>
+<li>For AI data access and deployment, can we name the altitude of each decision, or does each one become a negotiation?</li>
+<li>Have we mistaken an AI committee for AI authority — diffusing the decision instead of placing it?</li>
+</ul></div>
+<h2 class="art-h2">Pillar Three — Organizational Alignment Under AI</h2>
+<p>Alignment is composability: whether the work of separate parts can be assembled into one coherent whole. It is the pillar that breaks most invisibly under AI, because every individual step looks like an improvement.</p>
+<p>The failure mode is fragmentation disguised as progress. Each team adopts its own model, prompts, data, and bar for “good enough.” Each gets real local gains. And the outputs stop composing — diagnostics conflict, recommendations compete, two teams answer the same question differently with equal AI-generated confidence. The organization is busier, faster, and less coherent than a year ago, and no one can name the moment it happened because no single step was wrong.</p>
+<p>The architectural correction is widely misread as centralizing the tooling — picking one model for everyone. That fight is unwinnable and unnecessary. Align the standards instead: shared data definitions, shared output expectations, shared conventions for declaring confidence. Let teams choose their tools; govern what the tools must produce so the outputs can be assembled.</p>
+<div class="diag"><div class="diag-label">Diagnostic Questions</div><ul>
+<li>If two teams used AI to answer the same question, would their outputs compose — or compete?</li>
+<li>Do we have shared standards for AI output quality and confidence, or does each team set its own bar?</li>
+<li>Are we trying to win the unwinnable fight of centralizing AI tools, when the real lever is aligning AI output standards?</li>
+</ul></div>
+<h2 class="art-h2">Pillar Four — Execution Cadence Under AI</h2>
+<p>Cadence is what converts individual speed into organizational throughput. Under AI load it is the pillar operators feel in their bodies before they can name it.</p>
+<p>The failure mode announces itself as a feeling: I am fast, and everything around me is slow. AI compresses individual cycle times; the augmented person finishes in an hour what took a day. But the organization’s rhythms — reviews, approvals, handoffs, decision intervals — did not compress with them. So the fast individual finishes early and waits: on the weekly meeting, on Thursday’s approval, on the next unaugmented person. The gained speed leaks out at the first seam, and the gap between augmented people and unaugmented processes widens by the week.</p>
+<p>The architectural correction is to make the cadence absorb the new speed, or admit the speed is theater. That means shrinking the interval between decisions to match the interval at which the work is now actually ready — the same move the Execution Cadence discipline prescribes for any load. AI simply makes the cost of a slow cadence impossible to ignore.</p>
+<div class="diag"><div class="diag-label">Diagnostic Questions</div><ul>
+<li>Where in our organization are AI-augmented people finishing early and then waiting on an unaugmented process?</li>
+<li>Have our decision and review intervals tightened to match the speed at which work is now ready — or are they set where they were two years ago?</li>
+<li>Is our cadence converting individual AI speed into organizational throughput, or letting it leak out at the seams?</li>
+</ul></div>
+<h2 class="art-h2">Pillar Five — Scalable Delegation Under AI</h2>
+<p>Delegation is the architecture of what can be handed to whom. AI moved that boundary, and most delegation models have not moved with it.</p>
+<p>The failure mode is running the new boundary on the old map. A junior with AI can produce what used to require a senior; a senior with AI can produce what used to require a team. If the delegation pathways have not been redesigned, the organization runs as if AI were absent — seniors doing work that could move down, juniors capped below what they could carry. The cost is organizational drag: the distance between what people could produce and what the structure permits.</p>
+<p>The architectural correction is not “let everyone use AI.” It is a deliberate redesign of the delegation architecture around the moved boundary: what now gets pushed down, what guardrails travel with it, what review genuinely protects quality, and what review existed only because the work used to be hard to produce. Delegation designed for the old boundary and run against the new one is just expensive caution.</p>
+<div class="diag"><div class="diag-label">Diagnostic Questions</div><ul>
+<li>Given AI, what work could now be delegated a level down that we are still holding at the old level?</li>
+<li>Which of our review and approval steps protect real quality, and which only existed because the work used to be hard to produce?</li>
+<li>Have we redesigned our delegation pathways around AI’s new boundary, or are we running the old map against new ground?</li>
+</ul></div>
+<h2 class="art-h2">Reading Your Own Diagnostic</h2>
+<p>Across the five pillars, a pattern usually emerges: one or two pillars are genuinely solid, two or three are bending, and the bending ones are where AI has been quietly costing you coherence, speed, or throughput. That pattern is not a verdict on your AI strategy. It is a map of your architecture under load — and the same map would have appeared under any sufficient load; AI simply applied it now and visibly. The work that follows is not an AI project. It is architectural reinforcement, pillar by pillar, in the order the diagnostic exposed. Do that, and AI stops being a threat to absorb and becomes capability that compounds — which was the point of the architecture all along.</p>
+<p class="art-signoff">Lead the Way.</p>
+  </article>
+  <div class="art-end">
+    <a href="https://praeva.com/articles/ai-load-not-tool/">← AI Is a Load, Not a Tool</a>
+    <a href="https://praeva.com/field-notes" class="next">All Field Notes →</a>
+  </div>
+</div>
+<footer>
+  <div class="footer-brand">PRAEVA<span>™</span></div>
+  <div class="footer-copy">© 2026 PRAEVA™ · Leadership as Architecture · praeva.com</div>
+</footer>
+</body>
+</html>
