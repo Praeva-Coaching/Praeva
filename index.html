@@ -2159,5 +2159,62 @@ Library  }
 })();
 
 </script>
+<!-- ── Floating Section Index ── -->
+<style id="fidx-styles">
+.fidx{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:800;display:flex;flex-direction:column;gap:1px;font-family:'Jost',sans-serif;padding:9px 7px;border-radius:14px;background:rgba(10,35,66,0.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(184,134,11,0.22);box-shadow:0 10px 34px rgba(0,0,0,0.28)}
+.fidx-item{display:flex;align-items:center;gap:10px;justify-content:flex-end;width:100%;background:none;border:none;cursor:pointer;padding:7px 11px;border-radius:8px;color:rgba(245,240,234,0.58);transition:color .22s ease,background .22s ease}
+.fidx-label{font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:500;white-space:nowrap;line-height:1}
+.fidx-dot{width:6px;height:6px;border-radius:50%;flex:0 0 6px;background:currentColor;opacity:.9;transition:transform .22s ease}
+.fidx-item:hover{color:#f5f0ea;background:rgba(184,134,11,0.08)}
+.fidx-item.active{color:#B8860B}
+.fidx-item.active .fidx-dot{transform:scale(1.6)}
+.fidx-item:focus-visible{outline:2px solid #B8860B;outline-offset:2px}
+.fidx-fab{position:fixed;right:18px;bottom:18px;z-index:980;width:48px;height:48px;border-radius:50%;background:rgba(10,35,66,0.97);border:1px solid rgba(184,134,11,0.45);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);display:none;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,0.35)}
+.fidx-fab span{display:block;width:16px;height:2px;background:#B8860B;margin:2.5px 0;border-radius:2px;transition:.3s}
+.fidx-fab.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.fidx-fab.open span:nth-child(2){opacity:0}
+.fidx-fab.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.fidx-sheet{position:fixed;right:18px;bottom:74px;z-index:980;background:rgba(10,35,66,0.98);border:1px solid rgba(184,134,11,0.25);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-radius:14px;padding:8px;display:none;flex-direction:column;min-width:172px;box-shadow:0 12px 36px rgba(0,0,0,0.45)}
+.fidx-sheet.open{display:flex}
+.fidx-sheet button{background:none;border:none;text-align:left;cursor:pointer;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.06em;color:rgba(245,240,234,0.7);padding:11px 14px;border-radius:8px;transition:.2s}
+.fidx-sheet button:hover{background:rgba(184,134,11,0.1);color:#f5f0ea}
+.fidx-sheet button.active{color:#B8860B}
+@media (max-width:900px){.fidx{display:none}.fidx-fab{display:flex}}
+@media (prefers-reduced-motion:reduce){.fidx-item,.fidx-dot,.fidx-fab span{transition:none}}
+</style>
+<nav class="fidx" aria-label="Section index" id="fidx">
+  <button class="fidx-item" data-target="top"><span class="fidx-label">Top</span><span class="fidx-dot"></span></button>
+  <button class="fidx-item" data-target="about"><span class="fidx-label">About</span><span class="fidx-dot"></span></button>
+  <button class="fidx-item" data-target="framework"><span class="fidx-label">Framework</span><span class="fidx-dot"></span></button>
+  <button class="fidx-item" data-target="foundation"><span class="fidx-label">Foundation</span><span class="fidx-dot"></span></button>
+  <button class="fidx-item" data-target="work"><span class="fidx-label">The Work</span><span class="fidx-dot"></span></button>
+  <button class="fidx-item" data-target="book"><span class="fidx-label">The Book</span><span class="fidx-dot"></span></button>
+  <button class="fidx-item" data-target="begin"><span class="fidx-label">Contact</span><span class="fidx-dot"></span></button>
+</nav>
+<button class="fidx-fab" id="fidx-fab" aria-label="Open section index"><span></span><span></span><span></span></button>
+<div class="fidx-sheet" id="fidx-sheet" aria-label="Section index">
+  <button data-target="top">Top</button>
+  <button data-target="about">About</button>
+  <button data-target="framework">Framework</button>
+  <button data-target="foundation">Theoretical Foundation</button>
+  <button data-target="work">The Work</button>
+  <button data-target="book">The Book</button>
+  <button data-target="begin">Contact</button>
+</div>
+<script>
+(function(){
+  var OFFSET=84, targets=['top','about','framework','foundation','work','book','begin'];
+  function el(id){return id==='top'?null:document.getElementById(id);}
+  function go(id){var y=id==='top'?0:(el(id)?el(id).getBoundingClientRect().top+window.pageYOffset-OFFSET:0);window.scrollTo({top:y,behavior:'smooth'});}
+  Array.prototype.slice.call(document.querySelectorAll('.fidx-item,.fidx-sheet button')).forEach(function(b){b.addEventListener('click',function(){go(b.getAttribute('data-target'));closeSheet();});});
+  function spy(){var pos=window.pageYOffset+OFFSET+4,cur='top';targets.forEach(function(id){var e=el(id);if(e){var t=e.getBoundingClientRect().top+window.pageYOffset;if(t<=pos){cur=id;}}});if(window.innerHeight+window.pageYOffset>=document.body.scrollHeight-4){cur=targets[targets.length-1];}document.querySelectorAll('[data-target]').forEach(function(b){var on=b.getAttribute('data-target')===cur;b.classList.toggle('active',on);if(on){b.setAttribute('aria-current','true');}else{b.removeAttribute('aria-current');}});}
+  var fab=document.getElementById('fidx-fab'),sheet=document.getElementById('fidx-sheet');
+  function closeSheet(){if(sheet)sheet.classList.remove('open');if(fab)fab.classList.remove('open');}
+  if(fab){fab.addEventListener('click',function(e){e.stopPropagation();sheet.classList.toggle('open');fab.classList.toggle('open');});}
+  document.addEventListener('click',function(e){if(sheet&&sheet.classList.contains('open')&&!sheet.contains(e.target)&&e.target!==fab){closeSheet();}});
+  window.addEventListener('scroll',spy,{passive:true});window.addEventListener('resize',spy);spy();
+})();
+</script>
+
 </body>
 </html>
