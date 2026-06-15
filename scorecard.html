@@ -380,6 +380,10 @@ footer { background: var(--navy); border-top: 1px solid rgba(184,134,11,0.2); pa
 .sc-lead-success{display:none;font-family:'Cormorant Garamond',serif;font-size:1.18rem;font-style:italic;line-height:1.5;color:var(--gold2);text-align:center;margin:30px auto 0;max-width:450px;padding-top:26px;border-top:1px solid rgba(184,134,11,0.22)}
 .sc-lead-success.show{display:block}
 @media(max-width:480px){.sc-lead-row{flex-direction:column}.sc-lead-btn{padding:12px}}
+
+.sc-success-text{font-family:'Cormorant Garamond',serif;font-size:1.18rem;font-style:italic;line-height:1.5;color:var(--gold2);margin-bottom:18px}
+.sc-download-btn{display:inline-block;background:var(--gold);color:var(--navy);font-family:'Jost',sans-serif;font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:13px 28px;border-radius:2px;text-decoration:none;transition:background .2s}
+.sc-download-btn:hover{background:var(--gold2)}
 </style>
 </head>
 <body>
@@ -539,7 +543,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(184,134,11,0.2); pa
         </div>
         <div class="sc-lead-note">Your email is held for the playbook and occasional notes on leadership architecture. No spam.</div>
       </form>
-      <div class="sc-lead-success" id="scLeadSuccess">Thank you. Your <span class="sc-band-name">Governing</span> Cadence playbook is on its way — watch your inbox.</div>
+      <div class="sc-lead-success" id="scLeadSuccess"><div class="sc-success-text">Thank you. Your <span class="sc-band-name">Governing</span> Cadence Playbook is ready — yours to keep.</div><a class="sc-download-btn" id="scDownload" href="#" target="_blank" rel="noopener">Download the Playbook →</a></div>
       <div class="sc-result-cta">
         <a href="https://praeva.com/articles/when-rhythm-becomes-authority/" class="sc-result-link">Read: When Rhythm Becomes Authority →</a>
         <button type="button" class="sc-retake" id="scRetake">Retake the scorecard</button>
@@ -602,7 +606,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(184,134,11,0.2); pa
     e.preventDefault();
     var body=new URLSearchParams(new FormData(lead)).toString();
     fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body})
-      .then(function(){lead.style.display='none';document.getElementById('scLeadSuccess').classList.add('show');})
+      .then(function(){document.getElementById('scDownload').setAttribute('href','/playbooks/cadence-'+(document.getElementById('sc_band').value||'').toLowerCase()+'.pdf');lead.style.display='none';document.getElementById('scLeadSuccess').classList.add('show');})
       .catch(function(){alert('Something went wrong — please try again, or email kelly@praeva.com directly.');});
   });}
   update();
